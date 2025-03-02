@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KingMeServer</name>
+    </assembly>
+    <members>
+        <member name="F:KingMeServer.Jogo.versao">
+            <summary>
+            Versão da DLL do jogo.
+            </summary>
+        </member>
+        <member name="M:KingMeServer.Jogo.CriarPartida(System.String,System.String,System.String)">
+            <summary>
+            Cria uma nova partida
+            </summary>
+            <param name="nomePartida">Nome da partida, no máximo 15 caracteres</param>
+            <param name="senha">Senha para acesso à partida, no máximo 10 caracteres</param>
+            <returns>número inteiro com o Id da partida</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ListarPartidas(System.String)">
+            <summary>
+            Retorna a lista de partidas do tipo solicitado
+            </summary>
+            <param name="status">Envie um caracter: (T)odas, (A)bertas, (J)ogando, (F)inalizadas</param>
+            <returns>Id, nome, data de criação e status</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.Entrar(System.Int32,System.String,System.String)">
+            <summary>
+            Cria um jogador e o coloca em uma partida
+            </summary>
+            <param name="partida">Id da partida à entrar</param>
+            <param name="nomeJogador">Nome do jogador, máx 20 caracteres, só pode conter caracteres alfabéticos</param>
+            <param name="senhaPartida">Senha da partida</param>
+            <returns>id do jogador e a senha gerada para ele</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ListarJogadores(System.Int32)">
+            <summary>
+            Lista de jogadores de uma determinada partida
+            </summary>
+            <param name="idPartida">Id da partida</param>
+            <returns>Id do Jogador, nome, pontuação atual</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.Iniciar(System.Int32,System.String)">
+            <summary>
+            Envia um comando iniciando uma determinada partida. Muda o Status da mesma de A para J
+            </summary>
+            <param name="partida">Id da partida a ser iniciada</param>
+            <param name="senhaPartida">Senha da partida</param>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ColocarPersonagem(System.Int32,System.String,System.Int32,System.String)">
+            <summary>
+            Coloca um personagem no tabuleiro, na fase de Setup de uma rodada.
+            </summary>
+            <param name="jogador">Id do jogador que está fazendo o movimento</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="setor">Id do setor onde o personagem deve ser colocado</param>
+            <param name="personagem">Primeira letra do personagem a ser colocado</param>
+            <returns>Retorna o estado atual do tabuleiro</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.VerificarVez(System.Int32)">
+            <summary>
+            Verifica qual é o jogador da "vez", e o estado atual do tabuleiro
+            </summary>
+            <param name="jogador">Id do jogador que está fazendo a consulta</param>
+            <returns>Id de um jogador e o estado do tabuleiro nas linhas seguintes</returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.Promover(System.Int32,System.String,System.String)">
+            <summary>
+            Promove um personagem para o setor acima durante a fase de promoção de uma rodada
+            </summary>
+            <param name="jogador">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="personagem">Primeira letra do nome do personagem a ser promovido</param>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.Votar(System.Int32,System.String,System.String)">
+            <summary>
+            Vota S ou N em um personagem que está na presidencia. Caso todos jogadores votem S, a rodada é finalizada.
+            </summary>
+            <param name="jogador">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="voto">Voto (S/N), apenas 1 caractere.</param>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ListarPersonagens">
+            <summary>
+            Exibe uma lista com os nomes de todos os personagens cadastrados no jogo
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ListarSetores">
+            <summary>
+            Exibe uma lista com id e nome de todos os setores. O id é equivalente à pontuação de cada setor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ListarCartas(System.Int32,System.String)">
+            <summary>
+            Retorna a carta que contém a lista de personagens favoritos sorteada para este jogador.
+            </summary>
+            <param name="jogador">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ExibirUltimaVotacao(System.Int32)">
+            <summary>
+            Exibe como foi o voto de cada jogador na última votação já finalizada desta partida.
+            </summary>
+            <param name="jogador">Id do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <returns></returns>
+        </member>
+        <member name="M:KingMeServer.Jogo.ConsultarHistorico(System.Int32,System.Boolean)">
+            <summary>
+            Exibe o histórico de jogadas, desde o último movimento do jogador que está fazendo a solicitação
+            </summary>
+            <param name="jogador">iId do jogador</param>
+            <param name="senha">Senha do jogador</param>
+            <param name="formatado">True para retornar o histórico com o texto formatado para exibição</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
