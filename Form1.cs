@@ -20,6 +20,7 @@ namespace king_me
             cboStatus.SelectedIndex = 0;
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             btnListarPartidas_Click(null, null);
+            CarregarPersonagens();
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -84,17 +85,69 @@ namespace king_me
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
         {
+          
+            int idJogador = int.Parse(txtIdJogador.Text);
+            string senhaJogador = txtSenhaJogador.Text;
+            int id = int.Parse(txtIdPartida.Text);
+       
+
+            KingMeServer.Jogo.Iniciar(idJogador, senhaJogador);
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPersonagens_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
             string senha = txtSenhaPartida.Text;
-            
-            KingMeServer.Jogo.Iniciar(idJogador, senhaJogador);
 
-            txtPersonagensFav.Text = KingMeServer.Jogo.ListarCartas(idJogador, senhaJogador);
-
+            lblPersonagensFav.Text = KingMeServer.Jogo.ListarCartas(idJogador, senhaJogador);
         }
 
-     
+        private void CarregarPersonagens()
+        {
+            // Lista fixa de personagens
+            List<string> personagensFixos = new List<string>
+            {
+                "Adilson Konrad",
+                "Beatriz Paiva",
+                "Claro",
+                "Douglas Baquiao",
+                "Eduardo Takeo",
+                "Guilherme Rey",
+                "Heredia",
+                "Karin",
+                "Leonardo Takuno",
+                "Mario Toledo",
+                "Quintas",
+                "Ranulfo",
+                "Toshio"
+
+            };
+
+            listBox1.Items.Clear();
+
+            foreach (string personagem in personagensFixos)
+            {
+                listBox1.Items.Add(personagem);
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
+    
 }
