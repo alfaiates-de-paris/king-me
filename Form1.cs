@@ -55,6 +55,8 @@ namespace king_me
             senhaJogadorLabel.Text = $"Senha: {senhaJogador}";
 
             listarJogadores_Click(null, null);
+
+
         }
 
         private void criarPartida_Click(object sender, EventArgs e)
