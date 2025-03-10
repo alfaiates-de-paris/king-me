@@ -328,7 +328,7 @@
             // 
             // txtPersonagensFav
             // 
-            this.txtPersonagensFav.Location = new System.Drawing.Point(404, 282);
+            this.txtPersonagensFav.Location = new System.Drawing.Point(405, 222);
             this.txtPersonagensFav.Multiline = true;
             this.txtPersonagensFav.Name = "txtPersonagensFav";
             this.txtPersonagensFav.Size = new System.Drawing.Size(145, 134);
@@ -337,7 +337,7 @@
             // lblPersonagensFav
             // 
             this.lblPersonagensFav.AutoSize = true;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(405, 254);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(401, 203);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
             this.lblPersonagensFav.Size = new System.Drawing.Size(147, 16);
             this.lblPersonagensFav.TabIndex = 30;
