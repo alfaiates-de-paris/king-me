@@ -328,7 +328,7 @@
             // 
             // txtPersonagensFav
             // 
-            this.txtPersonagensFav.Location = new System.Drawing.Point(405, 222);
+            this.txtPersonagensFav.Location = new System.Drawing.Point(405, 233);
             this.txtPersonagensFav.Multiline = true;
             this.txtPersonagensFav.Name = "txtPersonagensFav";
             this.txtPersonagensFav.Size = new System.Drawing.Size(145, 134);
