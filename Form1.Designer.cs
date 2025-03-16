@@ -59,6 +59,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // infoGame
@@ -250,7 +259,7 @@
             // lblIdJogadorInput
             // 
             this.lblIdJogadorInput.AutoSize = true;
-            this.lblIdJogadorInput.Location = new System.Drawing.Point(304, 9);
+            this.lblIdJogadorInput.Location = new System.Drawing.Point(287, 56);
             this.lblIdJogadorInput.Name = "lblIdJogadorInput";
             this.lblIdJogadorInput.Size = new System.Drawing.Size(57, 13);
             this.lblIdJogadorInput.TabIndex = 23;
@@ -260,7 +269,7 @@
             // txtIdJogador
             // 
             this.txtIdJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtIdJogador.Location = new System.Drawing.Point(304, 25);
+            this.txtIdJogador.Location = new System.Drawing.Point(287, 72);
             this.txtIdJogador.Name = "txtIdJogador";
             this.txtIdJogador.Size = new System.Drawing.Size(100, 20);
             this.txtIdJogador.TabIndex = 22;
@@ -268,7 +277,7 @@
             // lblSenhaJogadorInput
             // 
             this.lblSenhaJogadorInput.AutoSize = true;
-            this.lblSenhaJogadorInput.Location = new System.Drawing.Point(301, 52);
+            this.lblSenhaJogadorInput.Location = new System.Drawing.Point(284, 99);
             this.lblSenhaJogadorInput.Name = "lblSenhaJogadorInput";
             this.lblSenhaJogadorInput.Size = new System.Drawing.Size(79, 13);
             this.lblSenhaJogadorInput.TabIndex = 25;
@@ -278,7 +287,7 @@
             // txtSenhaJogador
             // 
             this.txtSenhaJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSenhaJogador.Location = new System.Drawing.Point(304, 68);
+            this.txtSenhaJogador.Location = new System.Drawing.Point(287, 115);
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(100, 20);
             this.txtSenhaJogador.TabIndex = 24;
@@ -312,6 +321,7 @@
             this.lblPersonagensFav.Size = new System.Drawing.Size(58, 13);
             this.lblPersonagensFav.TabIndex = 30;
             this.lblPersonagensFav.Text = "Cartas Fav";
+            this.lblPersonagensFav.Click += new System.EventHandler(this.lblPersonagensFav_Click);
             // 
             // label1
             // 
@@ -324,7 +334,7 @@
             // 
             // btnIniciarPartida
             // 
-            this.btnIniciarPartida.Location = new System.Drawing.Point(303, 110);
+            this.btnIniciarPartida.Location = new System.Drawing.Point(287, 9);
             this.btnIniciarPartida.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciarPartida.Name = "btnIniciarPartida";
             this.btnIniciarPartida.Size = new System.Drawing.Size(100, 33);
@@ -346,7 +356,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(727, 326);
+            this.label2.Location = new System.Drawing.Point(751, 337);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 34;
@@ -362,11 +372,105 @@
             this.listBox1.TabIndex = 35;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(287, 144);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(89, 28);
+            this.button2.TabIndex = 36;
+            this.button2.Text = "Verificar Vez";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(707, 36);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(142, 160);
+            this.listBox2.TabIndex = 38;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(752, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Setores";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(564, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Setor\r\n";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Location = new System.Drawing.Point(567, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(63, 20);
+            this.textBox1.TabIndex = 40;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Location = new System.Drawing.Point(567, 92);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(75, 20);
+            this.textBox2.TabIndex = 42;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(564, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "Personagem\r\n";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(398, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 13);
+            this.label6.TabIndex = 43;
+            this.label6.Text = "Nome Jogador";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(398, 159);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 44;
+            this.label7.Text = "Id Jogador";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 569);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
@@ -400,6 +504,7 @@
             this.Controls.Add(this.infoGame);
             this.Name = "KingMe";
             this.Text = "Alfaiates de Paris";
+            this.Load += new System.EventHandler(this.KingMe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,6 +543,15 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 
