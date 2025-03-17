@@ -59,7 +59,7 @@
             this.btnExibirCartas = new System.Windows.Forms.Button();
             this.lblPersonagensExistentes = new System.Windows.Forms.Label();
             this.txtPersonagensExistentes = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnVerificarVez = new System.Windows.Forms.Button();
             this.txtSetoresExistentes = new System.Windows.Forms.ListBox();
             this.lblSetoresExistentes = new System.Windows.Forms.Label();
             this.lblSetor = new System.Windows.Forms.Label();
@@ -402,16 +402,16 @@
             this.txtPersonagensExistentes.TabIndex = 35;
             this.txtPersonagensExistentes.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // button2
+            // btnVerificarVez
             // 
-            this.button2.Location = new System.Drawing.Point(383, 177);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 34);
-            this.button2.TabIndex = 36;
-            this.button2.Text = "Verificar Vez";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnVerificarVez.Location = new System.Drawing.Point(383, 177);
+            this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnVerificarVez.Name = "btnVerificarVez";
+            this.btnVerificarVez.Size = new System.Drawing.Size(119, 34);
+            this.btnVerificarVez.TabIndex = 36;
+            this.btnVerificarVez.Text = "Verificar Vez";
+            this.btnVerificarVez.UseVisualStyleBackColor = true;
+            this.btnVerificarVez.Click += new System.EventHandler(this.btnVerificarVez_Click);
             // 
             // txtSetoresExistentes
             // 
@@ -543,7 +543,7 @@
             this.Controls.Add(this.lblSetor);
             this.Controls.Add(this.txtSetoresExistentes);
             this.Controls.Add(this.lblSetoresExistentes);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnVerificarVez);
             this.Controls.Add(this.txtPersonagensExistentes);
             this.Controls.Add(this.lblPersonagensExistentes);
             this.Controls.Add(this.btnExibirCartas);
@@ -617,7 +617,7 @@
         private System.Windows.Forms.Button btnExibirCartas;
         private System.Windows.Forms.Label lblPersonagensExistentes;
         private System.Windows.Forms.ListBox txtPersonagensExistentes;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnVerificarVez;
         private System.Windows.Forms.ListBox txtSetoresExistentes;
         private System.Windows.Forms.Label lblSetoresExistentes;
         private System.Windows.Forms.Label lblSetor;
