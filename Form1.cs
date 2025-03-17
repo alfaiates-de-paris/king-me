@@ -108,15 +108,24 @@ namespace king_me
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExibirCartas_Click(object sender, EventArgs e)
         {
-           
+            txtPersonagensFavoritos.Clear();
+            Mao mao = new Mao();
+            mao.CriarCartas();
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
             string senha = txtSenhaPartida.Text;
 
-            lblPersonagensFav.Text = KingMeServer.Jogo.ListarCartas(idJogador, senhaJogador);
+            string temp = KingMeServer.Jogo.ListarCartas(idJogador, senhaJogador);
+            temp = temp.Substring(0, temp.Length - 2);
+
+            foreach(char caractere in temp)
+            {
+                txtPersonagensFavoritos.Text += mao.ExibirPersonagem(caractere);
+                txtPersonagensFavoritos.Text += "\r\n";
+            }
         }
 
         private void CarregarPersonagens()
@@ -138,11 +147,11 @@ namespace king_me
                 "Toshio"
             };
 
-            listBox1.Items.Clear();
+            txtPersonagensExistentes.Items.Clear();
 
             foreach (string personagem in personagensFixos)
             {
-                listBox1.Items.Add(personagem);
+                txtPersonagensExistentes.Items.Add(personagem);
             }
         }
 
@@ -216,13 +225,6 @@ namespace king_me
             }
         }
 
-        
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CarregarSetor()
         {
             List<string> setores = new List<string>
@@ -236,44 +238,31 @@ namespace king_me
                 "0.Plebeus"
             };
 
-            listBox2.Items.Clear();
+            txtSetoresExistentes.Items.Clear();
 
             foreach (string setor in setores)
             {
-                listBox2.Items.Add(setor);
+                txtSetoresExistentes.Items.Add(setor);
             }
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPersonagensFav_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void KingMe_Load(object sender, EventArgs e)
         {
 
         }
 
-     
+        private void btnMoverPersonagem_Click(object sender, EventArgs e)
+        {
+
+            int idJogador = int.Parse(txtIdJogador.Text);
+            string senhaJogador = txtSenhaJogador.Text;
+            string personagem = txtPersonagem.Text.Substring(0, 1);
+            int setor = int.Parse(txtSetor.Text);
+
+            string retorno = KingMeServer.Jogo.ColocarPersonagem(idJogador, senhaJogador, setor, personagem);
+            txtTabuleiroAtual.Text = retorno;
+
+        }
     }
 }
