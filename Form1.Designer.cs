@@ -82,7 +82,7 @@
             this.lblInfoGame.Name = "lblInfoGame";
             this.lblInfoGame.Size = new System.Drawing.Size(139, 16);
             this.lblInfoGame.TabIndex = 0;
-            this.lblInfoGame.Text = "Alfaiates de Paris - 1.0";
+            this.lblInfoGame.Text = "Alfaiates de Paris - 1.1";
             // 
             // txtNomePartida
             // 
