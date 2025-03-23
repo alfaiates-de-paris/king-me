@@ -161,19 +161,19 @@ namespace king_me
         }
 
     
-        private void btnVerificarVez_Click(object sender, EventArgs e)
+private void btnVerificarVez_Click(object sender, EventArgs e)
         {
             try
             {
-                
+
                 if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
                 {
                     MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
                     return;
                 }
 
-                
-                if(!SucessoIniciarPartida)
+
+                if (!SucessoIniciarPartida)
                 {
                     MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
                     return;
@@ -181,7 +181,9 @@ namespace king_me
 
                 int idPartida = int.Parse(txtIdPartida.Text);
 
-                
+                // lblTesteVez.Text = KingMeServer.Jogo.VerificarVez(idPartida);
+                // lblTesteVez.Text.Substring(0, lblTesteVez.Text.Length - 2);
+
                 string jogadores = KingMeServer.Jogo.ListarJogadores(idPartida);
 
                 if (string.IsNullOrEmpty(jogadores))
@@ -194,20 +196,20 @@ namespace king_me
 
                 if (listaJogadores.Length > 0)
                 {
-                    
+
                     string jogadorDaVez = listaJogadores[0];
 
-                   
                     string[] dadosJogador = jogadorDaVez.Split(',');
 
-                    if (dadosJogador.Length >= 2) 
+
+                    if (dadosJogador.Length >= 2)
                     {
-                        string idJogador = dadosJogador[0].Trim();  
+                        string idJogador = KingMeServer.Jogo.VerificarVez(idPartida);
                         string nomeJogador = dadosJogador[1].Trim();
 
-                       
-                        label7.Text = $"ID do Jogador: {idJogador}";
-                        label6.Text = $"Nome: {nomeJogador}";
+
+                        lblVezIdJogador.Text = $"ID do Jogador: {idJogador.Substring(0,3)}";
+                        lblVezNomeJogador.Text = $"Nome: {nomeJogador}";
                     }
                     else
                     {

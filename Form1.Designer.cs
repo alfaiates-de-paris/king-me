@@ -66,12 +66,14 @@
             this.txtSetor = new System.Windows.Forms.TextBox();
             this.txtPersonagem = new System.Windows.Forms.TextBox();
             this.lblPersonagem = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblVezNomeJogador = new System.Windows.Forms.Label();
+            this.lblVezIdJogador = new System.Windows.Forms.Label();
             this.txtPersonagensFavoritos = new System.Windows.Forms.TextBox();
             this.lblTabuleiroAtual = new System.Windows.Forms.Label();
             this.txtTabuleiroAtual = new System.Windows.Forms.TextBox();
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblTesteVez = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -471,25 +473,25 @@
             this.lblPersonagem.TabIndex = 41;
             this.lblPersonagem.Text = "Personagem\r\n";
             // 
-            // label6
+            // lblVezNomeJogador
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(531, 162);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 16);
-            this.label6.TabIndex = 43;
-            this.label6.Text = "Nome Jogador";
+            this.lblVezNomeJogador.AutoSize = true;
+            this.lblVezNomeJogador.Location = new System.Drawing.Point(531, 162);
+            this.lblVezNomeJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVezNomeJogador.Name = "lblVezNomeJogador";
+            this.lblVezNomeJogador.Size = new System.Drawing.Size(98, 16);
+            this.lblVezNomeJogador.TabIndex = 43;
+            this.lblVezNomeJogador.Text = "Nome Jogador";
             // 
-            // label7
+            // lblVezIdJogador
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(531, 196);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 16);
-            this.label7.TabIndex = 44;
-            this.label7.Text = "Id Jogador";
+            this.lblVezIdJogador.AutoSize = true;
+            this.lblVezIdJogador.Location = new System.Drawing.Point(531, 196);
+            this.lblVezIdJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVezIdJogador.Name = "lblVezIdJogador";
+            this.lblVezIdJogador.Size = new System.Drawing.Size(72, 16);
+            this.lblVezIdJogador.TabIndex = 44;
+            this.lblVezIdJogador.Text = "Id Jogador";
             // 
             // txtPersonagensFavoritos
             // 
@@ -526,17 +528,35 @@
             this.btnMoverPersonagem.UseVisualStyleBackColor = true;
             this.btnMoverPersonagem.Click += new System.EventHandler(this.btnMoverPersonagem_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(434, 282);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 16);
+            this.label2.TabIndex = 49;
+            // 
+            // lblTesteVez
+            // 
+            this.lblTesteVez.Location = new System.Drawing.Point(378, 256);
+            this.lblTesteVez.Multiline = true;
+            this.lblTesteVez.Name = "lblTesteVez";
+            this.lblTesteVez.Size = new System.Drawing.Size(189, 123);
+            this.lblTesteVez.TabIndex = 50;
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1135, 733);
+            this.Controls.Add(this.lblTesteVez);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
             this.Controls.Add(this.txtTabuleiroAtual);
             this.Controls.Add(this.lblTabuleiroAtual);
             this.Controls.Add(this.txtPersonagensFavoritos);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblVezIdJogador);
+            this.Controls.Add(this.lblVezNomeJogador);
             this.Controls.Add(this.txtPersonagem);
             this.Controls.Add(this.lblPersonagem);
             this.Controls.Add(this.txtSetor);
@@ -624,12 +644,14 @@
         private System.Windows.Forms.TextBox txtSetor;
         private System.Windows.Forms.TextBox txtPersonagem;
         private System.Windows.Forms.Label lblPersonagem;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblVezNomeJogador;
+        private System.Windows.Forms.Label lblVezIdJogador;
         private System.Windows.Forms.TextBox txtPersonagensFavoritos;
         private System.Windows.Forms.Label lblTabuleiroAtual;
         private System.Windows.Forms.TextBox txtTabuleiroAtual;
         private System.Windows.Forms.Button btnMoverPersonagem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox lblTesteVez;
     }
 }
 
