@@ -14,11 +14,13 @@ namespace king_me
         private Dictionary<string, string> PreencherDicionarioJogadores(int idPartida)
         {
             string jogadoresString = KingMeServer.Jogo.ListarJogadores(idPartida);
-            string[] totalJogadores = jogadoresString.Split(';');
+            string[] totalJogadores = jogadoresString.Split(new[] { "\r\n" }, StringSplitOptions.None);
+
             foreach (string jogador in totalJogadores)
             {
                 string[] jogadorArray = jogador.Split(',');
                 jogadoresDict.Add(jogadorArray[0], jogadorArray[1]);
+                
             }
 
             foreach (KeyValuePair<string, string> jogador in jogadoresDict)
@@ -33,6 +35,12 @@ namespace king_me
 
             string infoJogador = KingMeServer.Jogo.VerificarVez(idPartida);
             string idJogador = infoJogador.Split(',')[0]; //pega so id (primeira posição do array split)
+            Console.WriteLine("ID jogador da vez: " + idJogador);
+            
+            foreach(KeyValuePair<string, string> item in jogadoresDict)
+            {
+                Console.WriteLine("ID jogador dict: " + item.Key + " nome:" + item.Value);
+            }
 
             foreach (KeyValuePair<string, string> jogador in jogadoresDict)
             {

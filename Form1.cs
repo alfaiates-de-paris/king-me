@@ -184,6 +184,8 @@ private void btnVerificarVez_Click(object sender, EventArgs e)
                 // lblTesteVez.Text = KingMeServer.Jogo.VerificarVez(idPartida);
                 // lblTesteVez.Text.Substring(0, lblTesteVez.Text.Length - 2);
 
+                Jogador jogador = new Jogador(idPartida); // tem que ser feito no botão de iniciar partida, corrigir dps
+
                 string jogadores = KingMeServer.Jogo.ListarJogadores(idPartida);
 
                 if (string.IsNullOrEmpty(jogadores))
@@ -204,8 +206,11 @@ private void btnVerificarVez_Click(object sender, EventArgs e)
 
                     if (dadosJogador.Length >= 2)
                     {
+
                         string idJogador = KingMeServer.Jogo.VerificarVez(idPartida);
-                        string nomeJogador = dadosJogador[1].Trim();
+                        string nomeJogador = jogador.GetJogadorDaVez(idPartida);
+                        Console.WriteLine("Nome jogador da vez: " + nomeJogador);
+                        //dadosJogador[1].Trim();
 
 
                         lblVezIdJogador.Text = $"ID do Jogador: {idJogador.Substring(0,3)}";
