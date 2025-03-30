@@ -34,7 +34,7 @@ jobs:
     - name: Create Release Body
       id: create_release_body
       run: |
-        RELEASE_BODY="## Release v${{ steps.get_version.outputs.VERSION }}\n\n### Changelog:\n${{ steps.create_release_notes.outputs.CHANGELOG }}"
+        RELEASE_BODY="## Release V${{ steps.get_version.outputs.VERSION }}\n\n### Changelog:\n${{ steps.create_release_notes.outputs.CHANGELOG }}"
         echo "RELEASE_BODY=$RELEASE_BODY" >> $GITHUB_ENV
         echo "::set-output name=RELEASE_BODY::$RELEASE_BODY"
 
@@ -44,7 +44,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ steps.get_version.outputs.VERSION }}
-        release_name: Release v${{ steps.get_version.outputs.VERSION }}
+        tag_name: V${{ steps.get_version.outputs.VERSION }}
+        release_name: Release V${{ steps.get_version.outputs.VERSION }}
         draft: false
         prerelease: false
