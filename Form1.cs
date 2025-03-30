@@ -26,6 +26,9 @@ namespace king_me
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService)
         {
             InitializeComponent();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = false;
+            this.Size = new Size(1280, 800);
             _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
             _jogadorService = jogadorService ?? throw new ArgumentNullException(nameof(jogadorService));
             _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));

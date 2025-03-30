@@ -74,12 +74,15 @@
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPromover = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlTabuleiro1 = new System.Windows.Forms.Panel();
+            this.txtTeste = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblInfoGame
             // 
             this.lblInfoGame.AutoSize = true;
-            this.lblInfoGame.Location = new System.Drawing.Point(977, 708);
+            this.lblInfoGame.Location = new System.Drawing.Point(1473, 867);
             this.lblInfoGame.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInfoGame.Name = "lblInfoGame";
             this.lblInfoGame.Size = new System.Drawing.Size(139, 16);
@@ -346,7 +349,7 @@
             // lblPersonagensFav
             // 
             this.lblPersonagensFav.AutoSize = true;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(557, 496);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(547, 260);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
             this.lblPersonagensFav.Size = new System.Drawing.Size(72, 16);
             this.lblPersonagensFav.TabIndex = 30;
@@ -373,7 +376,7 @@
             // 
             // btnExibirCartas
             // 
-            this.btnExibirCartas.Location = new System.Drawing.Point(383, 633);
+            this.btnExibirCartas.Location = new System.Drawing.Point(550, 282);
             this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
             this.btnExibirCartas.Name = "btnExibirCartas";
             this.btnExibirCartas.Size = new System.Drawing.Size(123, 28);
@@ -385,7 +388,7 @@
             // lblPersonagensExistentes
             // 
             this.lblPersonagensExistentes.AutoSize = true;
-            this.lblPersonagensExistentes.Location = new System.Drawing.Point(1003, 515);
+            this.lblPersonagensExistentes.Location = new System.Drawing.Point(984, 515);
             this.lblPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagensExistentes.Name = "lblPersonagensExistentes";
             this.lblPersonagensExistentes.Size = new System.Drawing.Size(88, 16);
@@ -397,7 +400,7 @@
             // 
             this.txtPersonagensExistentes.FormattingEnabled = true;
             this.txtPersonagensExistentes.ItemHeight = 16;
-            this.txtPersonagensExistentes.Location = new System.Drawing.Point(987, 535);
+            this.txtPersonagensExistentes.Location = new System.Drawing.Point(962, 535);
             this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagensExistentes.Name = "txtPersonagensExistentes";
             this.txtPersonagensExistentes.Size = new System.Drawing.Size(129, 148);
@@ -495,7 +498,7 @@
             // 
             // txtPersonagensFavoritos
             // 
-            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(529, 515);
+            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(382, 260);
             this.txtPersonagensFavoritos.Multiline = true;
             this.txtPersonagensFavoritos.Name = "txtPersonagensFavoritos";
             this.txtPersonagensFavoritos.Size = new System.Drawing.Size(148, 156);
@@ -536,21 +539,51 @@
             this.label2.Size = new System.Drawing.Size(0, 16);
             this.label2.TabIndex = 49;
             // 
-            // promover
+            // btnPromover
             // 
             this.btnPromover.Location = new System.Drawing.Point(753, 232);
-            this.btnPromover.Name = "promover";
+            this.btnPromover.Name = "btnPromover";
             this.btnPromover.Size = new System.Drawing.Size(100, 31);
             this.btnPromover.TabIndex = 50;
             this.btnPromover.Text = "Promover";
             this.btnPromover.UseVisualStyleBackColor = true;
             this.btnPromover.Click += new System.EventHandler(this.btnPromover_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::king_me.Properties.Resources.Tabuleiro2;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Location = new System.Drawing.Point(1189, 432);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(423, 406);
+            this.panel1.TabIndex = 52;
+            // 
+            // pnlTabuleiro1
+            // 
+            this.pnlTabuleiro1.AutoSize = true;
+            this.pnlTabuleiro1.BackgroundImage = global::king_me.Properties.Resources.Tabuleiro1;
+            this.pnlTabuleiro1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlTabuleiro1.Location = new System.Drawing.Point(1189, 44);
+            this.pnlTabuleiro1.Name = "pnlTabuleiro1";
+            this.pnlTabuleiro1.Size = new System.Drawing.Size(423, 394);
+            this.pnlTabuleiro1.TabIndex = 51;
+            // 
+            // txtTeste
+            // 
+            this.txtTeste.Location = new System.Drawing.Point(522, 535);
+            this.txtTeste.Multiline = true;
+            this.txtTeste.Name = "txtTeste";
+            this.txtTeste.Size = new System.Drawing.Size(269, 117);
+            this.txtTeste.TabIndex = 53;
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 733);
+            this.ClientSize = new System.Drawing.Size(1625, 892);
+            this.Controls.Add(this.txtTeste);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlTabuleiro1);
             this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
@@ -599,7 +632,9 @@
             this.Controls.Add(this.lblInfoGame);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KingMe";
-            this.Text = "2";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "King Me!";
             this.Load += new System.EventHandler(this.KingMe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -654,6 +689,9 @@
         private System.Windows.Forms.Button btnMoverPersonagem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPromover;
+        private System.Windows.Forms.Panel pnlTabuleiro1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtTeste;
     }
 }
 
