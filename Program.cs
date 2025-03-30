@@ -9,14 +9,21 @@ namespace king_me
     internal static class Program
     {
         /// <summary>
-        /// Ponto de entrada principal para o aplicativo.
+        ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new KingMe());
+
+            // Create instances of the services
+            var partidaService = new Services.PartidaService();
+            var jogadorService = new Services.JogadorService();
+            var cartaService = new Services.CartaService();
+
+            // Run the application with the KingMe form, injecting the dependencies
+            Application.Run(new KingMe(partidaService, jogadorService, cartaService));
         }
     }
 }

@@ -49,6 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICartaService.cs" />
+    <Compile Include="Interfaces\IJogadorService.cs" />
+    <Compile Include="Interfaces\IPartidaService.cs" />
+    <Compile Include="Models\CartaDTO.cs" />
+    <Compile Include="Models\JogadorDTO.cs" />
+    <Compile Include="Models\PartidaDTO.cs" />
+    <Compile Include="Services\CartaService.cs" />
+    <Compile Include="Services\JogadorService.cs" />
+    <Compile Include="Services\PartidaService.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Mao.cs" />
     <Compile Include="Form1.cs">
@@ -83,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KingMeServer\KingMeServer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

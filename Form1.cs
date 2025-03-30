@@ -8,16 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KingMeServer;
+using king_me.Interfaces;
 
 namespace king_me
 {
     public partial class KingMe : Form
     {
+        private readonly IPartidaService _partidaService;
+        private readonly IJogadorService _jogadorService;
+        private readonly ICartaService _cartaService;
         private bool SucessoIniciarPartida = false;
 
-        public KingMe()
+        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService)
         {
             InitializeComponent();
+            _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
+            _jogadorService = jogadorService ?? throw new ArgumentNullException(nameof(jogadorService));
+            _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));
 
             cboStatus.SelectedIndex = 0;
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -29,7 +36,7 @@ namespace king_me
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
             string status = cboStatus.Text.Substring(0, 1);
-            string partidas = KingMeServer.Jogo.ListarPartidas(status);
+            string partidas = _partidaService.ListarPartidas(status);
 
             if (partidas == string.Empty)
             {
@@ -50,15 +57,12 @@ namespace king_me
             if (jogador == string.Empty) { MessageBox.Show("Informe o nome do jogador."); return; }
             if (senha == string.Empty) { MessageBox.Show("Informe a senha da partida."); return; }
 
-            string infoJogador = KingMeServer.Jogo.Entrar(int.Parse(id), jogador, senha);
+            var infoJogador = _jogadorService.Entrar(int.Parse(id), jogador, senha);
 
-            string idJogador = infoJogador.Split(',')[0];
-            string senhaJogador = infoJogador.Split(',')[1];
-
-            txtIdJogador.Text = idJogador;
-            lblIdJogador.Text = $"ID: {idJogador}";
-            txtSenhaJogador.Text = senhaJogador;
-            lblSenhaJogador.Text = $"Senha: {senhaJogador}";
+            txtIdJogador.Text = infoJogador.IdJogador;
+            lblIdJogador.Text = $"ID: {infoJogador.IdJogador}";
+            txtSenhaJogador.Text = infoJogador.SenhaJogador;
+            lblSenhaJogador.Text = $"Senha: {infoJogador.SenhaJogador}";
 
             btnListarJogadores_Click(null, null);
         }
@@ -73,7 +77,7 @@ namespace king_me
             if (senha == string.Empty) { MessageBox.Show("Informe a senha da partida."); return; }
             if (grupo == string.Empty) { MessageBox.Show("Informe o grupo da partida."); return; }
 
-            string id = KingMeServer.Jogo.CriarPartida(nome, senha, grupo);
+            string id = _partidaService.CriarPartida(nome, senha, grupo);
 
             txtIdPartida.Text = id;
             lblIdPartida.Text = id;
@@ -88,7 +92,7 @@ namespace king_me
                 return;
             }
 
-            txtJogadores.Text = KingMeServer.Jogo.ListarJogadores(int.Parse(id));
+            txtJogadores.Text = _jogadorService.ListarJogadores(int.Parse(id));
         }
 
         public void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -98,7 +102,7 @@ namespace king_me
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
 
-            KingMeServer.Jogo.Iniciar(idJogador, senhaJogador);
+            _partidaService.Iniciar(idJogador, senhaJogador);
         }
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
@@ -109,7 +113,7 @@ namespace king_me
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
 
-            string temp = KingMeServer.Jogo.ListarCartas(idJogador, senhaJogador);
+            string temp = _cartaService.ListarCartas(idJogador, senhaJogador);
             temp = temp.Substring(0, temp.Length - 2);
 
             foreach (char caractere in temp)
@@ -183,9 +187,9 @@ namespace king_me
                 }
 
                 int idPartida = int.Parse(txtIdPartida.Text);
-                Jogador jogador = new Jogador(idPartida);
+                var jogador = _jogadorService.GetJogadorDaVez(idPartida);
 
-                string jogadores = KingMeServer.Jogo.ListarJogadores(idPartida);
+                string jogadores = _jogadorService.ListarJogadores(idPartida);
 
                 if (string.IsNullOrEmpty(jogadores))
                 {
@@ -201,21 +205,9 @@ namespace king_me
                     return;
                 }
 
-                string jogadorDaVez = listaJogadores[0];
-                string[] dadosJogador = jogadorDaVez.Split(',');
+                lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
 
-                if (dadosJogador.Length < 2)
-                {
-                    MessageBox.Show($"Formato inesperado do jogador retornado: '{jogadorDaVez}'", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string idJogadorDaVez = KingMeServer.Jogo.VerificarVez(idPartida);
-                string nomeJogadorDaVez = jogador.GetJogadorDaVez(idPartida);
-
-                lblVezIdJogador.Text = $"ID do Jogador: {idJogadorDaVez.Substring(0, Math.Min(4, idJogadorDaVez.Length))}";
-
-                lblVezNomeJogador.Text = $"Nome: {nomeJogadorDaVez}";
+                lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
             }
             catch (Exception ex)
             {
@@ -230,7 +222,7 @@ namespace king_me
             string personagem = txtPersonagem.Text.Substring(0, 1);
             int setor = int.Parse(txtSetor.Text);
 
-            string retorno = KingMeServer.Jogo.ColocarPersonagem(idJogador, senhaJogador, setor, personagem);
+            string retorno = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, personagem);
             txtTabuleiroAtual.Text = retorno;
         }
 
