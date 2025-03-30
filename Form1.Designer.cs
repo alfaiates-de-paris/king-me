@@ -73,8 +73,7 @@
             this.txtTabuleiroAtual = new System.Windows.Forms.TextBox();
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblTesteVez = new System.Windows.Forms.TextBox();
-            this.txtDict = new System.Windows.Forms.TextBox();
+            this.btnPromover = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -537,29 +536,22 @@
             this.label2.Size = new System.Drawing.Size(0, 16);
             this.label2.TabIndex = 49;
             // 
-            // lblTesteVez
+            // promover
             // 
-            this.lblTesteVez.Location = new System.Drawing.Point(378, 256);
-            this.lblTesteVez.Multiline = true;
-            this.lblTesteVez.Name = "lblTesteVez";
-            this.lblTesteVez.Size = new System.Drawing.Size(189, 123);
-            this.lblTesteVez.TabIndex = 50;
-            // 
-            // txtDict
-            // 
-            this.txtDict.Location = new System.Drawing.Point(674, 268);
-            this.txtDict.Multiline = true;
-            this.txtDict.Name = "txtDict";
-            this.txtDict.Size = new System.Drawing.Size(250, 122);
-            this.txtDict.TabIndex = 51;
+            this.btnPromover.Location = new System.Drawing.Point(753, 232);
+            this.btnPromover.Name = "promover";
+            this.btnPromover.Size = new System.Drawing.Size(100, 31);
+            this.btnPromover.TabIndex = 50;
+            this.btnPromover.Text = "Promover";
+            this.btnPromover.UseVisualStyleBackColor = true;
+            this.btnPromover.Click += new System.EventHandler(this.btnPromover_Click);
             // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1135, 733);
-            this.Controls.Add(this.txtDict);
-            this.Controls.Add(this.lblTesteVez);
+            this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
             this.Controls.Add(this.txtTabuleiroAtual);
@@ -661,8 +653,7 @@
         private System.Windows.Forms.TextBox txtTabuleiroAtual;
         private System.Windows.Forms.Button btnMoverPersonagem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox lblTesteVez;
-        private System.Windows.Forms.TextBox txtDict;
+        private System.Windows.Forms.Button btnPromover;
     }
 }
 
