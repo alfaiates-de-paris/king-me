@@ -18,6 +18,10 @@ namespace king_me
         private readonly IJogadorService _jogadorService;
         private readonly ICartaService _cartaService;
         private bool SucessoIniciarPartida = false;
+        private Mao mao = new Mao();
+
+
+
 
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService)
         {
@@ -25,6 +29,8 @@ namespace king_me
             _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
             _jogadorService = jogadorService ?? throw new ArgumentNullException(nameof(jogadorService));
             _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));
+
+            mao.CriarCartas();
 
             cboStatus.SelectedIndex = 0;
             cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -108,8 +114,7 @@ namespace king_me
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
             txtPersonagensFavoritos.Clear();
-            Mao mao = new Mao();
-            mao.CriarCartas();
+
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
 
@@ -118,7 +123,10 @@ namespace king_me
 
             foreach (char caractere in temp)
             {
-                txtPersonagensFavoritos.Text += mao.ExibirPersonagem(caractere) + "\r\n";
+                if (mao.personagens.ContainsKey(caractere))
+                {
+                    txtPersonagensFavoritos.Text += mao.ExibirPersonagem(caractere) + "\r\n";
+                }
             }
         }
 
@@ -219,11 +227,23 @@ namespace king_me
         {
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
-            string personagem = txtPersonagem.Text.Substring(0, 1);
+            string personagemLetra = txtPersonagem.Text.Substring(0, 1).ToUpper();
             int setor = int.Parse(txtSetor.Text);
 
-            string retorno = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, personagem);
+            char personagem = personagemLetra[0];
+
+            string retorno = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, personagemLetra);
+
+            if (retorno.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retorno, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             txtTabuleiroAtual.Text = retorno;
+
+            txtPersonagem.Clear();
+            txtPersonagem.Focus();
         }
 
         private void label2_Click(object sender, EventArgs e) { }
@@ -233,5 +253,41 @@ namespace king_me
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void KingMe_Load(object sender, EventArgs e) { }
+
+        private void btnPromover_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtIdJogador.Text, out int idJogador))
+            {
+                MessageBox.Show("ID do jogador inválido.");
+                return;
+            }
+
+            string senhaJogador = txtSenhaJogador.Text;
+            string personagemInput = txtPersonagem.Text.Trim();
+
+            if (string.IsNullOrEmpty(personagemInput))
+            {
+                MessageBox.Show("Informe o personagem que deseja promover.");
+                return;
+            }
+
+            string personagemLetra = personagemInput.Substring(0, 1).ToUpper();
+
+
+            string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemLetra);
+
+            if (retorno.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retorno, "Erro ao promover personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            txtTabuleiroAtual.Text = retorno;
+            txtPersonagem.Clear();
+            txtPersonagem.Focus();
+        }
+
     }
+
 }
+

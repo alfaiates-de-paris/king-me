@@ -15,5 +15,9 @@ namespace king_me.Services
         {
             return Jogo.ColocarPersonagem(idJogador, senhaJogador, setor, personagem);
         }
+        public string Promover(int idJogador, string senhaJogador,string personagem)
+        {
+            return Jogo.Promover(idJogador, senhaJogador, personagem);
+        }
     }
 }
