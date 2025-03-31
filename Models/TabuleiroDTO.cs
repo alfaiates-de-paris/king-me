@@ -8,6 +8,5 @@ namespace king_me.Models
 {
     public class TabuleiroDTO
     {
-      
     }
 }

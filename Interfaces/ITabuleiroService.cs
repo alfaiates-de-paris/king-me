@@ -10,6 +10,7 @@ namespace king_me.Interfaces
 {
     public interface ITabuleiroService
     {
-        void MoverPersonagem(Panel pnl, string personagem, int setor, int index);
+        void MoverPersonagem(Panel pnl, string personagem, int setor);
+        int ObterSetorAtual(string personagem);
     }
 }

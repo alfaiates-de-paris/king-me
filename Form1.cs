@@ -243,7 +243,7 @@ namespace king_me
             }
 
             // Use the ITabuleiroService to move the character on the board
-            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setor, -1);
+            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setor);
 
             txtTabuleiroAtual.Text = retorno;
 
@@ -286,7 +286,14 @@ namespace king_me
                 MessageBox.Show(retorno, "Erro ao promover personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
+            int setorAtual = _tabuleiroService.ObterSetorAtual(personagemLetra);
+            if (setorAtual != 5)
+                setorAtual++;
+            else
+                setorAtual = 10;
 
+            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setorAtual);
             txtTabuleiroAtual.Text = retorno;
             txtPersonagem.Clear();
             txtPersonagem.Focus();
