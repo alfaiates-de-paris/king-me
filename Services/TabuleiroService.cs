@@ -1,10 +1,14 @@
 ﻿using king_me.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace king_me.Services
 {
@@ -30,22 +34,22 @@ namespace king_me.Services
             x = x + 40 * setores[setor].QtdPersonagensAtual;
             y = y - 40 * setores[setor].QtdPersonagensAtual;
 
-            if (index >= 0 && index < pnl.Controls.Count && pnl.Controls[index] is Label)
+            if (index >= 0 && index < pnl.Controls.Count && pnl.Controls[index] is PictureBox)
             {
-                Label label = (Label)pnl.Controls[index];
-                label.Text = personagem;
-                label.Location = new System.Drawing.Point(x, y);
+                PictureBox pictureBox = (PictureBox)pnl.Controls[index];
+                pictureBox.Image = System.Drawing.Image.FromFile($"../Properties/images/cartas/carta_{personagem}.png");
+                pictureBox.Location = new System.Drawing.Point(x, y);
             }
             else
             {
-                Label label = new Label();
-                label.Name = "lbl" + personagem.ToUpper();
-                label.Text = personagem;
-                label.Location = new System.Drawing.Point(x, y);
-                label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-                label.Size = new System.Drawing.Size(30, 50);
-                label.BackColor = System.Drawing.Color.Transparent;
-                pnl.Controls.Add(label);
+                PictureBox pictureBox = new PictureBox(); 
+                pictureBox.Name = "pic" + personagem.ToUpper();
+                pictureBox.Image = System.Drawing.Image.FromFile($"../Properties/images/cartas/carta_{personagem}.png");
+                pictureBox.Location = new System.Drawing.Point(x, y);
+                pictureBox.Size = new System.Drawing.Size(40, 40);
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.BackColor = System.Drawing.Color.Transparent;
+                pnl.Controls.Add(pictureBox);
                 setores[setor].QtdPersonagensAtual++;
             }
         }
