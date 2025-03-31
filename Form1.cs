@@ -17,18 +17,18 @@ namespace king_me
         private readonly IPartidaService _partidaService;
         private readonly IJogadorService _jogadorService;
         private readonly ICartaService _cartaService;
+        private readonly ITabuleiroService _tabuleiroService;
         private bool SucessoIniciarPartida = false;
         private Mao mao = new Mao();
 
 
-
-
-        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService)
+        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, ITabuleiroService tabuleiroService)
         {
             InitializeComponent();
             _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
             _jogadorService = jogadorService ?? throw new ArgumentNullException(nameof(jogadorService));
             _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));
+            _tabuleiroService = tabuleiroService ?? throw new ArgumentNullException(nameof(tabuleiroService));
 
             mao.CriarCartas();
 
@@ -51,6 +51,8 @@ namespace king_me
             }
 
             txtPartidas.Text = partidas;
+
+
         }
 
         private void btnEntrarPartida_Click(object sender, EventArgs e)
@@ -240,6 +242,9 @@ namespace king_me
                 return;
             }
 
+            // Use the ITabuleiroService to move the character on the board
+            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setor);
+
             txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
@@ -281,7 +286,14 @@ namespace king_me
                 MessageBox.Show(retorno, "Erro ao promover personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
+            int setorAtual = _tabuleiroService.ObterSetorAtual(personagemLetra);
+            if (setorAtual != 5)
+                setorAtual++;
+            else
+                setorAtual = 10;
 
+            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setorAtual);
             txtTabuleiroAtual.Text = retorno;
             txtPersonagem.Clear();
             txtPersonagem.Focus();
