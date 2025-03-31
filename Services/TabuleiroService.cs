@@ -27,8 +27,8 @@ namespace king_me.Services
         {
             int x = setores[setor].PosX;
             int y = setores[setor].PosY;
-            x = x + 10 * setores[setor].QtdPersonagensAtual;
-            y = y + 10 * setores[setor].QtdPersonagensAtual;
+            x = x + 40 * setores[setor].QtdPersonagensAtual;
+            y = y - 40 * setores[setor].QtdPersonagensAtual;
 
             if (index >= 0 && index < pnl.Controls.Count && pnl.Controls[index] is Label)
             {
@@ -43,10 +43,10 @@ namespace king_me.Services
                 label.Text = personagem;
                 label.Location = new System.Drawing.Point(x, y);
                 label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+                label.Size = new System.Drawing.Size(30, 50);
+                label.BackColor = System.Drawing.Color.Transparent;
                 pnl.Controls.Add(label);
                 setores[setor].QtdPersonagensAtual++;
-
-
             }
         }
     }

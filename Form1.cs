@@ -242,7 +242,9 @@ namespace king_me
                 return;
             }
 
-            
+            // Use the ITabuleiroService to move the character on the board
+            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setor, -1);
+
             txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
