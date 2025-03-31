@@ -31,5 +31,23 @@ namespace king_me
         {
             return personagens[chave];
         }
+
+        public void RemoverPersonagem(char chave)
+        {
+            if (personagens.ContainsKey(chave))
+            {
+                personagens.Remove(chave);
+            }
+        }
+
+        public string PersonagensRestantes()
+        {
+            string restantes = "";
+            foreach (KeyValuePair<char, string> personagem in personagens)
+            {
+                restantes = restantes + personagem.Key;
+            }
+            return restantes;
+        }
     }
 }
