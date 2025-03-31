@@ -74,9 +74,7 @@
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPromover = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlTabuleiro1 = new System.Windows.Forms.Panel();
-            this.txtTeste = new System.Windows.Forms.TextBox();
+            this.pnlTabuleiro = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -324,6 +322,7 @@
             // lblPersonagensFav
             // 
             this.lblPersonagensFav.AutoSize = true;
+            this.lblPersonagensFav.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblPersonagensFav.Location = new System.Drawing.Point(410, 211);
             this.lblPersonagensFav.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
@@ -519,44 +518,21 @@
             this.btnPromover.UseVisualStyleBackColor = true;
             this.btnPromover.Click += new System.EventHandler(this.btnPromover_Click);
             // 
-            // panel1
+            // pnlTabuleiro
             // 
-            this.panel1.BackgroundImage = global::king_me.Properties.Resources.Tabuleiro2;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(892, 351);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(317, 330);
-            this.panel1.TabIndex = 52;
-            // 
-            // pnlTabuleiro1
-            // 
-            this.pnlTabuleiro1.AutoSize = true;
-            this.pnlTabuleiro1.BackgroundImage = global::king_me.Properties.Resources.Tabuleiro1;
-            this.pnlTabuleiro1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlTabuleiro1.Location = new System.Drawing.Point(892, 36);
-            this.pnlTabuleiro1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnlTabuleiro1.Name = "pnlTabuleiro1";
-            this.pnlTabuleiro1.Size = new System.Drawing.Size(317, 320);
-            this.pnlTabuleiro1.TabIndex = 51;
-            // 
-            // txtTeste
-            // 
-            this.txtTeste.Location = new System.Drawing.Point(392, 435);
-            this.txtTeste.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtTeste.Multiline = true;
-            this.txtTeste.Name = "txtTeste";
-            this.txtTeste.Size = new System.Drawing.Size(203, 96);
-            this.txtTeste.TabIndex = 53;
+            this.pnlTabuleiro.BackgroundImage = global::king_me.Properties.Resources.tabuleiro_completo;
+            this.pnlTabuleiro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlTabuleiro.Location = new System.Drawing.Point(923, 36);
+            this.pnlTabuleiro.Name = "pnlTabuleiro";
+            this.pnlTabuleiro.Size = new System.Drawing.Size(264, 616);
+            this.pnlTabuleiro.TabIndex = 51;
             // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 725);
-            this.Controls.Add(this.txtTeste);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlTabuleiro1);
+            this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
@@ -662,9 +638,7 @@
         private System.Windows.Forms.Button btnMoverPersonagem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPromover;
-        private System.Windows.Forms.Panel pnlTabuleiro1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtTeste;
+        private System.Windows.Forms.Panel pnlTabuleiro;
     }
 }
 

@@ -63,6 +63,26 @@ namespace king_me.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tabuleiro_completo {
+            get {
+                object obj = ResourceManager.GetObject("tabuleiro_completo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tabuleiro_completo1 {
+            get {
+                object obj = ResourceManager.GetObject("tabuleiro_completo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Tabuleiro1 {
             get {
                 object obj = ResourceManager.GetObject("Tabuleiro1", resourceCulture);
