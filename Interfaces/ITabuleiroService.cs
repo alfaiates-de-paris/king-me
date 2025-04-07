@@ -12,5 +12,7 @@ namespace king_me.Interfaces
     {
         void MoverPersonagem(Panel pnl, string personagem, int setor);
         int ObterSetorAtual(string personagem);
+        void LimparTabuleiro(Panel pnl);
+        void AtualizarTabuleiro(Panel pnl, string statusTabuleiro);
     }
 }
