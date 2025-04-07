@@ -325,7 +325,7 @@
             // lblPersonagensFav
             // 
             this.lblPersonagensFav.AutoSize = true;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(557, 496);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(349, 341);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
             this.lblPersonagensFav.Size = new System.Drawing.Size(58, 13);
             this.lblPersonagensFav.TabIndex = 30;
@@ -385,7 +385,7 @@
             // 
             // btnVerificarVez
             // 
-            this.btnVerificarVez.Location = new System.Drawing.Point(318, 168);
+            this.btnVerificarVez.Location = new System.Drawing.Point(287, 161);
             this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVerificarVez.Name = "btnVerificarVez";
             this.btnVerificarVez.Size = new System.Drawing.Size(89, 28);
@@ -467,7 +467,7 @@
             // 
             // txtPersonagensFavoritos
             // 
-            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(529, 515);
+            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(318, 367);
             this.txtPersonagensFavoritos.Multiline = true;
             this.txtPersonagensFavoritos.Name = "txtPersonagensFavoritos";
             this.txtPersonagensFavoritos.Size = new System.Drawing.Size(112, 128);
@@ -533,7 +533,7 @@
             // 
             // Votar
             // 
-            this.Votar.Location = new System.Drawing.Point(415, 152);
+            this.Votar.Location = new System.Drawing.Point(415, 123);
             this.Votar.Name = "Votar";
             this.Votar.Size = new System.Drawing.Size(87, 23);
             this.Votar.TabIndex = 51;
@@ -543,7 +543,7 @@
             // 
             // txtVoto
             // 
-            this.txtVoto.Location = new System.Drawing.Point(415, 193);
+            this.txtVoto.Location = new System.Drawing.Point(415, 161);
             this.txtVoto.Name = "txtVoto";
             this.txtVoto.Size = new System.Drawing.Size(87, 20);
             this.txtVoto.TabIndex = 52;
@@ -552,7 +552,7 @@
             // lblVotosRestantes
             // 
             this.lblVotosRestantes.AutoSize = true;
-            this.lblVotosRestantes.Location = new System.Drawing.Point(412, 229);
+            this.lblVotosRestantes.Location = new System.Drawing.Point(412, 202);
             this.lblVotosRestantes.Name = "lblVotosRestantes";
             this.lblVotosRestantes.Size = new System.Drawing.Size(90, 13);
             this.lblVotosRestantes.TabIndex = 53;

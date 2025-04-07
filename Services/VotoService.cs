@@ -4,34 +4,39 @@ using System.Collections.Generic;
 
 namespace king_me.Services
 {
-    public class VotoService : IVotoService
-    {
-        private Dictionary<int, int> votosRestantes = new Dictionary<int, int>();
 
-        public string Votar(int idJogador, string senha, string voto)
+        public class VotoService : IVotoService
         {
-            if (!votosRestantes.ContainsKey(idJogador))
-                votosRestantes[idJogador] = 3;
+            private Dictionary<int, int> votosPorJogador = new Dictionary<int, int>();
 
-            if (votosRestantes[idJogador] <= 0)
-                return "ERRO: Você não tem mais votos disponíveis.";
-
-            string resultado = Jogo.Votar(idJogador, senha, voto);
-
-            if (!resultado.StartsWith("ERRO"))
+            public string Votar(int jogador, string senha, string voto)
             {
-                votosRestantes[idJogador]--;
+                voto = voto.ToUpper();
+
+                if (voto.Length > 1)
+                    return "ERRO:Voto com excesso de caracteres";
+
+                if (voto != "S" && voto != "N")
+                    return "ERRO:Voto com caracter inválido (S/N)";
+
+                if (!votosPorJogador.ContainsKey(jogador))
+                    votosPorJogador[jogador] = 3;
+
+                if (votosPorJogador[jogador] <= 0)
+                    return "ERRO:Você não tem mais votos disponíveis";
+
+                votosPorJogador[jogador]--;
+
+                return Jogo.Votar(jogador, senha, voto);
             }
 
-            return resultado;
-        }
+            public int GetVotosRestantes(int jogador)
+            {
+                if (votosPorJogador.ContainsKey(jogador))
+                    return votosPorJogador[jogador];
 
-        public int GetVotosRestantes(int idJogador)
-        {
-            if (!votosRestantes.ContainsKey(idJogador))
-                return 3;
-
-            return votosRestantes[idJogador];
+                return 3; // valor padrão se nunca votou ainda
+            }
         }
     }
-}
+
