@@ -52,9 +52,11 @@
     <Compile Include="Interfaces\ICartaService.cs" />
     <Compile Include="Interfaces\IJogadorService.cs" />
     <Compile Include="Interfaces\IPartidaService.cs" />
+    <Compile Include="Interfaces\IVotoService.cs" />
     <Compile Include="Models\CartaDTO.cs" />
     <Compile Include="Models\JogadorDTO.cs" />
     <Compile Include="Models\PartidaDTO.cs" />
+    <Compile Include="Models\VotoDTO.cs" />
     <Compile Include="Services\CartaService.cs" />
     <Compile Include="Services\JogadorService.cs" />
     <Compile Include="Services\PartidaService.cs" />
@@ -68,6 +70,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\VotoService.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
