@@ -21,7 +21,6 @@ namespace king_me
         private bool SucessoIniciarPartida = false;
         private Mao mao = new Mao();
 
-
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, ITabuleiroService tabuleiroService)
         {
             InitializeComponent();
@@ -242,9 +241,9 @@ namespace king_me
                 return;
             }
 
-            // Use the ITabuleiroService to move the character on the board
-            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setor);
 
+            // Use the ITabuleiroService to move the character on the board
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
             txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
@@ -287,13 +286,7 @@ namespace king_me
                 return;
             }
             
-            int setorAtual = _tabuleiroService.ObterSetorAtual(personagemLetra);
-            if (setorAtual != 5)
-                setorAtual++;
-            else
-                setorAtual = 10;
-
-            _tabuleiroService.MoverPersonagem(pnlTabuleiro, personagemLetra, setorAtual);
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
             txtTabuleiroAtual.Text = retorno;
             txtPersonagem.Clear();
             txtPersonagem.Focus();
