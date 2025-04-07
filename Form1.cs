@@ -334,7 +334,15 @@ namespace king_me
         {
 
         }
-    }
 
+        private void lblVotosRestantes_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtIdJogador.Text, out int idJogador))
+            {
+                int votosRestantes = _votoService.GetVotosRestantes(idJogador);
+                lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
+            }
+        }
+    }
 }
 
