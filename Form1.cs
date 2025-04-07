@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KingMeServer;
 using king_me.Interfaces;
+using king_me.Services;
 
 namespace king_me
 {
@@ -20,14 +21,20 @@ namespace king_me
         private readonly ITabuleiroService _tabuleiroService;
         private bool SucessoIniciarPartida = false;
         private Mao mao = new Mao();
+        private readonly IVotoService _votoService;
 
-        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, ITabuleiroService tabuleiroService)
+
+
+
+        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService,ITabuleiroService tabuleiroService)
+       
         {
             InitializeComponent();
             _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
             _jogadorService = jogadorService ?? throw new ArgumentNullException(nameof(jogadorService));
             _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));
             _tabuleiroService = tabuleiroService ?? throw new ArgumentNullException(nameof(tabuleiroService));
+            _votoService = votoService ?? throw new ArgumentNullException(nameof(votoService));
 
             mao.CriarCartas();
 
@@ -292,6 +299,41 @@ namespace king_me
             txtPersonagem.Focus();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtIdJogador.Text, out int idJogador))
+            {
+                MessageBox.Show("ID do jogador inválido.");
+                return;
+            }
+
+            string senhaJogador = txtSenhaJogador.Text;
+            string voto = txtVoto.Text.Trim().ToUpper(); // TextBox para digitar S ou N
+
+            if (string.IsNullOrEmpty(voto))
+            {
+                MessageBox.Show("Digite S para aceitar ou N para rejeitar.");
+                return;
+            }
+
+            var votoService = new VotoService();
+            string retorno = votoService.Votar(idJogador, senhaJogador, voto);
+
+            if (retorno.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show("Voto registrado com sucesso!");
+            txtVoto.Clear();
+            txtVoto.Focus();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

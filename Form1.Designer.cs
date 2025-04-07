@@ -75,6 +75,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnPromover = new System.Windows.Forms.Button();
             this.pnlTabuleiro = new System.Windows.Forms.Panel();
+            this.Votar = new System.Windows.Forms.Button();
+            this.txtVoto = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -322,9 +324,7 @@
             // lblPersonagensFav
             // 
             this.lblPersonagensFav.AutoSize = true;
-            this.lblPersonagensFav.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(410, 211);
-            this.lblPersonagensFav.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(557, 496);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
             this.lblPersonagensFav.Size = new System.Drawing.Size(58, 13);
             this.lblPersonagensFav.TabIndex = 30;
@@ -341,8 +341,8 @@
             // 
             // btnIniciarPartida
             // 
-            this.btnIniciarPartida.Location = new System.Drawing.Point(287, 9);
-            this.btnIniciarPartida.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnIniciarPartida.Location = new System.Drawing.Point(383, 11);
+            this.btnIniciarPartida.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIniciarPartida.Name = "btnIniciarPartida";
             this.btnIniciarPartida.Size = new System.Drawing.Size(100, 33);
             this.btnIniciarPartida.TabIndex = 32;
@@ -352,7 +352,8 @@
             // 
             // btnExibirCartas
             // 
-            this.btnExibirCartas.Location = new System.Drawing.Point(412, 229);
+            this.btnExibirCartas.Location = new System.Drawing.Point(383, 633);
+            this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
             this.btnExibirCartas.Name = "btnExibirCartas";
             this.btnExibirCartas.Size = new System.Drawing.Size(92, 23);
             this.btnExibirCartas.TabIndex = 33;
@@ -363,7 +364,8 @@
             // lblPersonagensExistentes
             // 
             this.lblPersonagensExistentes.AutoSize = true;
-            this.lblPersonagensExistentes.Location = new System.Drawing.Point(738, 418);
+            this.lblPersonagensExistentes.Location = new System.Drawing.Point(1003, 515);
+            this.lblPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagensExistentes.Name = "lblPersonagensExistentes";
             this.lblPersonagensExistentes.Size = new System.Drawing.Size(69, 13);
             this.lblPersonagensExistentes.TabIndex = 34;
@@ -373,7 +375,9 @@
             // txtPersonagensExistentes
             // 
             this.txtPersonagensExistentes.FormattingEnabled = true;
-            this.txtPersonagensExistentes.Location = new System.Drawing.Point(722, 435);
+            this.txtPersonagensExistentes.ItemHeight = 16;
+            this.txtPersonagensExistentes.Location = new System.Drawing.Point(987, 535);
+            this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagensExistentes.Name = "txtPersonagensExistentes";
             this.txtPersonagensExistentes.Size = new System.Drawing.Size(98, 121);
             this.txtPersonagensExistentes.TabIndex = 35;
@@ -381,8 +385,8 @@
             // 
             // btnVerificarVez
             // 
-            this.btnVerificarVez.Location = new System.Drawing.Point(287, 144);
-            this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVerificarVez.Location = new System.Drawing.Point(383, 177);
+            this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVerificarVez.Name = "btnVerificarVez";
             this.btnVerificarVez.Size = new System.Drawing.Size(89, 28);
             this.btnVerificarVez.TabIndex = 36;
@@ -444,7 +448,8 @@
             // lblVezNomeJogador
             // 
             this.lblVezNomeJogador.AutoSize = true;
-            this.lblVezNomeJogador.Location = new System.Drawing.Point(398, 132);
+            this.lblVezNomeJogador.Location = new System.Drawing.Point(531, 162);
+            this.lblVezNomeJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezNomeJogador.Name = "lblVezNomeJogador";
             this.lblVezNomeJogador.Size = new System.Drawing.Size(76, 13);
             this.lblVezNomeJogador.TabIndex = 43;
@@ -453,7 +458,8 @@
             // lblVezIdJogador
             // 
             this.lblVezIdJogador.AutoSize = true;
-            this.lblVezIdJogador.Location = new System.Drawing.Point(398, 159);
+            this.lblVezIdJogador.Location = new System.Drawing.Point(531, 196);
+            this.lblVezIdJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezIdJogador.Name = "lblVezIdJogador";
             this.lblVezIdJogador.Size = new System.Drawing.Size(57, 13);
             this.lblVezIdJogador.TabIndex = 44;
@@ -461,8 +467,7 @@
             // 
             // txtPersonagensFavoritos
             // 
-            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(286, 211);
-            this.txtPersonagensFavoritos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(529, 515);
             this.txtPersonagensFavoritos.Multiline = true;
             this.txtPersonagensFavoritos.Name = "txtPersonagensFavoritos";
             this.txtPersonagensFavoritos.Size = new System.Drawing.Size(112, 128);
@@ -480,8 +485,7 @@
             // 
             // txtTabuleiroAtual
             // 
-            this.txtTabuleiroAtual.Location = new System.Drawing.Point(707, 229);
-            this.txtTabuleiroAtual.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTabuleiroAtual.Location = new System.Drawing.Point(943, 282);
             this.txtTabuleiroAtual.Multiline = true;
             this.txtTabuleiroAtual.Name = "txtTabuleiroAtual";
             this.txtTabuleiroAtual.Size = new System.Drawing.Size(131, 175);
@@ -527,12 +531,33 @@
             this.pnlTabuleiro.Size = new System.Drawing.Size(264, 616);
             this.pnlTabuleiro.TabIndex = 51;
             // 
+            // Votar
+            // 
+            this.Votar.Location = new System.Drawing.Point(448, 160);
+            this.Votar.Name = "Votar";
+            this.Votar.Size = new System.Drawing.Size(87, 23);
+            this.Votar.TabIndex = 51;
+            this.Votar.Text = "Votar";
+            this.Votar.UseVisualStyleBackColor = true;
+            this.Votar.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtVoto
+            // 
+            this.txtVoto.Location = new System.Drawing.Point(448, 193);
+            this.txtVoto.Name = "txtVoto";
+            this.txtVoto.Size = new System.Drawing.Size(87, 20);
+            this.txtVoto.TabIndex = 52;
+            this.txtVoto.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 725);
             this.Controls.Add(this.pnlTabuleiro);
+            this.ClientSize = new System.Drawing.Size(851, 596);
+            this.Controls.Add(this.txtVoto);
+            this.Controls.Add(this.Votar);
             this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
@@ -639,6 +664,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPromover;
         private System.Windows.Forms.Panel pnlTabuleiro;
+        private System.Windows.Forms.Button Votar;
+        private System.Windows.Forms.TextBox txtVoto;
     }
 }
 

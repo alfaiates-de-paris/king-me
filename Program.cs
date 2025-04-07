@@ -1,4 +1,5 @@
-﻿using System;
+﻿using king_me.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,9 +23,10 @@ namespace king_me
             var jogadorService = new Services.JogadorService();
             var cartaService = new Services.CartaService();
             var tabuleiroService = new Services.TabuleiroService();
+            var votoService = new VotoService();
 
             // Run the application with the KingMe form, injecting the dependencies
-            Application.Run(new KingMe(partidaService, jogadorService, cartaService, tabuleiroService));
+            Application.Run(new KingMe(partidaService, jogadorService, cartaService, tabuleiroService,votoService));
         }
     }
 }
