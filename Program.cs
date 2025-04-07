@@ -22,10 +22,11 @@ namespace king_me
             var partidaService = new Services.PartidaService();
             var jogadorService = new Services.JogadorService();
             var cartaService = new Services.CartaService();
+            var tabuleiroService = new Services.TabuleiroService();
             var votoService = new VotoService();
 
             // Run the application with the KingMe form, injecting the dependencies
-            Application.Run(new KingMe(partidaService, jogadorService, cartaService,votoService));
+            Application.Run(new KingMe(partidaService, jogadorService, cartaService, tabuleiroService,votoService));
         }
     }
 }
