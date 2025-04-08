@@ -552,7 +552,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1224, 677);
+            this.ClientSize = new System.Drawing.Size(1241, 725);
             this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.txtVoto);
             this.Controls.Add(this.Votar);
