@@ -219,8 +219,10 @@ namespace king_me
                 }
 
                 lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
-
                 lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
+
+                
+                AtualizarVotosRestantes();
             }
             catch (Exception ex)
             {
@@ -346,5 +348,6 @@ namespace king_me
                 lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
             }
         }
+
     }
 }
