@@ -25,7 +25,7 @@ namespace king_me.Services
             setores.Add(new Setor(3, 52, 324, 0)); 
             setores.Add(new Setor(4, 53, 242, 0)); 
             setores.Add(new Setor(5, 61, 163, 0)); 
-            setores.Add(new Setor(10, 99, 71, 0)); 
+            setores.Add(new Setor(10, 120, 71, 0)); 
         }
 
         public void MoverPersonagem(Panel pnl, string personagem, int setor)
@@ -42,6 +42,8 @@ namespace king_me.Services
                 }
             }
 
+            if (setor == 10)
+                setor = 6; //setor 10 é o mesmo que 6, só para facilitar a leitura do código
             int x = setores[setor].PosX;
             int y = setores[setor].PosY;
             x = x + 35 * setores[setor].QtdPersonagensAtual; //joga a carta para o lado caso ja exista uma carta naquele setor, para não haver sobreposição

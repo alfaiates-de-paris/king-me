@@ -594,7 +594,6 @@
             this.lblVotosRestantes.TabIndex = 54;
             this.lblVotosRestantes.Text = "Votos";
             this.lblVotosRestantes.Click += new System.EventHandler(this.lblVotosRestantes_Click);
-
             // 
             // KingMe
             // 
@@ -716,6 +715,5 @@
         private System.Windows.Forms.TextBox txtVoto;
         private System.Windows.Forms.Panel pnlTabuleiro;
         private System.Windows.Forms.Label lblVotosRestantes;
-
     }
 }
