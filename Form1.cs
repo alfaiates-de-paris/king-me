@@ -40,6 +40,7 @@ namespace king_me
             btnListarPartidas_Click(null, null);
             CarregarPersonagens();
             CarregarSetor();
+           
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -107,11 +108,15 @@ namespace king_me
         }
 
         public void btnIniciarPartida_Click(object sender, EventArgs e)
-        {
+        {   
             SucessoIniciarPartida = true;
             int idJogador = Int32.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
+            btnVerificarVez.Visible = false;
+
+            // Ativa o timer automático
+            tmrVerificarVez.Start();
 
             _partidaService.Iniciar(idJogador, senhaJogador);
         }
@@ -230,12 +235,70 @@ namespace king_me
             }
         }
 
+
+
+        private void VerificarVez()
+        {
+            try
+            {
+               
+
+                if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
+                {
+                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
+                    return;
+                }
+
+                if (!SucessoIniciarPartida)
+                {
+                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
+                    return;
+                }
+
+                int idPartida = int.Parse(txtIdPartida.Text);
+                var jogador = _jogadorService.GetJogadorDaVez(idPartida);
+
+                if (jogador == null)
+                {
+                    MessageBox.Show("Jogador da vez não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                lblVezIdJogador.Visible = true;
+                lblVezNomeJogador.Visible = true;
+
+                lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
+                lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
+
+                AtualizarVotosRestantes(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
+
+        private void tmrVerificarVez_Tick(object sender, EventArgs e)
+        {   
+            tmrVerificarVez.Enabled = false;
+            VerificarVez();
+            tmrVerificarVez.Enabled = true;
+        }
+
         private void btnMoverPersonagem_Click(object sender, EventArgs e)
         {
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
             string personagemLetra = txtPersonagem.Text.Substring(0, 1).ToUpper();
-            int setor = int.Parse(txtSetor.Text);
+
+            // Verifica se o campo de setor foi preenchido corretamente
+            if (!int.TryParse(txtSetor.Text, out int setor))
+            {
+                MessageBox.Show("Informe um setor válido antes de mover o personagem.", "Setor não informado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             char personagem = personagemLetra[0];
 
@@ -247,14 +310,14 @@ namespace king_me
                 return;
             }
 
-
-            // Use the ITabuleiroService to move the character on the board
+            // Atualiza o tabuleiro visual
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
             txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
             txtPersonagem.Focus();
         }
+
 
         private void label2_Click(object sender, EventArgs e) { }
 
@@ -349,5 +412,14 @@ namespace king_me
             }
         }
 
+        private void lblVezIdJogador_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblVezNomeJogador_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
