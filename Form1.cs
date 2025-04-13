@@ -23,11 +23,8 @@ namespace king_me
         private Mao mao = new Mao();
         private readonly IVotoService _votoService;
 
+        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService)
 
-
-
-        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService,ITabuleiroService tabuleiroService)
-       
         {
             InitializeComponent();
             _partidaService = partidaService ?? throw new ArgumentNullException(nameof(partidaService));
@@ -222,8 +219,10 @@ namespace king_me
                 }
 
                 lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
-
                 lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
+
+                
+                AtualizarVotosRestantes();
             }
             catch (Exception ex)
             {
@@ -292,7 +291,7 @@ namespace king_me
                 MessageBox.Show(retorno, "Erro ao promover personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
             txtTabuleiroAtual.Text = retorno;
             txtPersonagem.Clear();
@@ -328,13 +327,27 @@ namespace king_me
             MessageBox.Show("Voto registrado com sucesso!");
             txtVoto.Clear();
             txtVoto.Focus();
+
+            AtualizarVotosRestantes();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void lblVotosRestantes_Click(object sender, EventArgs e)
+        {
+            AtualizarVotosRestantes();
+        }
+        private void AtualizarVotosRestantes()
+        {
+            if (int.TryParse(txtIdJogador.Text, out int idJogador))
+            {
+                int votosRestantes = _votoService.GetVotosRestantes(idJogador);
+                lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
+            }
+        }
+
     }
-
 }
-
