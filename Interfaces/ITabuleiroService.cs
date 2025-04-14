@@ -14,5 +14,8 @@ namespace king_me.Interfaces
         int ObterSetorAtual(string personagem);
         void LimparTabuleiro(Panel pnl);
         void AtualizarTabuleiro(Panel pnl, string statusTabuleiro);
+
+        void RemoverPersonagem(Panel pnl, string personagem);
+        void LimparSetor10(Panel pnl);
     }
 }

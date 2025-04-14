@@ -361,7 +361,7 @@ namespace king_me
             txtPersonagem.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVotar_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtIdJogador.Text, out int idJogador))
             {
@@ -388,6 +388,9 @@ namespace king_me
             }
 
             MessageBox.Show("Voto registrado com sucesso!");
+            if (txtVoto.Text == "N") { 
+                _tabuleiroService.LimparSetor10(pnlTabuleiro);
+            }
             txtVoto.Clear();
             txtVoto.Focus();
 
