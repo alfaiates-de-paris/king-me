@@ -96,7 +96,7 @@
             // 
             this.txtNomePartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNomePartida.Location = new System.Drawing.Point(16, 31);
-            this.txtNomePartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomePartida.Margin = new System.Windows.Forms.Padding(4);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(133, 22);
             this.txtNomePartida.TabIndex = 2;
@@ -127,7 +127,7 @@
             // 
             this.txtSenhaPartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSenhaPartida.Location = new System.Drawing.Point(16, 84);
-            this.txtSenhaPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSenhaPartida.Margin = new System.Windows.Forms.Padding(4);
             this.txtSenhaPartida.Name = "txtSenhaPartida";
             this.txtSenhaPartida.Size = new System.Drawing.Size(133, 22);
             this.txtSenhaPartida.TabIndex = 4;
@@ -147,7 +147,7 @@
             // 
             this.txtNomeGrupo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNomeGrupo.Location = new System.Drawing.Point(16, 138);
-            this.txtNomeGrupo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeGrupo.Margin = new System.Windows.Forms.Padding(4);
             this.txtNomeGrupo.Name = "txtNomeGrupo";
             this.txtNomeGrupo.ReadOnly = true;
             this.txtNomeGrupo.Size = new System.Drawing.Size(133, 22);
@@ -169,7 +169,7 @@
             // 
             this.txtIdPartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIdPartida.Location = new System.Drawing.Point(16, 197);
-            this.txtIdPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIdPartida.Margin = new System.Windows.Forms.Padding(4);
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.Size = new System.Drawing.Size(133, 22);
             this.txtIdPartida.TabIndex = 8;
@@ -177,7 +177,7 @@
             // btnListarPartidas
             // 
             this.btnListarPartidas.Location = new System.Drawing.Point(185, 263);
-            this.btnListarPartidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnListarPartidas.Margin = new System.Windows.Forms.Padding(4);
             this.btnListarPartidas.Name = "btnListarPartidas";
             this.btnListarPartidas.Size = new System.Drawing.Size(133, 28);
             this.btnListarPartidas.TabIndex = 11;
@@ -199,7 +199,7 @@
             "Jogando",
             "Encerrada"});
             this.cboStatus.Location = new System.Drawing.Point(16, 263);
-            this.cboStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(160, 24);
             this.cboStatus.TabIndex = 12;
@@ -208,7 +208,7 @@
             // txtPartidas
             // 
             this.txtPartidas.Location = new System.Drawing.Point(16, 299);
-            this.txtPartidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPartidas.Margin = new System.Windows.Forms.Padding(4);
             this.txtPartidas.Name = "txtPartidas";
             this.txtPartidas.Size = new System.Drawing.Size(301, 117);
             this.txtPartidas.TabIndex = 13;
@@ -229,7 +229,7 @@
             // 
             this.txtNomeJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNomeJogador.Location = new System.Drawing.Point(20, 452);
-            this.txtNomeJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeJogador.Margin = new System.Windows.Forms.Padding(4);
             this.txtNomeJogador.Name = "txtNomeJogador";
             this.txtNomeJogador.Size = new System.Drawing.Size(133, 22);
             this.txtNomeJogador.TabIndex = 16;
@@ -237,7 +237,7 @@
             // btnEntrarPartida
             // 
             this.btnEntrarPartida.Location = new System.Drawing.Point(185, 448);
-            this.btnEntrarPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEntrarPartida.Margin = new System.Windows.Forms.Padding(4);
             this.btnEntrarPartida.Name = "btnEntrarPartida";
             this.btnEntrarPartida.Size = new System.Drawing.Size(133, 28);
             this.btnEntrarPartida.TabIndex = 17;
@@ -248,7 +248,7 @@
             // txtJogadores
             // 
             this.txtJogadores.Location = new System.Drawing.Point(20, 535);
-            this.txtJogadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtJogadores.Margin = new System.Windows.Forms.Padding(4);
             this.txtJogadores.Name = "txtJogadores";
             this.txtJogadores.Size = new System.Drawing.Size(301, 117);
             this.txtJogadores.TabIndex = 18;
@@ -257,7 +257,7 @@
             // btnListarJogadores
             // 
             this.btnListarJogadores.Location = new System.Drawing.Point(104, 661);
-            this.btnListarJogadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnListarJogadores.Margin = new System.Windows.Forms.Padding(4);
             this.btnListarJogadores.Name = "btnListarJogadores";
             this.btnListarJogadores.Size = new System.Drawing.Size(133, 28);
             this.btnListarJogadores.TabIndex = 19;
@@ -302,7 +302,7 @@
             // 
             this.txtIdJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIdJogador.Location = new System.Drawing.Point(383, 89);
-            this.txtIdJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIdJogador.Margin = new System.Windows.Forms.Padding(4);
             this.txtIdJogador.Name = "txtIdJogador";
             this.txtIdJogador.Size = new System.Drawing.Size(133, 22);
             this.txtIdJogador.TabIndex = 22;
@@ -322,7 +322,7 @@
             // 
             this.txtSenhaJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSenhaJogador.Location = new System.Drawing.Point(383, 142);
-            this.txtSenhaJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSenhaJogador.Margin = new System.Windows.Forms.Padding(4);
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(133, 22);
             this.txtSenhaJogador.TabIndex = 24;
@@ -330,7 +330,7 @@
             // btnCriarPartida
             // 
             this.btnCriarPartida.Location = new System.Drawing.Point(185, 31);
-            this.btnCriarPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCriarPartida.Margin = new System.Windows.Forms.Padding(4);
             this.btnCriarPartida.Name = "btnCriarPartida";
             this.btnCriarPartida.Size = new System.Drawing.Size(133, 28);
             this.btnCriarPartida.TabIndex = 26;
@@ -381,7 +381,7 @@
             // btnExibirCartas
             // 
             this.btnExibirCartas.Location = new System.Drawing.Point(332, 622);
-            this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
             this.btnExibirCartas.Name = "btnExibirCartas";
             this.btnExibirCartas.Size = new System.Drawing.Size(123, 28);
             this.btnExibirCartas.TabIndex = 33;
@@ -405,7 +405,7 @@
             this.txtPersonagensExistentes.FormattingEnabled = true;
             this.txtPersonagensExistentes.ItemHeight = 16;
             this.txtPersonagensExistentes.Location = new System.Drawing.Point(963, 535);
-            this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagensExistentes.Name = "txtPersonagensExistentes";
             this.txtPersonagensExistentes.Size = new System.Drawing.Size(129, 148);
             this.txtPersonagensExistentes.TabIndex = 35;
@@ -427,7 +427,7 @@
             this.txtSetoresExistentes.FormattingEnabled = true;
             this.txtSetoresExistentes.ItemHeight = 16;
             this.txtSetoresExistentes.Location = new System.Drawing.Point(943, 44);
-            this.txtSetoresExistentes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetoresExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetoresExistentes.Name = "txtSetoresExistentes";
             this.txtSetoresExistentes.Size = new System.Drawing.Size(188, 196);
             this.txtSetoresExistentes.TabIndex = 38;
@@ -456,7 +456,7 @@
             // 
             this.txtSetor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSetor.Location = new System.Drawing.Point(756, 27);
-            this.txtSetor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetor.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetor.Name = "txtSetor";
             this.txtSetor.Size = new System.Drawing.Size(83, 22);
             this.txtSetor.TabIndex = 40;
@@ -465,7 +465,7 @@
             // 
             this.txtPersonagem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPersonagem.Location = new System.Drawing.Point(755, 89);
-            this.txtPersonagem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPersonagem.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagem.Name = "txtPersonagem";
             this.txtPersonagem.Size = new System.Drawing.Size(99, 22);
             this.txtPersonagem.TabIndex = 42;
@@ -562,7 +562,7 @@
             // btnVotar
             // 
             this.btnVotar.Location = new System.Drawing.Point(745, 258);
-            this.btnVotar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVotar.Margin = new System.Windows.Forms.Padding(4);
             this.btnVotar.Name = "btnVotar";
             this.btnVotar.Size = new System.Drawing.Size(116, 28);
             this.btnVotar.TabIndex = 51;
@@ -573,7 +573,7 @@
             // txtVoto
             // 
             this.txtVoto.Location = new System.Drawing.Point(745, 299);
-            this.txtVoto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtVoto.Margin = new System.Windows.Forms.Padding(4);
             this.txtVoto.Name = "txtVoto";
             this.txtVoto.Size = new System.Drawing.Size(115, 22);
             this.txtVoto.TabIndex = 52;
@@ -608,6 +608,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1640, 896);
             this.Controls.Add(this.pnlTabuleiro);
@@ -661,7 +662,7 @@
             this.Controls.Add(this.lblInfoGame);
             this.Controls.Add(this.lblVotosRestantes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KingMe";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
