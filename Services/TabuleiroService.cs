@@ -110,5 +110,33 @@ namespace king_me.Services
             }
         }
 
+        public void RemoverPersonagem(Panel pnl, string personagem)
+        {
+            if (JogadorSetor.TryGetValue(personagem.ToUpper(), out int setor))
+            {
+                setores[setor].QtdPersonagensAtual--;
+                JogadorSetor.Remove(personagem.ToUpper());
+                PictureBox pictureBox = (PictureBox)pnl.Controls["pic" + personagem.ToUpper()];
+                if (pictureBox != null)
+                {
+                    pnl.Controls.Remove(pictureBox);
+                    pictureBox.Dispose();
+                }
+            }
+        }
+
+        public void LimparSetor10(Panel pnl)
+        {
+            int setor = 6; // setor 10 é equivalente ao setor 6, pois estã na 6a posição da lista de setores
+            // remove o único personagem do setor 10, se existir  
+            if (setores[setor].QtdPersonagensAtual > 0)
+            {
+                var personagem = JogadorSetor.FirstOrDefault(j => j.Value == setor).Key; //busca o primeiro personagem que tem como setor o 6°, vulgo o unico
+                if (!string.IsNullOrEmpty(personagem))
+                {
+                    RemoverPersonagem(pnl, personagem);
+                }
+            }
+        }
     }
 }

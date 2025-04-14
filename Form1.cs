@@ -388,6 +388,9 @@ namespace king_me
             }
 
             MessageBox.Show("Voto registrado com sucesso!");
+            if (txtVoto.Text == "S") { 
+                _tabuleiroService.LimparSetor10(pnlTabuleiro);
+            }
             txtVoto.Clear();
             txtVoto.Focus();
 
