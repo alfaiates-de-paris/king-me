@@ -75,7 +75,7 @@
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPromover = new System.Windows.Forms.Button();
-            this.Votar = new System.Windows.Forms.Button();
+            this.btnVotar = new System.Windows.Forms.Button();
             this.txtVoto = new System.Windows.Forms.TextBox();
             this.pnlTabuleiro = new System.Windows.Forms.Panel();
             this.lblVotosRestantes = new System.Windows.Forms.Label();
@@ -85,26 +85,29 @@
             // lblInfoGame
             // 
             this.lblInfoGame.AutoSize = true;
-            this.lblInfoGame.Location = new System.Drawing.Point(1105, 704);
+            this.lblInfoGame.Location = new System.Drawing.Point(1473, 866);
+            this.lblInfoGame.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInfoGame.Name = "lblInfoGame";
-            this.lblInfoGame.Size = new System.Drawing.Size(112, 13);
+            this.lblInfoGame.Size = new System.Drawing.Size(139, 16);
             this.lblInfoGame.TabIndex = 0;
             this.lblInfoGame.Text = "Alfaiates de Paris - 1.1";
             // 
             // txtNomePartida
             // 
             this.txtNomePartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNomePartida.Location = new System.Drawing.Point(12, 25);
+            this.txtNomePartida.Location = new System.Drawing.Point(16, 31);
+            this.txtNomePartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNomePartida.Name = "txtNomePartida";
-            this.txtNomePartida.Size = new System.Drawing.Size(100, 20);
+            this.txtNomePartida.Size = new System.Drawing.Size(133, 22);
             this.txtNomePartida.TabIndex = 2;
             // 
             // lblNomePartida
             // 
             this.lblNomePartida.AutoSize = true;
-            this.lblNomePartida.Location = new System.Drawing.Point(12, 9);
+            this.lblNomePartida.Location = new System.Drawing.Point(16, 11);
+            this.lblNomePartida.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomePartida.Name = "lblNomePartida";
-            this.lblNomePartida.Size = new System.Drawing.Size(86, 13);
+            this.lblNomePartida.Size = new System.Drawing.Size(109, 16);
             this.lblNomePartida.TabIndex = 3;
             this.lblNomePartida.Text = "Nome da Partida";
             this.lblNomePartida.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -112,9 +115,10 @@
             // lblSenha
             // 
             this.lblSenha.AutoSize = true;
-            this.lblSenha.Location = new System.Drawing.Point(12, 52);
+            this.lblSenha.Location = new System.Drawing.Point(16, 64);
+            this.lblSenha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSenha.Name = "lblSenha";
-            this.lblSenha.Size = new System.Drawing.Size(38, 13);
+            this.lblSenha.Size = new System.Drawing.Size(46, 16);
             this.lblSenha.TabIndex = 5;
             this.lblSenha.Text = "Senha";
             this.lblSenha.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -122,17 +126,19 @@
             // txtSenhaPartida
             // 
             this.txtSenhaPartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSenhaPartida.Location = new System.Drawing.Point(12, 68);
+            this.txtSenhaPartida.Location = new System.Drawing.Point(16, 84);
+            this.txtSenhaPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSenhaPartida.Name = "txtSenhaPartida";
-            this.txtSenhaPartida.Size = new System.Drawing.Size(100, 20);
+            this.txtSenhaPartida.Size = new System.Drawing.Size(133, 22);
             this.txtSenhaPartida.TabIndex = 4;
             // 
             // lblNomeGrupo
             // 
             this.lblNomeGrupo.AutoSize = true;
-            this.lblNomeGrupo.Location = new System.Drawing.Point(12, 96);
+            this.lblNomeGrupo.Location = new System.Drawing.Point(16, 118);
+            this.lblNomeGrupo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeGrupo.Name = "lblNomeGrupo";
-            this.lblNomeGrupo.Size = new System.Drawing.Size(80, 13);
+            this.lblNomeGrupo.Size = new System.Drawing.Size(101, 16);
             this.lblNomeGrupo.TabIndex = 7;
             this.lblNomeGrupo.Text = "Nome do grupo";
             this.lblNomeGrupo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -140,19 +146,21 @@
             // txtNomeGrupo
             // 
             this.txtNomeGrupo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNomeGrupo.Location = new System.Drawing.Point(12, 112);
+            this.txtNomeGrupo.Location = new System.Drawing.Point(16, 138);
+            this.txtNomeGrupo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNomeGrupo.Name = "txtNomeGrupo";
             this.txtNomeGrupo.ReadOnly = true;
-            this.txtNomeGrupo.Size = new System.Drawing.Size(100, 20);
+            this.txtNomeGrupo.Size = new System.Drawing.Size(133, 22);
             this.txtNomeGrupo.TabIndex = 6;
             this.txtNomeGrupo.Text = "Alfaiates de Paris";
             // 
             // lblInputIdPartida
             // 
             this.lblInputIdPartida.AutoSize = true;
-            this.lblInputIdPartida.Location = new System.Drawing.Point(12, 144);
+            this.lblInputIdPartida.Location = new System.Drawing.Point(16, 177);
+            this.lblInputIdPartida.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInputIdPartida.Name = "lblInputIdPartida";
-            this.lblInputIdPartida.Size = new System.Drawing.Size(68, 13);
+            this.lblInputIdPartida.Size = new System.Drawing.Size(84, 16);
             this.lblInputIdPartida.TabIndex = 9;
             this.lblInputIdPartida.Text = "ID da partida";
             this.lblInputIdPartida.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -160,16 +168,18 @@
             // txtIdPartida
             // 
             this.txtIdPartida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtIdPartida.Location = new System.Drawing.Point(12, 160);
+            this.txtIdPartida.Location = new System.Drawing.Point(16, 197);
+            this.txtIdPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtIdPartida.Name = "txtIdPartida";
-            this.txtIdPartida.Size = new System.Drawing.Size(100, 20);
+            this.txtIdPartida.Size = new System.Drawing.Size(133, 22);
             this.txtIdPartida.TabIndex = 8;
             // 
             // btnListarPartidas
             // 
-            this.btnListarPartidas.Location = new System.Drawing.Point(139, 214);
+            this.btnListarPartidas.Location = new System.Drawing.Point(185, 263);
+            this.btnListarPartidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnListarPartidas.Name = "btnListarPartidas";
-            this.btnListarPartidas.Size = new System.Drawing.Size(100, 23);
+            this.btnListarPartidas.Size = new System.Drawing.Size(133, 28);
             this.btnListarPartidas.TabIndex = 11;
             this.btnListarPartidas.Text = "Listar Partidas";
             this.btnListarPartidas.UseVisualStyleBackColor = true;
@@ -188,26 +198,29 @@
             "Aberta",
             "Jogando",
             "Encerrada"});
-            this.cboStatus.Location = new System.Drawing.Point(12, 214);
+            this.cboStatus.Location = new System.Drawing.Point(16, 263);
+            this.cboStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(121, 21);
+            this.cboStatus.Size = new System.Drawing.Size(160, 24);
             this.cboStatus.TabIndex = 12;
             this.cboStatus.Tag = "";
             // 
             // txtPartidas
             // 
-            this.txtPartidas.Location = new System.Drawing.Point(12, 243);
+            this.txtPartidas.Location = new System.Drawing.Point(16, 299);
+            this.txtPartidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPartidas.Name = "txtPartidas";
-            this.txtPartidas.Size = new System.Drawing.Size(227, 96);
+            this.txtPartidas.Size = new System.Drawing.Size(301, 117);
             this.txtPartidas.TabIndex = 13;
             this.txtPartidas.Text = "";
             // 
             // lblNomeJogador
             // 
             this.lblNomeJogador.AutoSize = true;
-            this.lblNomeJogador.Location = new System.Drawing.Point(12, 351);
+            this.lblNomeJogador.Location = new System.Drawing.Point(16, 432);
+            this.lblNomeJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeJogador.Name = "lblNomeJogador";
-            this.lblNomeJogador.Size = new System.Drawing.Size(91, 13);
+            this.lblNomeJogador.Size = new System.Drawing.Size(117, 16);
             this.lblNomeJogador.TabIndex = 15;
             this.lblNomeJogador.Text = "Nome do Jogador";
             this.lblNomeJogador.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -215,16 +228,18 @@
             // txtNomeJogador
             // 
             this.txtNomeJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNomeJogador.Location = new System.Drawing.Point(15, 367);
+            this.txtNomeJogador.Location = new System.Drawing.Point(20, 452);
+            this.txtNomeJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNomeJogador.Name = "txtNomeJogador";
-            this.txtNomeJogador.Size = new System.Drawing.Size(100, 20);
+            this.txtNomeJogador.Size = new System.Drawing.Size(133, 22);
             this.txtNomeJogador.TabIndex = 16;
             // 
             // btnEntrarPartida
             // 
-            this.btnEntrarPartida.Location = new System.Drawing.Point(139, 364);
+            this.btnEntrarPartida.Location = new System.Drawing.Point(185, 448);
+            this.btnEntrarPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEntrarPartida.Name = "btnEntrarPartida";
-            this.btnEntrarPartida.Size = new System.Drawing.Size(100, 23);
+            this.btnEntrarPartida.Size = new System.Drawing.Size(133, 28);
             this.btnEntrarPartida.TabIndex = 17;
             this.btnEntrarPartida.Text = "Entrar na Partida";
             this.btnEntrarPartida.UseVisualStyleBackColor = true;
@@ -232,17 +247,19 @@
             // 
             // txtJogadores
             // 
-            this.txtJogadores.Location = new System.Drawing.Point(15, 435);
+            this.txtJogadores.Location = new System.Drawing.Point(20, 535);
+            this.txtJogadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtJogadores.Name = "txtJogadores";
-            this.txtJogadores.Size = new System.Drawing.Size(227, 96);
+            this.txtJogadores.Size = new System.Drawing.Size(301, 117);
             this.txtJogadores.TabIndex = 18;
             this.txtJogadores.Text = "";
             // 
             // btnListarJogadores
             // 
-            this.btnListarJogadores.Location = new System.Drawing.Point(78, 537);
+            this.btnListarJogadores.Location = new System.Drawing.Point(104, 661);
+            this.btnListarJogadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnListarJogadores.Name = "btnListarJogadores";
-            this.btnListarJogadores.Size = new System.Drawing.Size(100, 23);
+            this.btnListarJogadores.Size = new System.Drawing.Size(133, 28);
             this.btnListarJogadores.TabIndex = 19;
             this.btnListarJogadores.Text = "Listar Jogadores";
             this.btnListarJogadores.UseVisualStyleBackColor = true;
@@ -251,9 +268,10 @@
             // lblIdJogador
             // 
             this.lblIdJogador.AutoSize = true;
-            this.lblIdJogador.Location = new System.Drawing.Point(35, 390);
+            this.lblIdJogador.Location = new System.Drawing.Point(47, 480);
+            this.lblIdJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdJogador.Name = "lblIdJogador";
-            this.lblIdJogador.Size = new System.Drawing.Size(57, 13);
+            this.lblIdJogador.Size = new System.Drawing.Size(72, 16);
             this.lblIdJogador.TabIndex = 20;
             this.lblIdJogador.Text = "Id Jogador";
             this.lblIdJogador.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -261,9 +279,10 @@
             // lblSenhaJogador
             // 
             this.lblSenhaJogador.AutoSize = true;
-            this.lblSenhaJogador.Location = new System.Drawing.Point(24, 403);
+            this.lblSenhaJogador.Location = new System.Drawing.Point(32, 496);
+            this.lblSenhaJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSenhaJogador.Name = "lblSenhaJogador";
-            this.lblSenhaJogador.Size = new System.Drawing.Size(79, 13);
+            this.lblSenhaJogador.Size = new System.Drawing.Size(100, 16);
             this.lblSenhaJogador.TabIndex = 21;
             this.lblSenhaJogador.Text = "Senha Jogador";
             this.lblSenhaJogador.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -271,9 +290,10 @@
             // lblIdJogadorInput
             // 
             this.lblIdJogadorInput.AutoSize = true;
-            this.lblIdJogadorInput.Location = new System.Drawing.Point(287, 56);
+            this.lblIdJogadorInput.Location = new System.Drawing.Point(383, 69);
+            this.lblIdJogadorInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdJogadorInput.Name = "lblIdJogadorInput";
-            this.lblIdJogadorInput.Size = new System.Drawing.Size(57, 13);
+            this.lblIdJogadorInput.Size = new System.Drawing.Size(72, 16);
             this.lblIdJogadorInput.TabIndex = 23;
             this.lblIdJogadorInput.Text = "Id Jogador";
             this.lblIdJogadorInput.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -281,17 +301,19 @@
             // txtIdJogador
             // 
             this.txtIdJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtIdJogador.Location = new System.Drawing.Point(287, 72);
+            this.txtIdJogador.Location = new System.Drawing.Point(383, 89);
+            this.txtIdJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtIdJogador.Name = "txtIdJogador";
-            this.txtIdJogador.Size = new System.Drawing.Size(100, 20);
+            this.txtIdJogador.Size = new System.Drawing.Size(133, 22);
             this.txtIdJogador.TabIndex = 22;
             // 
             // lblSenhaJogadorInput
             // 
             this.lblSenhaJogadorInput.AutoSize = true;
-            this.lblSenhaJogadorInput.Location = new System.Drawing.Point(284, 99);
+            this.lblSenhaJogadorInput.Location = new System.Drawing.Point(379, 122);
+            this.lblSenhaJogadorInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSenhaJogadorInput.Name = "lblSenhaJogadorInput";
-            this.lblSenhaJogadorInput.Size = new System.Drawing.Size(79, 13);
+            this.lblSenhaJogadorInput.Size = new System.Drawing.Size(100, 16);
             this.lblSenhaJogadorInput.TabIndex = 25;
             this.lblSenhaJogadorInput.Text = "Senha Jogador";
             this.lblSenhaJogadorInput.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -299,16 +321,18 @@
             // txtSenhaJogador
             // 
             this.txtSenhaJogador.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSenhaJogador.Location = new System.Drawing.Point(287, 115);
+            this.txtSenhaJogador.Location = new System.Drawing.Point(383, 142);
+            this.txtSenhaJogador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSenhaJogador.Name = "txtSenhaJogador";
-            this.txtSenhaJogador.Size = new System.Drawing.Size(100, 20);
+            this.txtSenhaJogador.Size = new System.Drawing.Size(133, 22);
             this.txtSenhaJogador.TabIndex = 24;
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(139, 25);
+            this.btnCriarPartida.Location = new System.Drawing.Point(185, 31);
+            this.btnCriarPartida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCriarPartida.Name = "btnCriarPartida";
-            this.btnCriarPartida.Size = new System.Drawing.Size(100, 23);
+            this.btnCriarPartida.Size = new System.Drawing.Size(133, 28);
             this.btnCriarPartida.TabIndex = 26;
             this.btnCriarPartida.Text = "Criar Partida";
             this.btnCriarPartida.UseVisualStyleBackColor = true;
@@ -317,9 +341,10 @@
             // lblIdPartida
             // 
             this.lblIdPartida.AutoSize = true;
-            this.lblIdPartida.Location = new System.Drawing.Point(180, 51);
+            this.lblIdPartida.Location = new System.Drawing.Point(240, 63);
+            this.lblIdPartida.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdPartida.Name = "lblIdPartida";
-            this.lblIdPartida.Size = new System.Drawing.Size(18, 13);
+            this.lblIdPartida.Size = new System.Drawing.Size(20, 16);
             this.lblIdPartida.TabIndex = 27;
             this.lblIdPartida.Text = "ID";
             this.lblIdPartida.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -328,28 +353,26 @@
             // 
             this.lblPersonagensFav.AutoSize = true;
             this.lblPersonagensFav.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(266, 489);
-            this.lblPersonagensFav.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(355, 602);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
-            this.lblPersonagensFav.Size = new System.Drawing.Size(58, 13);
+            this.lblPersonagensFav.Size = new System.Drawing.Size(72, 16);
             this.lblPersonagensFav.TabIndex = 30;
             this.lblPersonagensFav.Text = "Cartas Fav";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(304, 112);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(405, 138);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 31;
             // 
             // btnIniciarPartida
             // 
-            this.btnIniciarPartida.Location = new System.Drawing.Point(290, 9);
-            this.btnIniciarPartida.Margin = new System.Windows.Forms.Padding(2);
+            this.btnIniciarPartida.Location = new System.Drawing.Point(387, 11);
+            this.btnIniciarPartida.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIniciarPartida.Name = "btnIniciarPartida";
-            this.btnIniciarPartida.Size = new System.Drawing.Size(100, 33);
+            this.btnIniciarPartida.Size = new System.Drawing.Size(133, 41);
             this.btnIniciarPartida.TabIndex = 32;
             this.btnIniciarPartida.Text = "Iniciar Partida";
             this.btnIniciarPartida.UseVisualStyleBackColor = true;
@@ -357,9 +380,10 @@
             // 
             // btnExibirCartas
             // 
-            this.btnExibirCartas.Location = new System.Drawing.Point(249, 505);
+            this.btnExibirCartas.Location = new System.Drawing.Point(332, 622);
+            this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExibirCartas.Name = "btnExibirCartas";
-            this.btnExibirCartas.Size = new System.Drawing.Size(92, 23);
+            this.btnExibirCartas.Size = new System.Drawing.Size(123, 28);
             this.btnExibirCartas.TabIndex = 33;
             this.btnExibirCartas.Text = "Exibir Cartas";
             this.btnExibirCartas.UseVisualStyleBackColor = true;
@@ -368,9 +392,10 @@
             // lblPersonagensExistentes
             // 
             this.lblPersonagensExistentes.AutoSize = true;
-            this.lblPersonagensExistentes.Location = new System.Drawing.Point(738, 418);
+            this.lblPersonagensExistentes.Location = new System.Drawing.Point(984, 514);
+            this.lblPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagensExistentes.Name = "lblPersonagensExistentes";
-            this.lblPersonagensExistentes.Size = new System.Drawing.Size(69, 13);
+            this.lblPersonagensExistentes.Size = new System.Drawing.Size(88, 16);
             this.lblPersonagensExistentes.TabIndex = 34;
             this.lblPersonagensExistentes.Text = "Personagens";
             this.lblPersonagensExistentes.Click += new System.EventHandler(this.label2_Click);
@@ -378,18 +403,20 @@
             // txtPersonagensExistentes
             // 
             this.txtPersonagensExistentes.FormattingEnabled = true;
-            this.txtPersonagensExistentes.Location = new System.Drawing.Point(722, 435);
+            this.txtPersonagensExistentes.ItemHeight = 16;
+            this.txtPersonagensExistentes.Location = new System.Drawing.Point(963, 535);
+            this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPersonagensExistentes.Name = "txtPersonagensExistentes";
-            this.txtPersonagensExistentes.Size = new System.Drawing.Size(98, 121);
+            this.txtPersonagensExistentes.Size = new System.Drawing.Size(129, 148);
             this.txtPersonagensExistentes.TabIndex = 35;
             this.txtPersonagensExistentes.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // btnVerificarVez
             // 
-            this.btnVerificarVez.Location = new System.Drawing.Point(287, 168);
-            this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(2);
+            this.btnVerificarVez.Location = new System.Drawing.Point(383, 207);
+            this.btnVerificarVez.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVerificarVez.Name = "btnVerificarVez";
-            this.btnVerificarVez.Size = new System.Drawing.Size(89, 28);
+            this.btnVerificarVez.Size = new System.Drawing.Size(119, 34);
             this.btnVerificarVez.TabIndex = 36;
             this.btnVerificarVez.Text = "Verificar Vez";
             this.btnVerificarVez.UseVisualStyleBackColor = true;
@@ -398,60 +425,68 @@
             // txtSetoresExistentes
             // 
             this.txtSetoresExistentes.FormattingEnabled = true;
-            this.txtSetoresExistentes.Location = new System.Drawing.Point(707, 36);
+            this.txtSetoresExistentes.ItemHeight = 16;
+            this.txtSetoresExistentes.Location = new System.Drawing.Point(943, 44);
+            this.txtSetoresExistentes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSetoresExistentes.Name = "txtSetoresExistentes";
-            this.txtSetoresExistentes.Size = new System.Drawing.Size(142, 160);
+            this.txtSetoresExistentes.Size = new System.Drawing.Size(188, 196);
             this.txtSetoresExistentes.TabIndex = 38;
             // 
             // lblSetoresExistentes
             // 
             this.lblSetoresExistentes.AutoSize = true;
-            this.lblSetoresExistentes.Location = new System.Drawing.Point(752, 9);
+            this.lblSetoresExistentes.Location = new System.Drawing.Point(1003, 11);
+            this.lblSetoresExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSetoresExistentes.Name = "lblSetoresExistentes";
-            this.lblSetoresExistentes.Size = new System.Drawing.Size(43, 13);
+            this.lblSetoresExistentes.Size = new System.Drawing.Size(54, 16);
             this.lblSetoresExistentes.TabIndex = 37;
             this.lblSetoresExistentes.Text = "Setores";
             // 
             // lblSetor
             // 
             this.lblSetor.AutoSize = true;
-            this.lblSetor.Location = new System.Drawing.Point(564, 9);
+            this.lblSetor.Location = new System.Drawing.Point(752, 11);
+            this.lblSetor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSetor.Name = "lblSetor";
-            this.lblSetor.Size = new System.Drawing.Size(32, 13);
+            this.lblSetor.Size = new System.Drawing.Size(39, 16);
             this.lblSetor.TabIndex = 39;
             this.lblSetor.Text = "Setor\r\n";
             // 
             // txtSetor
             // 
             this.txtSetor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSetor.Location = new System.Drawing.Point(567, 22);
+            this.txtSetor.Location = new System.Drawing.Point(756, 27);
+            this.txtSetor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSetor.Name = "txtSetor";
-            this.txtSetor.Size = new System.Drawing.Size(63, 20);
+            this.txtSetor.Size = new System.Drawing.Size(83, 22);
             this.txtSetor.TabIndex = 40;
             // 
             // txtPersonagem
             // 
             this.txtPersonagem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPersonagem.Location = new System.Drawing.Point(566, 72);
+            this.txtPersonagem.Location = new System.Drawing.Point(755, 89);
+            this.txtPersonagem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPersonagem.Name = "txtPersonagem";
-            this.txtPersonagem.Size = new System.Drawing.Size(75, 20);
+            this.txtPersonagem.Size = new System.Drawing.Size(99, 22);
             this.txtPersonagem.TabIndex = 42;
             // 
             // lblPersonagem
             // 
             this.lblPersonagem.AutoSize = true;
-            this.lblPersonagem.Location = new System.Drawing.Point(566, 56);
+            this.lblPersonagem.Location = new System.Drawing.Point(755, 69);
+            this.lblPersonagem.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagem.Name = "lblPersonagem";
-            this.lblPersonagem.Size = new System.Drawing.Size(66, 13);
+            this.lblPersonagem.Size = new System.Drawing.Size(85, 16);
             this.lblPersonagem.TabIndex = 41;
             this.lblPersonagem.Text = "Personagem\r\n";
             // 
             // lblVezNomeJogador
             // 
             this.lblVezNomeJogador.AutoSize = true;
-            this.lblVezNomeJogador.Location = new System.Drawing.Point(404, 84);
+            this.lblVezNomeJogador.Location = new System.Drawing.Point(539, 103);
+            this.lblVezNomeJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezNomeJogador.Name = "lblVezNomeJogador";
-            this.lblVezNomeJogador.Size = new System.Drawing.Size(76, 13);
+            this.lblVezNomeJogador.Size = new System.Drawing.Size(98, 16);
             this.lblVezNomeJogador.TabIndex = 43;
             this.lblVezNomeJogador.Text = "Nome Jogador";
             this.lblVezNomeJogador.Click += new System.EventHandler(this.lblVezNomeJogador_Click);
@@ -459,47 +494,47 @@
             // lblVezIdJogador
             // 
             this.lblVezIdJogador.AutoSize = true;
-            this.lblVezIdJogador.Location = new System.Drawing.Point(404, 111);
+            this.lblVezIdJogador.Location = new System.Drawing.Point(539, 137);
+            this.lblVezIdJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezIdJogador.Name = "lblVezIdJogador";
-            this.lblVezIdJogador.Size = new System.Drawing.Size(57, 13);
+            this.lblVezIdJogador.Size = new System.Drawing.Size(72, 16);
             this.lblVezIdJogador.TabIndex = 44;
             this.lblVezIdJogador.Text = "Id Jogador";
             this.lblVezIdJogador.Click += new System.EventHandler(this.lblVezIdJogador_Click);
             // 
             // txtPersonagensFavoritos
             // 
-            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(346, 403);
-            this.txtPersonagensFavoritos.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(461, 496);
+            this.txtPersonagensFavoritos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPersonagensFavoritos.Multiline = true;
             this.txtPersonagensFavoritos.Name = "txtPersonagensFavoritos";
-            this.txtPersonagensFavoritos.Size = new System.Drawing.Size(112, 128);
+            this.txtPersonagensFavoritos.Size = new System.Drawing.Size(148, 157);
             this.txtPersonagensFavoritos.TabIndex = 45;
             // 
             // lblTabuleiroAtual
             // 
             this.lblTabuleiroAtual.AutoSize = true;
-            this.lblTabuleiroAtual.Location = new System.Drawing.Point(738, 214);
-            this.lblTabuleiroAtual.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTabuleiroAtual.Location = new System.Drawing.Point(984, 263);
             this.lblTabuleiroAtual.Name = "lblTabuleiroAtual";
-            this.lblTabuleiroAtual.Size = new System.Drawing.Size(78, 13);
+            this.lblTabuleiroAtual.Size = new System.Drawing.Size(98, 16);
             this.lblTabuleiroAtual.TabIndex = 46;
             this.lblTabuleiroAtual.Text = "Tabuleiro Atual";
             // 
             // txtTabuleiroAtual
             // 
-            this.txtTabuleiroAtual.Location = new System.Drawing.Point(707, 229);
-            this.txtTabuleiroAtual.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTabuleiroAtual.Location = new System.Drawing.Point(943, 282);
+            this.txtTabuleiroAtual.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTabuleiroAtual.Multiline = true;
             this.txtTabuleiroAtual.Name = "txtTabuleiroAtual";
-            this.txtTabuleiroAtual.Size = new System.Drawing.Size(131, 175);
+            this.txtTabuleiroAtual.Size = new System.Drawing.Size(173, 214);
             this.txtTabuleiroAtual.TabIndex = 47;
             // 
             // btnMoverPersonagem
             // 
-            this.btnMoverPersonagem.Location = new System.Drawing.Point(566, 111);
-            this.btnMoverPersonagem.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMoverPersonagem.Location = new System.Drawing.Point(755, 137);
+            this.btnMoverPersonagem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMoverPersonagem.Name = "btnMoverPersonagem";
-            this.btnMoverPersonagem.Size = new System.Drawing.Size(75, 46);
+            this.btnMoverPersonagem.Size = new System.Drawing.Size(100, 57);
             this.btnMoverPersonagem.TabIndex = 48;
             this.btnMoverPersonagem.Text = "Mover Personagem";
             this.btnMoverPersonagem.UseVisualStyleBackColor = true;
@@ -508,38 +543,39 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(326, 229);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(435, 282);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.Size = new System.Drawing.Size(0, 16);
             this.label2.TabIndex = 49;
             // 
             // btnPromover
             // 
-            this.btnPromover.Location = new System.Drawing.Point(566, 161);
-            this.btnPromover.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPromover.Location = new System.Drawing.Point(755, 198);
+            this.btnPromover.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPromover.Name = "btnPromover";
-            this.btnPromover.Size = new System.Drawing.Size(75, 25);
+            this.btnPromover.Size = new System.Drawing.Size(100, 31);
             this.btnPromover.TabIndex = 50;
             this.btnPromover.Text = "Promover";
             this.btnPromover.UseVisualStyleBackColor = true;
             this.btnPromover.Click += new System.EventHandler(this.btnPromover_Click);
             // 
-            // Votar
+            // btnVotar
             // 
-            this.Votar.Location = new System.Drawing.Point(559, 210);
-            this.Votar.Name = "Votar";
-            this.Votar.Size = new System.Drawing.Size(87, 23);
-            this.Votar.TabIndex = 51;
-            this.Votar.Text = "Votar";
-            this.Votar.UseVisualStyleBackColor = true;
-            this.Votar.Click += new System.EventHandler(this.button1_Click);
+            this.btnVotar.Location = new System.Drawing.Point(745, 258);
+            this.btnVotar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVotar.Name = "btnVotar";
+            this.btnVotar.Size = new System.Drawing.Size(116, 28);
+            this.btnVotar.TabIndex = 51;
+            this.btnVotar.Text = "Votar";
+            this.btnVotar.UseVisualStyleBackColor = true;
+            this.btnVotar.Click += new System.EventHandler(this.btnVotar_Click);
             // 
             // txtVoto
             // 
-            this.txtVoto.Location = new System.Drawing.Point(559, 243);
+            this.txtVoto.Location = new System.Drawing.Point(745, 299);
+            this.txtVoto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtVoto.Name = "txtVoto";
-            this.txtVoto.Size = new System.Drawing.Size(87, 20);
+            this.txtVoto.Size = new System.Drawing.Size(115, 22);
             this.txtVoto.TabIndex = 52;
             this.txtVoto.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -547,19 +583,18 @@
             // 
             this.pnlTabuleiro.BackgroundImage = global::king_me.Properties.Resources.tabuleiro_completo;
             this.pnlTabuleiro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlTabuleiro.Location = new System.Drawing.Point(923, 36);
-            this.pnlTabuleiro.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlTabuleiro.Location = new System.Drawing.Point(1231, 44);
+            this.pnlTabuleiro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTabuleiro.Name = "pnlTabuleiro";
-            this.pnlTabuleiro.Size = new System.Drawing.Size(264, 616);
+            this.pnlTabuleiro.Size = new System.Drawing.Size(352, 758);
             this.pnlTabuleiro.TabIndex = 53;
             // 
             // lblVotosRestantes
             // 
             this.lblVotosRestantes.AutoSize = true;
-            this.lblVotosRestantes.Location = new System.Drawing.Point(562, 301);
-            this.lblVotosRestantes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblVotosRestantes.Location = new System.Drawing.Point(749, 370);
             this.lblVotosRestantes.Name = "lblVotosRestantes";
-            this.lblVotosRestantes.Size = new System.Drawing.Size(34, 13);
+            this.lblVotosRestantes.Size = new System.Drawing.Size(42, 16);
             this.lblVotosRestantes.TabIndex = 54;
             this.lblVotosRestantes.Text = "Votos";
             this.lblVotosRestantes.Click += new System.EventHandler(this.lblVotosRestantes_Click);
@@ -568,17 +603,16 @@
             // 
             this.tmrVerificarVez.Interval = 5000;
             this.tmrVerificarVez.Tick += new System.EventHandler(this.tmrVerificarVez_Tick);
-
             // 
             // KingMe
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1230, 728);
+            this.ClientSize = new System.Drawing.Size(1640, 896);
             this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.txtVoto);
-            this.Controls.Add(this.Votar);
+            this.Controls.Add(this.btnVotar);
             this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
@@ -627,6 +661,7 @@
             this.Controls.Add(this.lblInfoGame);
             this.Controls.Add(this.lblVotosRestantes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "KingMe";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -685,7 +720,7 @@
         private System.Windows.Forms.Button btnMoverPersonagem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPromover;
-        private System.Windows.Forms.Button Votar;
+        private System.Windows.Forms.Button btnVotar;
         private System.Windows.Forms.TextBox txtVoto;
         private System.Windows.Forms.Panel pnlTabuleiro;
         private System.Windows.Forms.Label lblVotosRestantes;
