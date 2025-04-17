@@ -268,7 +268,8 @@ namespace king_me
                 lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
                 lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
 
-                AtualizarVotosRestantes();
+                AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
+
 
                 string tabuleiro = txtTabuleiroAtual.Text;
                 if (tabuleiro.Contains("10")) //
@@ -285,7 +286,8 @@ namespace king_me
                         {
                             txtVoto.Text = votoAuto;
                             MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            AtualizarVotosRestantes();
+                            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
+
                         }
                     }
                 }
@@ -411,7 +413,8 @@ namespace king_me
             txtVoto.Clear();
             txtVoto.Focus();
 
-            AtualizarVotosRestantes();
+            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -421,9 +424,10 @@ namespace king_me
 
         private void lblVotosRestantes_Click(object sender, EventArgs e)
         {
-            AtualizarVotosRestantes();
+            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
+
         }
-        private void AtualizarVotosRestantes()
+        private void AtualizarVotosRestantes(int IdJogador)
         {
             if (int.TryParse(txtIdJogador.Text, out int idJogador))
             {
