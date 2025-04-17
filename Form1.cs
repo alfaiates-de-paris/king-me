@@ -241,8 +241,6 @@ namespace king_me
         {
             try
             {
-               
-
                 if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
                 {
                     MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
@@ -270,15 +268,37 @@ namespace king_me
                 lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
                 lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
 
-                AtualizarVotosRestantes(); 
+                AtualizarVotosRestantes();
+
+                string tabuleiro = txtTabuleiroAtual.Text;
+                if (tabuleiro.Contains("10")) //
+                {
+                    int idJogador = int.Parse(txtIdJogador.Text);
+                    string senhaJogador = txtSenhaJogador.Text;
+
+                    if (_votoService.GetVotosRestantes(idJogador) > 0)
+                    {
+                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
+                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+
+                        if (!retorno.StartsWith("ERRO"))
+                        {
+                            txtVoto.Text = votoAuto;
+                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AtualizarVotosRestantes();
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
-        
+
 
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {   
