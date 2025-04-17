@@ -378,8 +378,8 @@ namespace king_me
                 return;
             }
 
-            var votoService = new VotoService();
-            string retorno = votoService.Votar(idJogador, senhaJogador, voto);
+            string retorno = _votoService.Votar(idJogador, senhaJogador, voto);
+
 
             if (retorno.StartsWith("ERRO"))
             {

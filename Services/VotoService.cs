@@ -35,7 +35,7 @@ namespace king_me.Services
                 if (votosPorJogador.ContainsKey(jogador))
                     return votosPorJogador[jogador];
 
-                return 3; // valor padrão se nunca votou ainda
+                return 3; 
             }
         }
     }
