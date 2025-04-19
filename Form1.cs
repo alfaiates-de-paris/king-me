@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using KingMeServer;
 using king_me.Interfaces;
 using king_me.Services;
+using king_me.Models;
 
 namespace king_me
 {
@@ -226,16 +227,14 @@ namespace king_me
                 lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
                 lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
 
-                
-                AtualizarVotosRestantes();
+
+                AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         private void VerificarVez()
         {
@@ -254,50 +253,65 @@ namespace king_me
                 }
 
                 int idPartida = int.Parse(txtIdPartida.Text);
-                var jogador = _jogadorService.GetJogadorDaVez(idPartida);
+                var jogadorDaVez = _jogadorService.GetJogadorDaVez(idPartida);
 
-                if (jogador == null)
+                if (jogadorDaVez == null)
                 {
                     MessageBox.Show("Jogador da vez não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                // Exibe dados do jogador da vez
                 lblVezIdJogador.Visible = true;
                 lblVezNomeJogador.Visible = true;
+                lblVezIdJogador.Text = $"ID do Jogador: {jogadorDaVez.IdJogador.Substring(0, Math.Min(4, jogadorDaVez.IdJogador.Length))}";
+                lblVezNomeJogador.Text = $"Nome: {jogadorDaVez.NomeJogador}";
 
-                lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
-                lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
-
-                AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
-
-
-                string tabuleiro = txtTabuleiroAtual.Text;
-                if (tabuleiro.Contains("10")) //
+                // Atualiza votos do jogador LOGADO
+                if (int.TryParse(txtIdJogador.Text, out int idJogadorLogado))
                 {
-                    int idJogador = int.Parse(txtIdJogador.Text);
-                    string senhaJogador = txtSenhaJogador.Text;
-
-                    if (_votoService.GetVotosRestantes(idJogador) > 0)
-                    {
-                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
-
-                        if (!retorno.StartsWith("ERRO"))
-                        {
-                            txtVoto.Text = votoAuto;
-                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
-
-                        }
-                    }
+                    AtualizarVotosRestantes(idJogadorLogado);
                 }
 
+                // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
+                string tabuleiro = txtTabuleiroAtual.Text;
+                if (tabuleiro.Contains("10"))
+                {
+                    // Se o jogador logado for o jogador da vez
+                    if (txtIdJogador.Text == jogadorDaVez.IdJogador && txtSenhaJogador.Text == jogadorDaVez.SenhaJogador)
+                    {
+                        int idJogador = int.Parse(jogadorDaVez.IdJogador);
+                        string senhaJogador = jogadorDaVez.SenhaJogador;
+
+                        if (_votoService.GetVotosRestantes(idJogador) > 0)
+                        {
+                            string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
+                            string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+
+                            if (!retorno.StartsWith("ERRO"))
+                            {
+                                txtVoto.Text = votoAuto;
+                                MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                // Atualiza votos do jogador logado após votar
+                                AtualizarVotosRestantes(idJogador);
+                            }
+                            else
+                            {
+                                MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para votar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
 
@@ -392,7 +406,7 @@ namespace king_me
             }
 
             string senhaJogador = txtSenhaJogador.Text;
-            string voto = txtVoto.Text.Trim().ToUpper(); // TextBox para digitar S ou N
+            string voto = txtVoto.Text.Trim().ToUpper();
 
             if (string.IsNullOrEmpty(voto))
             {
@@ -413,8 +427,7 @@ namespace king_me
             txtVoto.Clear();
             txtVoto.Focus();
 
-            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
-
+            AtualizarVotosRestantes(idJogador);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -424,17 +437,18 @@ namespace king_me
 
         private void lblVotosRestantes_Click(object sender, EventArgs e)
         {
-            AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
-
-        }
-        private void AtualizarVotosRestantes(int IdJogador)
-        {
             if (int.TryParse(txtIdJogador.Text, out int idJogador))
             {
-                int votosRestantes = _votoService.GetVotosRestantes(idJogador);
-                lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
+                AtualizarVotosRestantes(idJogador);
             }
         }
+        private void AtualizarVotosRestantes(int idJogador)
+        {
+            int votosRestantes = _votoService.GetVotosRestantes(idJogador);
+            lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
+         
+        }
+
 
         private void lblVezIdJogador_Click(object sender, EventArgs e)
         {
@@ -445,5 +459,6 @@ namespace king_me
         {
 
         }
+   
     }
 }

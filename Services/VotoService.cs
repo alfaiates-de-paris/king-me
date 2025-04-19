@@ -9,7 +9,7 @@ namespace king_me.Services
         {
             private Dictionary<int, int> votosPorJogador = new Dictionary<int, int>();
 
-            public string Votar(int jogador, string senha, string voto)
+            public string Votar(int idJogador, string senhaJogador, string voto)
             {
                 voto = voto.ToUpper();
 
@@ -19,18 +19,25 @@ namespace king_me.Services
                 if (voto != "S" && voto != "N")
                     return "ERRO:Voto com caracter inválido (S/N)";
 
-                if (!votosPorJogador.ContainsKey(jogador))
-                    votosPorJogador[jogador] = 3;
+                // Inicializa contador local se não existir
+                if (!votosPorJogador.ContainsKey(idJogador))
+                    votosPorJogador[idJogador] = 3;
 
-                if (votosPorJogador[jogador] <= 0)
+                if (votosPorJogador[idJogador] <= 0)
                     return "ERRO:Você não tem mais votos disponíveis";
 
-                votosPorJogador[jogador]--;
+                string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-                return Jogo.Votar(jogador, senha, voto);
+                if (!retorno.StartsWith("ERRO"))
+                {
+                    votosPorJogador[idJogador]--; // ✅ Só decrementa se for sucesso
+                }
+
+                return retorno;
             }
 
-            public int GetVotosRestantes(int jogador)
+
+        public int GetVotosRestantes(int jogador)
             {
                 if (votosPorJogador.ContainsKey(jogador))
                     return votosPorJogador[jogador];
