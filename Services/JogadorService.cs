@@ -7,25 +7,31 @@ namespace king_me.Services
 {
     public class JogadorService : IJogadorService
     {
-        private Dictionary<string, string> _jogadoresDict = new Dictionary<string, string>();
-
-        private Dictionary<string, string> PreencherDicionarioJogadores(int idPartida)
+        public JogadorDTO GetJogadorDaVez(int idPartida)
         {
             string jogadoresString = Jogo.ListarJogadores(idPartida);
             string[] totalJogadores = jogadoresString.Split(new[] { "\r\n" }, System.StringSplitOptions.RemoveEmptyEntries);
+
+            Dictionary<string, JogadorDTO> jogadoresDict = new Dictionary<string, JogadorDTO>();
 
             foreach (string jogador in totalJogadores)
             {
                 string[] jogadorArray = jogador.Split(',');
 
-                if (jogadorArray.Length >= 2)
+                if (jogadorArray.Length >= 3)
                 {
                     string id = jogadorArray[0].Trim();
                     string nome = jogadorArray[1].Trim();
+                    string senha = jogadorArray[2].Trim();
 
-                    if (!_jogadoresDict.ContainsKey(id))
+                    if (!jogadoresDict.ContainsKey(id))
                     {
-                        _jogadoresDict.Add(id, nome);
+                        jogadoresDict.Add(id, new JogadorDTO
+                        {
+                            IdJogador = id,
+                            NomeJogador = nome,
+                            SenhaJogador = senha
+                        });
                     }
                 }
                 else
@@ -34,37 +40,20 @@ namespace king_me.Services
                 }
             }
 
-            foreach (KeyValuePair<string, string> jogador in _jogadoresDict)
+            string infoJogador = Jogo.VerificarVez(idPartida);
+            string idJogador = infoJogador.Split(',')[0].Trim();
+
+            if (jogadoresDict.TryGetValue(idJogador, out JogadorDTO jogadorDaVez))
             {
-                System.Console.WriteLine(jogador.Key + " " + jogador.Value);
+                return jogadorDaVez;
             }
 
-            return _jogadoresDict;
-        }
-
-        public JogadorDTO GetJogadorDaVez(int idPartida)
-        {
-            PreencherDicionarioJogadores(idPartida);
-            string infoJogador = KingMeServer.Jogo.VerificarVez(idPartida);
-            string idJogador = infoJogador.Split(',')[0].Trim(); // Pega só o ID
-
-            System.Console.WriteLine("ID jogador da vez: " + idJogador);
-
-            foreach (KeyValuePair<string, string> item in _jogadoresDict)
+            return new JogadorDTO
             {
-                System.Console.WriteLine("ID jogador dict: " + item.Key + " nome:" + item.Value);
-            }
-
-            // Busca segura usando TryGetValue
-            if (_jogadoresDict.TryGetValue(idJogador, out string nomeJogador))
-            {
-                return new JogadorDTO { IdJogador = idJogador, NomeJogador = nomeJogador };
-            }
-            else
-            {
-                System.Console.WriteLine($"ID '{idJogador}' não encontrado no dicionário de jogadores.");
-                return new JogadorDTO { NomeJogador = "Erro: jogador não encontrado" };
-            }
+                IdJogador = idJogador,
+                NomeJogador = "Desconhecido",
+                SenhaJogador = null
+            };
         }
 
         public JogadorDTO Entrar(int idPartida, string jogador, string senha)
