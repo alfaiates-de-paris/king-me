@@ -41,7 +41,7 @@ namespace king_me
             btnListarPartidas_Click(null, null);
             CarregarPersonagens();
             CarregarSetor();
-           
+
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace king_me
         }
 
         public void btnIniciarPartida_Click(object sender, EventArgs e)
-        {   
+        {
             SucessoIniciarPartida = true;
             int idJogador = Int32.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
@@ -267,21 +267,26 @@ namespace king_me
                 lblVezIdJogador.Text = $"ID do Jogador: {jogadorDaVez.IdJogador.Substring(0, Math.Min(4, jogadorDaVez.IdJogador.Length))}";
                 lblVezNomeJogador.Text = $"Nome: {jogadorDaVez.NomeJogador}";
 
-                // Atualiza votos do jogador LOGADO
+                // Atualiza votos do jogador logado
                 if (int.TryParse(txtIdJogador.Text, out int idJogadorLogado))
                 {
                     AtualizarVotosRestantes(idJogadorLogado);
+                }
+
+                // Atualiza votos do jogador da vez também (opcional, mas útil para debug/visibilidade)
+                if (int.TryParse(jogadorDaVez.IdJogador, out int idJogadorDaVez))
+                {
+                    AtualizarVotosRestantes(idJogadorDaVez);
                 }
 
                 // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
                 string tabuleiro = txtTabuleiroAtual.Text;
                 if (tabuleiro.Contains("10"))
                 {
-                    // Se o jogador logado for o jogador da vez
-                    if (txtIdJogador.Text == jogadorDaVez.IdJogador && txtSenhaJogador.Text == jogadorDaVez.SenhaJogador)
+                    if (txtIdJogador.Text == jogadorDaVez.IdJogador)
                     {
-                        int idJogador = int.Parse(jogadorDaVez.IdJogador);
-                        string senhaJogador = jogadorDaVez.SenhaJogador;
+                        int idJogador = int.Parse(txtIdJogador.Text);
+                        string senhaJogador = txtSenhaJogador.Text;
 
                         if (_votoService.GetVotosRestantes(idJogador) > 0)
                         {
@@ -293,8 +298,10 @@ namespace king_me
                                 txtVoto.Text = votoAuto;
                                 MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                // Atualiza votos do jogador logado após votar
+
                                 AtualizarVotosRestantes(idJogador);
+
+                                lblVotosRestantes.Text = string.Empty;
                             }
                             else
                             {
@@ -316,8 +323,9 @@ namespace king_me
 
 
 
+
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
-        {   
+        {
             tmrVerificarVez.Enabled = false;
             VerificarVez();
             tmrVerificarVez.Enabled = true;
@@ -446,7 +454,7 @@ namespace king_me
         {
             int votosRestantes = _votoService.GetVotosRestantes(idJogador);
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
-         
+
         }
 
 
@@ -459,6 +467,6 @@ namespace king_me
         {
 
         }
-   
+
     }
 }

@@ -30,7 +30,7 @@ namespace king_me.Services
 
                 if (!retorno.StartsWith("ERRO"))
                 {
-                    votosPorJogador[idJogador]--; // ✅ Só decrementa se for sucesso
+                    votosPorJogador[idJogador]--; 
                 }
 
                 return retorno;
