@@ -330,12 +330,10 @@ namespace king_me
             //Solução temporária pro problema, tem que separar esse método em dois métodos diferentes, um pra votar e um pra verificar vez
             int idDaPartida = int.Parse(txtIdPartida.Text);
             var jogadorVez = _jogadorService.GetJogadorDaVez(idDaPartida);
-            if (txtIdJogador.Text == jogadorVez.IdJogador) return true;
+            if (txtIdJogador.Text == jogadorVez.IdJogador) 
+                return true;
             else
-            {
-                MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para jogar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
-            }
         }
         private void PosicionarPersonagem()
         {
@@ -383,6 +381,7 @@ namespace king_me
                 txtPersonagem.Focus();
             } 
         }
+
 
 
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
