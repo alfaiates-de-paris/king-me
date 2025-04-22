@@ -115,6 +115,11 @@ namespace king_me
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
             btnVerificarVez.Visible = false;
+            btnMoverPersonagem.Visible = false;
+            txtSetor.Visible = false;
+            txtPersonagem.Visible = false;
+            lblSetor.Visible = false;
+            lblPersonagem.Visible = false;
 
             // Ativa o timer automático
             tmrVerificarVez.Start();
@@ -236,20 +241,20 @@ namespace king_me
             }
         }
 
-        private void VerificarVez()
+        private bool VerificarVez()
         {
             try
             {
                 if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
                 {
                     MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
+                    return false;
                 }
 
                 if (!SucessoIniciarPartida)
                 {
                     MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
+                    return false;
                 }
 
                 int idPartida = int.Parse(txtIdPartida.Text);
@@ -258,7 +263,7 @@ namespace king_me
                 if (jogadorDaVez == null)
                 {
                     MessageBox.Show("Jogador da vez não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
 
                 // Exibe dados do jogador da vez
@@ -313,21 +318,79 @@ namespace king_me
                     {
                         MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para votar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            
+            //Solução temporária pro problema, tem que separar esse método em dois métodos diferentes, um pra votar e um pra verificar vez
+            int idDaPartida = int.Parse(txtIdPartida.Text);
+            var jogadorVez = _jogadorService.GetJogadorDaVez(idDaPartida);
+            if (txtIdJogador.Text == jogadorVez.IdJogador) return true;
+            else
+            {
+                MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para jogar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
             }
         }
+        private void PosicionarPersonagem()
+        {
+            string retornoVerificarVez = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string faseDoJogo = retornoVerificarVez.Split(',')[3];
+            faseDoJogo = faseDoJogo.Substring(0, 1);
+            
+            if(faseDoJogo == "S") //Se o jogo está na fase de Setup
+            {
+                int idJogador = int.Parse(txtIdJogador.Text);
 
+                string senhaJogador = txtSenhaJogador.Text;
 
+                int posicao = 0;
+                int? retornoSetorPersonagem = 0;
+                char inicialPersonagem = '\0';
+
+                //while para achar um personagem não posicionado
+                while (retornoSetorPersonagem != null && posicao < 13) //tem 13 personagens por isso a restrição de posição
+                {
+                    inicialPersonagem = mao.ObterChavePorPosicao(posicao);
+                    retornoSetorPersonagem = _tabuleiroService.ObterSetorAtual(inicialPersonagem.ToString());
+                    posicao++;
+                }
+
+                int setor = _tabuleiroService.ObterSetorNãoCheio();
+                if (setor == -1)
+                {
+                    MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+
+                if (retornoDLL.StartsWith("ERRO"))
+                {
+                    MessageBox.Show(retornoDLL, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Atualiza o tabuleiro visual
+                _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
+                txtTabuleiroAtual.Text = retornoDLL;
+
+                txtPersonagem.Clear();
+                txtPersonagem.Focus();
+            } 
+        }
 
 
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {
             tmrVerificarVez.Enabled = false;
-            VerificarVez();
+            bool minhaVez = VerificarVez();
+            if (minhaVez)
+                PosicionarPersonagem();
             tmrVerificarVez.Enabled = true;
         }
 
