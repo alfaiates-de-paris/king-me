@@ -382,12 +382,18 @@ namespace king_me
             } 
         }
 
-
+        private void VerificarTabuleiro()
+        {
+            string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string[] retorno = retornoDLL.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, string.Join("\r\n", retorno.Skip(1))); //ignora o primeiro elemento
+        }
 
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {
             tmrVerificarVez.Enabled = false;
             bool minhaVez = VerificarVez();
+            VerificarTabuleiro();
             if (minhaVez)
                 PosicionarPersonagem();
             tmrVerificarVez.Enabled = true;
