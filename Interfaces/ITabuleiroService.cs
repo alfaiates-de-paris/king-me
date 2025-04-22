@@ -11,11 +11,11 @@ namespace king_me.Interfaces
     public interface ITabuleiroService
     {
         void MoverPersonagem(Panel pnl, string personagem, int setor);
-        int ObterSetorAtual(string personagem);
+        int? ObterSetorAtual(string personagem);
         void LimparTabuleiro(Panel pnl);
         void AtualizarTabuleiro(Panel pnl, string statusTabuleiro);
-
         void RemoverPersonagem(Panel pnl, string personagem);
         void LimparSetor10(Panel pnl);
+        int ObterSetorNãoCheio();
     }
 }

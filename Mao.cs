@@ -17,7 +17,6 @@ namespace king_me
             personagens.Add('C', "Claro");
             personagens.Add('D', "Douglas Baquiao");
             personagens.Add('E', "Eduardo Takeo");
-            personagens.Add('F', "Fernando Heredia");
             personagens.Add('G', "Guilherme Rey");
             personagens.Add('H', "Heredia");
             personagens.Add('K', "Karin");
@@ -31,5 +30,14 @@ namespace king_me
         {
             return personagens[chave];
         }
+        public char ObterChavePorPosicao(int posicao)
+        {
+            if (posicao < 0 || posicao >= personagens.Count)
+                throw new ArgumentOutOfRangeException(nameof(posicao), "A posição está fora do intervalo válido.");
+
+            return personagens.ElementAt(posicao).Key;
+        }
+
+
     }
 }

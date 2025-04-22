@@ -75,13 +75,13 @@ namespace king_me.Services
             }
         }
 
-        public int ObterSetorAtual(string personagem)
+        public int? ObterSetorAtual(string personagem)
         {
             if (JogadorSetor.TryGetValue(personagem.ToUpper(), out int setor))
             {
                 return setor;
             }
-            throw new ArgumentException("Personagem não encontrado.");
+            return null;
         }
         public void LimparTabuleiro(Panel pnl)
         {
@@ -137,6 +137,18 @@ namespace king_me.Services
                     RemoverPersonagem(pnl, personagem);
                 }
             }
+        }
+
+        public int ObterSetorNãoCheio()
+        {
+            foreach (var setor in setores.OrderByDescending(s => s.NumSetor))
+            {
+                if ((setor.NumSetor > 0 && setor.NumSetor < 5) && setor.QtdPersonagensAtual < 4)
+                {
+                    return setor.NumSetor;
+                }
+            }
+            return -1; //retorna -1 caso não tenha nenhum setor disponível
         }
     }
 }
