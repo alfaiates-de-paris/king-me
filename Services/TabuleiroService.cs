@@ -150,5 +150,40 @@ namespace king_me.Services
             }
             return -1; //retorna -1 caso não tenha nenhum setor disponível
         }
+
+        public List<int> ObterSetoresNaoCheios(int idPartida)
+        {
+            List<int> setoresDisponiveis = new List<int>();
+            for (int i = 1; i <= 4; i++)
+            {
+                if (!IsSetorCheio(i, idPartida))
+                {
+                    setoresDisponiveis.Add(i);
+                }
+            }
+            return setoresDisponiveis;
+        }
+
+        public bool IsSetorCheio(int setor, int idPartida)
+        {
+            // Implemente a lógica para verificar se o setor está cheio
+            // Esta é uma implementação de exemplo, ajuste conforme necessário
+            string tabuleiro = KingMeServer.Jogo.VerificarVez(idPartida);
+            if (string.IsNullOrEmpty(tabuleiro))
+                return false;
+
+            string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            int contadorPersonagens = 0;
+            foreach (string linha in linhas)
+            {
+                if (linha.StartsWith($"{setor},"))
+                {
+                    contadorPersonagens++;
+                }
+            }
+
+            return contadorPersonagens >= 3; // Assumindo que cada setor aceita até 3 personagens
+        }
     }
 }
