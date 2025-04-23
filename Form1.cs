@@ -335,51 +335,56 @@ namespace king_me
             else
                 return false;
         }
+
         private void PosicionarPersonagem()
         {
-            string retornoVerificarVez = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
-            string faseDoJogo = retornoVerificarVez.Split(',')[3];
-            faseDoJogo = faseDoJogo.Substring(0, 1);
+            int idJogador = int.Parse(txtIdJogador.Text);
+            string senhaJogador = txtSenhaJogador.Text;
             
-            if(faseDoJogo == "S") //Se o jogo está na fase de Setup
+            // Cria lista de personagens não posicionados
+            List<char> personagensDisponiveis = new List<char>();
+            for (int i = 0; i < 13; i++) // 13 personagens disponíveis
             {
-                int idJogador = int.Parse(txtIdJogador.Text);
-
-                string senhaJogador = txtSenhaJogador.Text;
-
-                int posicao = 0;
-                int? retornoSetorPersonagem = 0;
-                char inicialPersonagem = '\0';
-
-                //while para achar um personagem não posicionado
-                while (retornoSetorPersonagem != null && posicao < 13) //tem 13 personagens por isso a restrição de posição
+                char personagem = mao.ObterChavePorPosicao(i);
+                int? setorAtual = _tabuleiroService.ObterSetorAtual(personagem.ToString());
+                if (setorAtual == null)
                 {
-                    inicialPersonagem = mao.ObterChavePorPosicao(posicao);
-                    retornoSetorPersonagem = _tabuleiroService.ObterSetorAtual(inicialPersonagem.ToString());
-                    posicao++;
+                    personagensDisponiveis.Add(personagem);
                 }
+            }
 
-                int setor = _tabuleiroService.ObterSetorNãoCheio();
-                if (setor == -1)
-                {
-                    MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            // Se não houver personagens disponíveis
+            if (personagensDisponiveis.Count == 0)
+            {
+                MessageBox.Show("Não há personagens disponíveis para posicionar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+            Random random = new Random();
+            char inicialPersonagem = personagensDisponiveis[random.Next(personagensDisponiveis.Count)];
 
-                if (retornoDLL.StartsWith("ERRO"))
-                {
-                    MessageBox.Show(retornoDLL, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            List<int> setoresDisponiveis = _tabuleiroService.ObterSetoresNaoCheios(int.Parse(txtIdPartida.Text));
+            if (setoresDisponiveis.Count == 0)
+            {
+                MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                // Atualiza o tabuleiro visual
-                _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
-                txtTabuleiroAtual.Text = retornoDLL;
+            int setor = setoresDisponiveis[random.Next(setoresDisponiveis.Count)];
 
-                txtPersonagem.Clear();
-                txtPersonagem.Focus();
-            } 
+            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+
+            if (retornoDLL.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retornoDLL, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
+            txtTabuleiroAtual.Text = retornoDLL;
+
+            txtPersonagem.Clear();
+            txtPersonagem.Focus();
         }
 
         private void VerificarTabuleiro()
@@ -394,9 +399,68 @@ namespace king_me
             tmrVerificarVez.Enabled = false;
             bool minhaVez = VerificarVez();
             VerificarTabuleiro();
+            
+            string retornoVerificarVez = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string faseDoJogo = retornoVerificarVez.Split(',')[3];
+            faseDoJogo = faseDoJogo.Substring(0, 1);
+            
             if (minhaVez)
-                PosicionarPersonagem();
+            {
+                if (faseDoJogo == "S") 
+                {
+                    PosicionarPersonagem();
+                } else if (faseDoJogo == "P") {
+                    PromoverAutomaticamente();
+                }
+            }
+            
             tmrVerificarVez.Enabled = true;
+        }
+        
+        private void PromoverAutomaticamente()
+        {
+            try
+            {
+                int idJogador = int.Parse(txtIdJogador.Text);
+                string senhaJogador = txtSenhaJogador.Text;
+
+                string tabuleiro = txtTabuleiroAtual.Text;
+                if (string.IsNullOrEmpty(tabuleiro))
+                    return;
+
+                string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                List<string> personagensPromociveis = new List<string>();
+
+                foreach (string linha in linhas)
+                {
+                    string[] partes = linha.Split(',');
+                    if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
+                    {
+                        // setor para ser promocionavel deve ser entre 1 e 4 e o setor acima dele não deve estar cheio
+                        if (setor >= 1 && setor <= 4 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
+                        {
+                            personagensPromociveis.Add(partes[1]);
+                        }
+                    }
+                }
+
+                if (personagensPromociveis.Count > 0)
+                {
+                    string personagemParaPromover = personagensPromociveis[0];
+
+                    string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemParaPromover);
+
+                    if (!retorno.StartsWith("ERRO"))
+                    {
+                        _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
+                        txtTabuleiroAtual.Text = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro na promoção automática: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnMoverPersonagem_Click(object sender, EventArgs e)
@@ -457,7 +521,6 @@ namespace king_me
             }
 
             string personagemLetra = personagemInput.Substring(0, 1).ToUpper();
-
 
             string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemLetra);
 
