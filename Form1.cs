@@ -316,7 +316,7 @@ namespace king_me
                     }
                     else
                     {
-                        MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para votar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                 }
@@ -429,7 +429,7 @@ namespace king_me
                     return;
 
                 string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                List<string> personagensPromociveis = new List<string>();
+                List<string> personagensPromoviveis = new List<string>();
 
                 foreach (string linha in linhas)
                 {
@@ -437,16 +437,16 @@ namespace king_me
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
                         // setor para ser promocionavel deve ser entre 1 e 4 e o setor acima dele não deve estar cheio
-                        if (setor >= 1 && setor <= 4 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
+                        if (setor >= 1 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
-                            personagensPromociveis.Add(partes[1]);
+                            personagensPromoviveis.Add(partes[1]);
                         }
                     }
                 }
 
-                if (personagensPromociveis.Count > 0)
+                if (personagensPromoviveis.Count > 0)
                 {
-                    string personagemParaPromover = personagensPromociveis[0];
+                    string personagemParaPromover = personagensPromoviveis[0];
 
                     string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemParaPromover);
 
