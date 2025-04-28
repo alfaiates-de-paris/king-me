@@ -285,7 +285,9 @@ namespace king_me
                 }
 
                 // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
-                string tabuleiro = txtTabuleiroAtual.Text;
+                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+                string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
                 if (tabuleiro.Contains("10"))
                 {
                     if (txtIdJogador.Text == jogadorDaVez.IdJogador)
@@ -424,7 +426,10 @@ namespace king_me
                 int idJogador = int.Parse(txtIdJogador.Text);
                 string senhaJogador = txtSenhaJogador.Text;
 
-                string tabuleiro = txtTabuleiroAtual.Text;
+                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+                string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
+
                 if (string.IsNullOrEmpty(tabuleiro))
                     return;
 
@@ -436,7 +441,6 @@ namespace king_me
                     string[] partes = linha.Split(',');
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
-                        // setor para ser promocionavel deve ser entre 1 e 4 e o setor acima dele não deve estar cheio
                         if (setor >= 1 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
                             personagensPromoviveis.Add(partes[1]);
@@ -454,6 +458,10 @@ namespace king_me
                     {
                         _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
                         txtTabuleiroAtual.Text = retorno;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Não foi possível promover o personagem automaticamente.");
                     }
                 }
             }
