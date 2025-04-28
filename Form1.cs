@@ -395,13 +395,21 @@ namespace king_me
         {
             tmrVerificarVez.Enabled = false;
 
+           
             //verificação se a rodada foi alterada
             string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
             string[] partes = retornoDLL.Split(',');
             statusPartida = partes[1].Trim();
             lblStatusPartida.Text = "Status partida: " + statusPartida;
-            int rodada = int.Parse(partes[2].Trim());
+            
+            if(statusPartida == "E")
+            {
+                MessageBox.Show("Partida Encerrada.");
+                tmrVerificarVez.Stop();
+                return;
+            }
 
+            int rodada = int.Parse(partes[2].Trim());
             string[] linhasTabuleiro = retornoDLL.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             retornoDLL = string.Join("\r\n", linhasTabuleiro.Skip(1));
             txtTabuleiro.Text = retornoDLL;
@@ -455,7 +463,7 @@ namespace king_me
                     string[] partes = linha.Split(',');
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
-                        if (setor >= 1 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
+                        if (setor >= 0 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
                             personagensPromoviveis.Add(partes[1]);
                         }
