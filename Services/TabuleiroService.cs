@@ -139,19 +139,7 @@ namespace king_me.Services
             }
         }
 
-        public int ObterSetorNãoCheio()
-        {
-            foreach (var setor in setores.OrderByDescending(s => s.NumSetor))
-            {
-                if ((setor.NumSetor > 0 && setor.NumSetor < 5) && setor.QtdPersonagensAtual < 4)
-                {
-                    return setor.NumSetor;
-                }
-            }
-            return -1; //retorna -1 caso não tenha nenhum setor disponível
-        }
-
-        public List<int> ObterSetoresNaoCheios(int idPartida)
+        public List<int> ObterSetoresNaoCheios(int idPartida) //método pra fase de setup
         {
             List<int> setoresDisponiveis = new List<int>();
             for (int i = 1; i <= 4; i++)
@@ -164,10 +152,8 @@ namespace king_me.Services
             return setoresDisponiveis;
         }
 
-        public bool IsSetorCheio(int setor, int idPartida)
+        public bool IsSetorCheio(int setor, int idPartida) //método na promoção
         {
-            // Implemente a lógica para verificar se o setor está cheio
-            // Esta é uma implementação de exemplo, ajuste conforme necessário
             string tabuleiro = KingMeServer.Jogo.VerificarVez(idPartida);
             if (string.IsNullOrEmpty(tabuleiro))
                 return false;
@@ -183,7 +169,7 @@ namespace king_me.Services
                 }
             }
 
-            return contadorPersonagens >= 3; // Assumindo que cada setor aceita até 3 personagens
+            return contadorPersonagens >= 4; 
         }
     }
 }

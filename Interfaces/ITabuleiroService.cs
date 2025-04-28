@@ -16,7 +16,6 @@ namespace king_me.Interfaces
         void AtualizarTabuleiro(Panel pnl, string statusTabuleiro);
         void RemoverPersonagem(Panel pnl, string personagem);
         void LimparSetor10(Panel pnl);
-        int ObterSetorNãoCheio();
         List<int> ObterSetoresNaoCheios(int idPartida);
         bool IsSetorCheio(int setor, int idPartida);
     }

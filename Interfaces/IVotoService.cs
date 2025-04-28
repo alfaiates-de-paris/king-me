@@ -5,5 +5,7 @@ namespace king_me.Interfaces
     {
         string Votar(int idJogador, string senha, string voto);
         int GetVotosRestantes(int idJogador);
+
+        void ResetarVotosJogadores(int idPartida);
     }
 }

@@ -23,7 +23,8 @@ namespace king_me
         private bool SucessoIniciarPartida = false;
         private Mao mao = new Mao();
         private readonly IVotoService _votoService;
-
+        int rodadaAtual = 1;
+        string statusPartida;
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService)
 
         {
@@ -120,7 +121,7 @@ namespace king_me
             txtPersonagem.Visible = false;
             lblSetor.Visible = false;
             lblPersonagem.Visible = false;
-
+            lblRodadaAtual.Text = "Rodada atual: " + rodadaAtual;
             // Ativa o timer automático
             tmrVerificarVez.Start();
 
@@ -285,7 +286,9 @@ namespace king_me
                 }
 
                 // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
-                string tabuleiro = txtTabuleiroAtual.Text;
+                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+                string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
                 if (tabuleiro.Contains("10"))
                 {
                     if (txtIdJogador.Text == jogadorDaVez.IdJogador)
@@ -293,30 +296,25 @@ namespace king_me
                         int idJogador = int.Parse(txtIdJogador.Text);
                         string senhaJogador = txtSenhaJogador.Text;
 
-                        if (_votoService.GetVotosRestantes(idJogador) > 0)
+                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
+                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+
+                        if (!retorno.StartsWith("ERRO"))
                         {
-                            string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-                            string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+                            txtVoto.Text = votoAuto;
+                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AtualizarVotosRestantes(idJogador);
 
-                            if (!retorno.StartsWith("ERRO"))
-                            {
-                                txtVoto.Text = votoAuto;
-                                MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                                AtualizarVotosRestantes(idJogador);
-
-                                lblVotosRestantes.Text = string.Empty;
-                            }
-                            else
-                            {
-                                MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
+                            lblVotosRestantes.Text = string.Empty;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao enviar voto automático: " + retorno, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("É a vez de outro jogador. Troque o ID e a senha para votar.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information); //comentar essa linha ao depurar com breakpoint
                     }
 
                 }
@@ -381,7 +379,6 @@ namespace king_me
             }
 
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
-            txtTabuleiroAtual.Text = retornoDLL;
 
             txtPersonagem.Clear();
             txtPersonagem.Focus();
@@ -397,6 +394,32 @@ namespace king_me
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {
             tmrVerificarVez.Enabled = false;
+
+           
+            //verificação se a rodada foi alterada
+            string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string[] partes = retornoDLL.Split(',');
+            statusPartida = partes[1].Trim();
+            lblStatusPartida.Text = "Status partida: " + statusPartida;
+            
+            if(statusPartida == "E")
+            {
+                MessageBox.Show("Partida Encerrada.");
+                tmrVerificarVez.Stop();
+                return;
+            }
+
+            int rodada = int.Parse(partes[2].Trim());
+            string[] linhasTabuleiro = retornoDLL.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            retornoDLL = string.Join("\r\n", linhasTabuleiro.Skip(1));
+
+            if (rodada != rodadaAtual)
+            {
+                lblRodadaAtual.Text = "Rodada atual: " + rodada;
+                rodadaAtual = rodada;
+                _votoService.ResetarVotosJogadores(int.Parse(txtIdPartida.Text));
+            }
+
             bool minhaVez = VerificarVez();
             VerificarTabuleiro();
             
@@ -424,36 +447,41 @@ namespace king_me
                 int idJogador = int.Parse(txtIdJogador.Text);
                 string senhaJogador = txtSenhaJogador.Text;
 
-                string tabuleiro = txtTabuleiroAtual.Text;
+                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+                string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
+
                 if (string.IsNullOrEmpty(tabuleiro))
                     return;
 
                 string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                List<string> personagensPromociveis = new List<string>();
+                List<string> personagensPromoviveis = new List<string>();
 
                 foreach (string linha in linhas)
                 {
                     string[] partes = linha.Split(',');
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
-                        // setor para ser promocionavel deve ser entre 1 e 4 e o setor acima dele não deve estar cheio
-                        if (setor >= 1 && setor <= 4 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
+                        if (setor >= 0 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
-                            personagensPromociveis.Add(partes[1]);
+                            personagensPromoviveis.Add(partes[1]);
                         }
                     }
                 }
 
-                if (personagensPromociveis.Count > 0)
+                if (personagensPromoviveis.Count > 0)
                 {
-                    string personagemParaPromover = personagensPromociveis[0];
+                    string personagemParaPromover = personagensPromoviveis[0];
 
                     string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemParaPromover);
 
                     if (!retorno.StartsWith("ERRO"))
                     {
                         _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-                        txtTabuleiroAtual.Text = retorno;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Não foi possível promover o personagem automaticamente.");
                     }
                 }
             }
@@ -488,14 +516,10 @@ namespace king_me
 
             // Atualiza o tabuleiro visual
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-            txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
             txtPersonagem.Focus();
         }
-
-
-        private void label2_Click(object sender, EventArgs e) { }
 
         private void txtPersonagens_TextChanged(object sender, EventArgs e) { }
 
@@ -531,7 +555,7 @@ namespace king_me
             }
 
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-            txtTabuleiroAtual.Text = retorno;
+
             txtPersonagem.Clear();
             txtPersonagem.Focus();
         }
@@ -590,17 +614,5 @@ namespace king_me
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
 
         }
-
-
-        private void lblVezIdJogador_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblVezNomeJogador_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
