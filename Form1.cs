@@ -412,7 +412,6 @@ namespace king_me
             int rodada = int.Parse(partes[2].Trim());
             string[] linhasTabuleiro = retornoDLL.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             retornoDLL = string.Join("\r\n", linhasTabuleiro.Skip(1));
-            txtTabuleiro.Text = retornoDLL;
 
             if (rodada != rodadaAtual)
             {

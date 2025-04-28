@@ -80,7 +80,6 @@
             this.tmrVerificarVez = new System.Windows.Forms.Timer(this.components);
             this.lblRodadaAtual = new System.Windows.Forms.Label();
             this.lblStatusPartida = new System.Windows.Forms.Label();
-            this.txtTabuleiro = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -603,14 +602,6 @@
             this.lblStatusPartida.TabIndex = 56;
             this.lblStatusPartida.Text = "Status partida: ";
             // 
-            // txtTabuleiro
-            // 
-            this.txtTabuleiro.Location = new System.Drawing.Point(972, 477);
-            this.txtTabuleiro.Multiline = true;
-            this.txtTabuleiro.Name = "txtTabuleiro";
-            this.txtTabuleiro.Size = new System.Drawing.Size(122, 173);
-            this.txtTabuleiro.TabIndex = 57;
-            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -618,7 +609,6 @@
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1640, 896);
-            this.Controls.Add(this.txtTabuleiro);
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.lblRodadaAtual);
             this.Controls.Add(this.pnlTabuleiro);
@@ -734,6 +724,5 @@
         private System.Windows.Forms.Timer tmrVerificarVez;
         private System.Windows.Forms.Label lblRodadaAtual;
         private System.Windows.Forms.Label lblStatusPartida;
-        private System.Windows.Forms.TextBox txtTabuleiro;
     }
 }
