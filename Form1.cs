@@ -383,7 +383,6 @@ namespace king_me
             }
 
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
-            txtTabuleiroAtual.Text = retornoDLL;
 
             txtPersonagem.Clear();
             txtPersonagem.Focus();
@@ -457,7 +456,6 @@ namespace king_me
                     if (!retorno.StartsWith("ERRO"))
                     {
                         _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-                        txtTabuleiroAtual.Text = retorno;
                     }
                     else
                     {
@@ -496,14 +494,10 @@ namespace king_me
 
             // Atualiza o tabuleiro visual
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-            txtTabuleiroAtual.Text = retorno;
 
             txtPersonagem.Clear();
             txtPersonagem.Focus();
         }
-
-
-        private void label2_Click(object sender, EventArgs e) { }
 
         private void txtPersonagens_TextChanged(object sender, EventArgs e) { }
 
@@ -539,7 +533,7 @@ namespace king_me
             }
 
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-            txtTabuleiroAtual.Text = retorno;
+
             txtPersonagem.Clear();
             txtPersonagem.Focus();
         }
@@ -596,17 +590,6 @@ namespace king_me
         {
             int votosRestantes = _votoService.GetVotosRestantes(idJogador);
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
-
-        }
-
-
-        private void lblVezIdJogador_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblVezNomeJogador_Click(object sender, EventArgs e)
-        {
 
         }
 

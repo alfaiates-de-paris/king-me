@@ -70,8 +70,6 @@
             this.lblVezNomeJogador = new System.Windows.Forms.Label();
             this.lblVezIdJogador = new System.Windows.Forms.Label();
             this.txtPersonagensFavoritos = new System.Windows.Forms.TextBox();
-            this.lblTabuleiroAtual = new System.Windows.Forms.Label();
-            this.txtTabuleiroAtual = new System.Windows.Forms.TextBox();
             this.btnMoverPersonagem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPromover = new System.Windows.Forms.Button();
@@ -353,7 +351,7 @@
             // 
             this.lblPersonagensFav.AutoSize = true;
             this.lblPersonagensFav.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPersonagensFav.Location = new System.Drawing.Point(355, 602);
+            this.lblPersonagensFav.Location = new System.Drawing.Point(405, 271);
             this.lblPersonagensFav.Name = "lblPersonagensFav";
             this.lblPersonagensFav.Size = new System.Drawing.Size(72, 16);
             this.lblPersonagensFav.TabIndex = 30;
@@ -380,7 +378,7 @@
             // 
             // btnExibirCartas
             // 
-            this.btnExibirCartas.Location = new System.Drawing.Point(332, 622);
+            this.btnExibirCartas.Location = new System.Drawing.Point(379, 452);
             this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
             this.btnExibirCartas.Name = "btnExibirCartas";
             this.btnExibirCartas.Size = new System.Drawing.Size(123, 28);
@@ -392,19 +390,18 @@
             // lblPersonagensExistentes
             // 
             this.lblPersonagensExistentes.AutoSize = true;
-            this.lblPersonagensExistentes.Location = new System.Drawing.Point(984, 514);
+            this.lblPersonagensExistentes.Location = new System.Drawing.Point(991, 275);
             this.lblPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagensExistentes.Name = "lblPersonagensExistentes";
             this.lblPersonagensExistentes.Size = new System.Drawing.Size(88, 16);
             this.lblPersonagensExistentes.TabIndex = 34;
             this.lblPersonagensExistentes.Text = "Personagens";
-            this.lblPersonagensExistentes.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtPersonagensExistentes
             // 
             this.txtPersonagensExistentes.FormattingEnabled = true;
             this.txtPersonagensExistentes.ItemHeight = 16;
-            this.txtPersonagensExistentes.Location = new System.Drawing.Point(963, 535);
+            this.txtPersonagensExistentes.Location = new System.Drawing.Point(972, 295);
             this.txtPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagensExistentes.Name = "txtPersonagensExistentes";
             this.txtPersonagensExistentes.Size = new System.Drawing.Size(129, 148);
@@ -435,7 +432,7 @@
             // lblSetoresExistentes
             // 
             this.lblSetoresExistentes.AutoSize = true;
-            this.lblSetoresExistentes.Location = new System.Drawing.Point(1003, 11);
+            this.lblSetoresExistentes.Location = new System.Drawing.Point(1011, 23);
             this.lblSetoresExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSetoresExistentes.Name = "lblSetoresExistentes";
             this.lblSetoresExistentes.Size = new System.Drawing.Size(54, 16);
@@ -489,7 +486,6 @@
             this.lblVezNomeJogador.Size = new System.Drawing.Size(98, 16);
             this.lblVezNomeJogador.TabIndex = 43;
             this.lblVezNomeJogador.Text = "Nome Jogador";
-            this.lblVezNomeJogador.Click += new System.EventHandler(this.lblVezNomeJogador_Click);
             // 
             // lblVezIdJogador
             // 
@@ -500,34 +496,15 @@
             this.lblVezIdJogador.Size = new System.Drawing.Size(72, 16);
             this.lblVezIdJogador.TabIndex = 44;
             this.lblVezIdJogador.Text = "Id Jogador";
-            this.lblVezIdJogador.Click += new System.EventHandler(this.lblVezIdJogador_Click);
             // 
             // txtPersonagensFavoritos
             // 
-            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(461, 496);
+            this.txtPersonagensFavoritos.Location = new System.Drawing.Point(368, 289);
             this.txtPersonagensFavoritos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPersonagensFavoritos.Multiline = true;
             this.txtPersonagensFavoritos.Name = "txtPersonagensFavoritos";
             this.txtPersonagensFavoritos.Size = new System.Drawing.Size(148, 157);
             this.txtPersonagensFavoritos.TabIndex = 45;
-            // 
-            // lblTabuleiroAtual
-            // 
-            this.lblTabuleiroAtual.AutoSize = true;
-            this.lblTabuleiroAtual.Location = new System.Drawing.Point(984, 263);
-            this.lblTabuleiroAtual.Name = "lblTabuleiroAtual";
-            this.lblTabuleiroAtual.Size = new System.Drawing.Size(98, 16);
-            this.lblTabuleiroAtual.TabIndex = 46;
-            this.lblTabuleiroAtual.Text = "Tabuleiro Atual";
-            // 
-            // txtTabuleiroAtual
-            // 
-            this.txtTabuleiroAtual.Location = new System.Drawing.Point(943, 282);
-            this.txtTabuleiroAtual.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTabuleiroAtual.Multiline = true;
-            this.txtTabuleiroAtual.Name = "txtTabuleiroAtual";
-            this.txtTabuleiroAtual.Size = new System.Drawing.Size(173, 214);
-            this.txtTabuleiroAtual.TabIndex = 47;
             // 
             // btnMoverPersonagem
             // 
@@ -617,8 +594,6 @@
             this.Controls.Add(this.btnPromover);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMoverPersonagem);
-            this.Controls.Add(this.txtTabuleiroAtual);
-            this.Controls.Add(this.lblTabuleiroAtual);
             this.Controls.Add(this.txtPersonagensFavoritos);
             this.Controls.Add(this.lblVezIdJogador);
             this.Controls.Add(this.lblVezNomeJogador);
@@ -716,8 +691,6 @@
         private System.Windows.Forms.Label lblVezNomeJogador;
         private System.Windows.Forms.Label lblVezIdJogador;
         private System.Windows.Forms.TextBox txtPersonagensFavoritos;
-        private System.Windows.Forms.Label lblTabuleiroAtual;
-        private System.Windows.Forms.TextBox txtTabuleiroAtual;
         private System.Windows.Forms.Button btnMoverPersonagem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPromover;
