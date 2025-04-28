@@ -296,30 +296,25 @@ namespace king_me
                         int idJogador = int.Parse(txtIdJogador.Text);
                         string senhaJogador = txtSenhaJogador.Text;
 
-                        if (_votoService.GetVotosRestantes(idJogador) > 0)
+                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
+                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+
+                        if (!retorno.StartsWith("ERRO"))
                         {
-                            string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-                            string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+                            txtVoto.Text = votoAuto;
+                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AtualizarVotosRestantes(idJogador);
 
-                            if (!retorno.StartsWith("ERRO"))
-                            {
-                                txtVoto.Text = votoAuto;
-                                MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                                AtualizarVotosRestantes(idJogador);
-
-                                lblVotosRestantes.Text = string.Empty;
-                            }
-                            else
-                            {
-                                MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
+                            lblVotosRestantes.Text = string.Empty;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao enviar voto automático: " + retorno, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information); //comentar essa linha ao depurar com breakpoint
                     }
 
                 }
@@ -406,10 +401,15 @@ namespace king_me
             statusPartida = partes[1].Trim();
             lblStatusPartida.Text = "Status partida: " + statusPartida;
             int rodada = int.Parse(partes[2].Trim());
-            
+
+            string[] linhasTabuleiro = retornoDLL.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            retornoDLL = string.Join("\r\n", linhasTabuleiro.Skip(1));
+            txtTabuleiro.Text = retornoDLL;
+
             if (rodada != rodadaAtual)
             {
                 lblRodadaAtual.Text = "Rodada atual: " + rodada;
+                rodadaAtual = rodada;
                 _votoService.ResetarVotosJogadores(int.Parse(txtIdPartida.Text));
             }
 
