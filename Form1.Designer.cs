@@ -78,6 +78,8 @@
             this.pnlTabuleiro = new System.Windows.Forms.Panel();
             this.lblVotosRestantes = new System.Windows.Forms.Label();
             this.tmrVerificarVez = new System.Windows.Forms.Timer(this.components);
+            this.lblRodadaAtual = new System.Windows.Forms.Label();
+            this.lblStatusPartida = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -480,7 +482,7 @@
             // lblVezNomeJogador
             // 
             this.lblVezNomeJogador.AutoSize = true;
-            this.lblVezNomeJogador.Location = new System.Drawing.Point(539, 103);
+            this.lblVezNomeJogador.Location = new System.Drawing.Point(539, 108);
             this.lblVezNomeJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezNomeJogador.Name = "lblVezNomeJogador";
             this.lblVezNomeJogador.Size = new System.Drawing.Size(98, 16);
@@ -490,7 +492,7 @@
             // lblVezIdJogador
             // 
             this.lblVezIdJogador.AutoSize = true;
-            this.lblVezIdJogador.Location = new System.Drawing.Point(539, 137);
+            this.lblVezIdJogador.Location = new System.Drawing.Point(539, 138);
             this.lblVezIdJogador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVezIdJogador.Name = "lblVezIdJogador";
             this.lblVezIdJogador.Size = new System.Drawing.Size(72, 16);
@@ -581,6 +583,25 @@
             this.tmrVerificarVez.Interval = 5000;
             this.tmrVerificarVez.Tick += new System.EventHandler(this.tmrVerificarVez_Tick);
             // 
+            // lblRodadaAtual
+            // 
+            this.lblRodadaAtual.AutoSize = true;
+            this.lblRodadaAtual.Location = new System.Drawing.Point(539, 43);
+            this.lblRodadaAtual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRodadaAtual.Name = "lblRodadaAtual";
+            this.lblRodadaAtual.Size = new System.Drawing.Size(92, 16);
+            this.lblRodadaAtual.TabIndex = 55;
+            this.lblRodadaAtual.Text = "Rodada atual:";
+            // 
+            // lblStatusPartida
+            // 
+            this.lblStatusPartida.AutoSize = true;
+            this.lblStatusPartida.Location = new System.Drawing.Point(539, 23);
+            this.lblStatusPartida.Name = "lblStatusPartida";
+            this.lblStatusPartida.Size = new System.Drawing.Size(95, 16);
+            this.lblStatusPartida.TabIndex = 56;
+            this.lblStatusPartida.Text = "Status partida: ";
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -588,6 +609,8 @@
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1640, 896);
+            this.Controls.Add(this.lblStatusPartida);
+            this.Controls.Add(this.lblRodadaAtual);
             this.Controls.Add(this.pnlTabuleiro);
             this.Controls.Add(this.txtVoto);
             this.Controls.Add(this.btnVotar);
@@ -699,5 +722,7 @@
         private System.Windows.Forms.Panel pnlTabuleiro;
         private System.Windows.Forms.Label lblVotosRestantes;
         private System.Windows.Forms.Timer tmrVerificarVez;
+        private System.Windows.Forms.Label lblRodadaAtual;
+        private System.Windows.Forms.Label lblStatusPartida;
     }
 }

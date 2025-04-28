@@ -23,7 +23,8 @@ namespace king_me
         private bool SucessoIniciarPartida = false;
         private Mao mao = new Mao();
         private readonly IVotoService _votoService;
-
+        int rodadaAtual = 1;
+        string statusPartida;
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService)
 
         {
@@ -120,7 +121,7 @@ namespace king_me
             txtPersonagem.Visible = false;
             lblSetor.Visible = false;
             lblPersonagem.Visible = false;
-
+            lblRodadaAtual.Text = "Rodada atual: " + rodadaAtual;
             // Ativa o timer automático
             tmrVerificarVez.Start();
 
@@ -398,6 +399,20 @@ namespace king_me
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {
             tmrVerificarVez.Enabled = false;
+
+            //verificação se a rodada foi alterada
+            string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string[] partes = retornoDLL.Split(',');
+            statusPartida = partes[1].Trim();
+            lblStatusPartida.Text = "Status partida: " + statusPartida;
+            int rodada = int.Parse(partes[2].Trim());
+            
+            if (rodada != rodadaAtual)
+            {
+                lblRodadaAtual.Text = "Rodada atual: " + rodada;
+                _votoService.ResetarVotosJogadores(int.Parse(txtIdPartida.Text));
+            }
+
             bool minhaVez = VerificarVez();
             VerificarTabuleiro();
             
@@ -592,6 +607,5 @@ namespace king_me
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
 
         }
-
     }
 }
