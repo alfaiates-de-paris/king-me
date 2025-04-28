@@ -57,6 +57,7 @@
     <Compile Include="Models\CartaDTO.cs" />
     <Compile Include="Models\JogadorDTO.cs" />
     <Compile Include="Models\PartidaDTO.cs" />
+    <Compile Include="Models\ResultadoVotoDTO.cs" />
     <Compile Include="Models\TabuleiroDTO.cs" />
     <Compile Include="Models\VotoDTO.cs" />
     <Compile Include="Services\CartaService.cs" />

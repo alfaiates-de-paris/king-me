@@ -114,7 +114,7 @@ namespace king_me
             SucessoIniciarPartida = true;
             int idJogador = Int32.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
-            int id = int.Parse(txtIdPartida.Text);
+            int idPartida = int.Parse(txtIdPartida.Text);
             btnVerificarVez.Visible = false;
             btnMoverPersonagem.Visible = false;
             txtSetor.Visible = false;
@@ -125,7 +125,13 @@ namespace king_me
             // Ativa o timer automático
             tmrVerificarVez.Start();
 
-            _partidaService.Iniciar(idJogador, senhaJogador);
+            if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
+            {
+                MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
+                return;
+            }
+
+            _partidaService.Iniciar(idJogador, senhaJogador, id);
         }
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
@@ -195,22 +201,10 @@ namespace king_me
             }
         }
 
-        private void btnVerificarVez_Click(object sender, EventArgs e)
+        /*private void btnVerificarVez_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
-                }
-
-                if (!SucessoIniciarPartida)
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
-                }
-
                 int idPartida = int.Parse(txtIdPartida.Text);
                 var jogador = _jogadorService.GetJogadorDaVez(idPartida);
 
@@ -240,24 +234,12 @@ namespace king_me
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         private bool VerificarVez()
         {
             try
             {
-                if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return false;
-                }
-
-                if (!SucessoIniciarPartida)
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return false;
-                }
-
                 int idPartida = int.Parse(txtIdPartida.Text);
                 var jogadorDaVez = _jogadorService.GetJogadorDaVez(idPartida);
 
@@ -273,6 +255,21 @@ namespace king_me
                 lblVezIdJogador.Text = $"ID do Jogador: {jogadorDaVez.IdJogador.Substring(0, Math.Min(4, jogadorDaVez.IdJogador.Length))}";
                 lblVezNomeJogador.Text = $"Nome: {jogadorDaVez.NomeJogador}";
 
+                ResultadoVotoDTO resultado = _partidaService.VerificarVez(_jogadorService, _votoService);
+
+                if (!resultado.Status.StartsWith("ERRO"))
+                {
+                    txtVoto.Text = resultado.Voto;
+                    MessageBox.Show($"Voto automático enviado: {resultado.Voto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AtualizarVotosRestantes(resultado.IdJogador);
+
+                    lblVotosRestantes.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao enviar voto automático: " + resultado.Status, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
                 // Atualiza votos do jogador logado
                 if (int.TryParse(txtIdJogador.Text, out int idJogadorLogado))
                 {
@@ -286,38 +283,7 @@ namespace king_me
                 }
 
                 // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
-                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
-                string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
-                if (tabuleiro.Contains("10"))
-                {
-                    if (txtIdJogador.Text == jogadorDaVez.IdJogador)
-                    {
-                        int idJogador = int.Parse(txtIdJogador.Text);
-                        string senhaJogador = txtSenhaJogador.Text;
-
-                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
-
-                        if (!retorno.StartsWith("ERRO"))
-                        {
-                            txtVoto.Text = votoAuto;
-                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            AtualizarVotosRestantes(idJogador);
-
-                            lblVotosRestantes.Text = string.Empty;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Erro ao enviar voto automático: " + retorno, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        //MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information); //comentar essa linha ao depurar com breakpoint
-                    }
-
-                }
+               
             }
             catch (Exception ex)
             {
