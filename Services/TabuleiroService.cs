@@ -75,13 +75,13 @@ namespace king_me.Services
             }
         }
 
-        public int ObterSetorAtual(string personagem)
+        public int? ObterSetorAtual(string personagem)
         {
             if (JogadorSetor.TryGetValue(personagem.ToUpper(), out int setor))
             {
                 return setor;
             }
-            throw new ArgumentException("Personagem não encontrado.");
+            return null;
         }
         public void LimparTabuleiro(Panel pnl)
         {
@@ -108,6 +108,68 @@ namespace king_me.Services
                     this.MoverPersonagem(pnl, partes[1], Convert.ToInt32(partes[0]));
                 }
             }
+        }
+
+        public void RemoverPersonagem(Panel pnl, string personagem)
+        {
+            if (JogadorSetor.TryGetValue(personagem.ToUpper(), out int setor))
+            {
+                setores[setor].QtdPersonagensAtual--;
+                JogadorSetor.Remove(personagem.ToUpper());
+                PictureBox pictureBox = (PictureBox)pnl.Controls["pic" + personagem.ToUpper()];
+                if (pictureBox != null)
+                {
+                    pnl.Controls.Remove(pictureBox);
+                    pictureBox.Dispose();
+                }
+            }
+        }
+
+        public void LimparSetor10(Panel pnl)
+        {
+            int setor = 6; // setor 10 é equivalente ao setor 6, pois estã na 6a posição da lista de setores
+            // remove o único personagem do setor 10, se existir  
+            if (setores[setor].QtdPersonagensAtual > 0)
+            {
+                var personagem = JogadorSetor.FirstOrDefault(j => j.Value == setor).Key; //busca o primeiro personagem que tem como setor o 6°, vulgo o unico
+                if (!string.IsNullOrEmpty(personagem))
+                {
+                    RemoverPersonagem(pnl, personagem);
+                }
+            }
+        }
+
+        public List<int> ObterSetoresNaoCheios(int idPartida) //método pra fase de setup
+        {
+            List<int> setoresDisponiveis = new List<int>();
+            for (int i = 1; i <= 4; i++)
+            {
+                if (!IsSetorCheio(i, idPartida))
+                {
+                    setoresDisponiveis.Add(i);
+                }
+            }
+            return setoresDisponiveis;
+        }
+
+        public bool IsSetorCheio(int setor, int idPartida) //método na promoção
+        {
+            string tabuleiro = KingMeServer.Jogo.VerificarVez(idPartida);
+            if (string.IsNullOrEmpty(tabuleiro))
+                return false;
+
+            string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            int contadorPersonagens = 0;
+            foreach (string linha in linhas)
+            {
+                if (linha.StartsWith($"{setor},"))
+                {
+                    contadorPersonagens++;
+                }
+            }
+
+            return contadorPersonagens >= 4; 
         }
     }
 }
