@@ -323,6 +323,41 @@ namespace king_me
 
 
 
+<<<<<<< Updated upstream
+=======
+            Random random = new Random();
+            char inicialPersonagem = personagensDisponiveis[random.Next(personagensDisponiveis.Count)];
+
+            List<int> setoresDisponiveis = _tabuleiroService.ObterSetoresNaoCheios(int.Parse(txtIdPartida.Text));
+            if (setoresDisponiveis.Count == 0)
+            {
+                MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+             }
+
+            int setor = setoresDisponiveis[random.Next(setoresDisponiveis.Count)];
+
+            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+
+            if (retornoDLL.StartsWith("ERRO"))
+            {
+                MessageBox.Show(retornoDLL, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
+
+            txtPersonagem.Clear();
+            txtPersonagem.Focus();
+        }
+
+        private void VerificarTabuleiro()
+        {
+            string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+            string[] retorno = retornoDLL.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, string.Join("\r\n", retorno.Skip(1))); //ignora o primeiro elemento
+        }
+>>>>>>> Stashed changes
 
         private void tmrVerificarVez_Tick(object sender, EventArgs e)
         {
