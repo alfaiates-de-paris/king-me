@@ -29,7 +29,7 @@ namespace king_me.Services
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-            if (!retorno.StartsWith("ERRO") && voto == "N")
+            if (!retorno.StartsWith("ERRO"))
             {
                 votosPorJogador[idJogador]--;
             }

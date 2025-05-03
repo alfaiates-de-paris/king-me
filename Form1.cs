@@ -279,66 +279,64 @@ namespace king_me
                     AtualizarVotosRestantes(idJogadorLogado);
                 }
 
-                // Atualiza votos do jogador da vez também (opcional, mas útil para debug/visibilidade)
+                // Atualiza votos do jogador da vez (opcional para debug)
                 if (int.TryParse(jogadorDaVez.IdJogador, out int idJogadorDaVez))
                 {
                     AtualizarVotosRestantes(idJogadorDaVez);
                 }
 
-                // Se personagem chegou no setor 10, e for a vez do jogador logado, vota automaticamente
-                string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
+                // Verifica tabuleiro e realiza voto automático
+                string tabuleiro = KingMeServer.Jogo.VerificarVez(idPartida);
                 string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
-                if (tabuleiro.Contains("10"))
-                {
-                    if (txtIdJogador.Text == jogadorDaVez.IdJogador)
-                    {
-                        int idJogador = int.Parse(txtIdJogador.Text);
-                        string senhaJogador = txtSenhaJogador.Text;
 
-                        string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-                        string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
-
-                        if (!retorno.StartsWith("ERRO"))
-                        {
-                            txtVoto.Text = votoAuto;
-                            MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            AtualizarVotosRestantes(idJogador);
-
-                            lblVotosRestantes.Text = string.Empty;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Erro ao enviar voto automático: " + retorno, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        //MessageBox.Show("É a vez de outro jogador.", "Aguardando troca de jogador", MessageBoxButtons.OK, MessageBoxIcon.Information); //comentar essa linha ao depurar com breakpoint
-                    }
-
-                }
+                RealizarVotoAutomatico(tabuleiro, jogadorDaVez);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
-            //Solução temporária pro problema, tem que separar esse método em dois métodos diferentes, um pra votar e um pra verificar vez
+
+            // Retorna se é a vez do jogador logado
             int idDaPartida = int.Parse(txtIdPartida.Text);
             var jogadorVez = _jogadorService.GetJogadorDaVez(idDaPartida);
-            if (txtIdJogador.Text == jogadorVez.IdJogador) 
-                return true;
+            return txtIdJogador.Text == jogadorVez.IdJogador;
+        }
+
+        private void RealizarVotoAutomatico(string tabuleiro, JogadorDTO jogadorDaVez)
+
+        {
+            if (!tabuleiro.Contains("10")) return;
+
+            if (txtIdJogador.Text != jogadorDaVez.IdJogador) return;
+
+            int idJogador = int.Parse(txtIdJogador.Text);
+            string senhaJogador = txtSenhaJogador.Text;
+
+            if (_votoService.GetVotosRestantes(idJogador) <= 0) return;
+
+            string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
+            string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+
+            if (!retorno.StartsWith("ERRO"))
+            {
+                txtVoto.Text = votoAuto;
+                MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizarVotosRestantes(idJogador);
+                
+            }
             else
-                return false;
+            {
+                MessageBox.Show("Erro ao enviar voto automático: " + retorno, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PosicionarPersonagem()
         {
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
-            
+
             // Cria lista de personagens não posicionados
             List<char> personagensDisponiveis = new List<char>();
             for (int i = 0; i < 13; i++) // 13 personagens disponíveis
@@ -395,14 +393,14 @@ namespace king_me
         {
             tmrVerificarVez.Enabled = false;
 
-           
+
             //verificação se a rodada foi alterada
             string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
             string[] partes = retornoDLL.Split(',');
             statusPartida = partes[1].Trim();
             lblStatusPartida.Text = "Status partida: " + statusPartida;
-            
-            if(statusPartida == "E")
+
+            if (statusPartida == "E")
             {
                 MessageBox.Show("Partida Encerrada.");
                 tmrVerificarVez.Stop();
@@ -417,29 +415,32 @@ namespace king_me
             {
                 lblRodadaAtual.Text = "Rodada atual: " + rodada;
                 rodadaAtual = rodada;
+
                 _votoService.ResetarVotosJogadores(int.Parse(txtIdPartida.Text));
             }
 
             bool minhaVez = VerificarVez();
             VerificarTabuleiro();
-            
+
             string retornoVerificarVez = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
             string faseDoJogo = retornoVerificarVez.Split(',')[3];
             faseDoJogo = faseDoJogo.Substring(0, 1);
-            
+
             if (minhaVez)
             {
-                if (faseDoJogo == "S") 
+                if (faseDoJogo == "S")
                 {
                     PosicionarPersonagem();
-                } else if (faseDoJogo == "P") {
+                }
+                else if (faseDoJogo == "P")
+                {
                     PromoverAutomaticamente();
                 }
             }
-            
+
             tmrVerificarVez.Enabled = true;
         }
-        
+
         private void PromoverAutomaticamente()
         {
             try
@@ -587,7 +588,8 @@ namespace king_me
             }
 
             MessageBox.Show("Voto registrado com sucesso!");
-            if (txtVoto.Text == "N") { 
+            if (txtVoto.Text == "N")
+            {
                 _tabuleiroService.LimparSetor10(pnlTabuleiro);
             }
             txtVoto.Clear();
