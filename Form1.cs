@@ -469,6 +469,9 @@ namespace king_me
                 int idJogador = int.Parse(txtIdJogador.Text);
                 string senhaJogador = txtSenhaJogador.Text;
 
+                string cartasFavoritas = _cartaService.ListarCartas(idJogador, senhaJogador);
+                cartasFavoritas = cartasFavoritas.Substring(0, cartasFavoritas.Length - 2);
+
                 string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
                 string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
@@ -477,23 +480,47 @@ namespace king_me
                     return;
 
                 string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                List<string> personagensPromoviveis = new List<string>();
+                linhas = linhas.Reverse().ToArray(); //deixa em ordem decrescente
 
-                foreach (string linha in linhas)
+                List<string> personagensPromoviveis = new List<string>();
+                List<string> personagensFavoritosPromoviveis = new List<string>();
+                List<string> personagensSetor5 = new List<string>();
+
+                foreach (string linha in linhas) 
                 {
                     string[] partes = linha.Split(',');
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
                         if (setor >= 0 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
-                            personagensPromoviveis.Add(partes[1]);
+                            if (setor == 5)
+                            {
+                                personagensSetor5.Add(partes[1]);
+                            }
+                            else
+                            {
+                                personagensPromoviveis.Add(partes[1]);
+                                if (cartasFavoritas.Contains(partes[1]))
+                                {
+                                    personagensFavoritosPromoviveis.Add(partes[1]);
+                                }
+                            }
                         }
                     }
+                }
+                int a = 0; ; // debbugging
+                if (personagensPromoviveis.Count == 0 && personagensSetor5.Count > 0)
+                {
+                    personagensPromoviveis.AddRange(personagensSetor5);
                 }
 
                 if (personagensPromoviveis.Count > 0)
                 {
-                    string personagemParaPromover = personagensPromoviveis[0];
+                    string personagemParaPromover;
+                    if (personagensFavoritosPromoviveis.Count > 0)
+                        personagemParaPromover = personagensFavoritosPromoviveis[0];
+                    else
+                        personagemParaPromover = personagensPromoviveis[0];
 
                     string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemParaPromover);
 
