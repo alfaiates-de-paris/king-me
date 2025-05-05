@@ -508,7 +508,7 @@ namespace king_me
                         }
                     }
                 }
-                int a = 0; ; // debbugging
+                //int a = 0; //Colocar breakpoint nessa linha e descomentar caso queira visualizar as listas
                 if (personagensPromoviveis.Count == 0 && personagensSetor5.Count > 0)
                 {
                     personagensPromoviveis.AddRange(personagensSetor5);
