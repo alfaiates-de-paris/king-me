@@ -57,7 +57,6 @@
             this.lblPersonagensFav = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
-            this.btnExibirCartas = new System.Windows.Forms.Button();
             this.lblPersonagensExistentes = new System.Windows.Forms.Label();
             this.txtPersonagensExistentes = new System.Windows.Forms.ListBox();
             this.btnVerificarVez = new System.Windows.Forms.Button();
@@ -378,17 +377,6 @@
             this.btnIniciarPartida.UseVisualStyleBackColor = true;
             this.btnIniciarPartida.Click += new System.EventHandler(this.btnIniciarPartida_Click);
             // 
-            // btnExibirCartas
-            // 
-            this.btnExibirCartas.Location = new System.Drawing.Point(379, 452);
-            this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExibirCartas.Name = "btnExibirCartas";
-            this.btnExibirCartas.Size = new System.Drawing.Size(123, 28);
-            this.btnExibirCartas.TabIndex = 33;
-            this.btnExibirCartas.Text = "Exibir Cartas";
-            this.btnExibirCartas.UseVisualStyleBackColor = true;
-            this.btnExibirCartas.Click += new System.EventHandler(this.btnExibirCartas_Click);
-            // 
             // lblPersonagensExistentes
             // 
             this.lblPersonagensExistentes.AutoSize = true;
@@ -629,7 +617,6 @@
             this.Controls.Add(this.btnVerificarVez);
             this.Controls.Add(this.txtPersonagensExistentes);
             this.Controls.Add(this.lblPersonagensExistentes);
-            this.Controls.Add(this.btnExibirCartas);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPersonagensFav);
@@ -701,7 +688,6 @@
         private System.Windows.Forms.Label lblPersonagensFav;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnIniciarPartida;
-        private System.Windows.Forms.Button btnExibirCartas;
         private System.Windows.Forms.Label lblPersonagensExistentes;
         private System.Windows.Forms.ListBox txtPersonagensExistentes;
         private System.Windows.Forms.Button btnVerificarVez;

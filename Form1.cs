@@ -126,14 +126,8 @@ namespace king_me
             tmrVerificarVez.Start();
 
             _partidaService.Iniciar(idJogador, senhaJogador);
-        }
 
-        private void btnExibirCartas_Click(object sender, EventArgs e)
-        {
             txtPersonagensFavoritos.Clear();
-
-            int idJogador = int.Parse(txtIdJogador.Text);
-            string senhaJogador = txtSenhaJogador.Text;
 
             string temp = _cartaService.ListarCartas(idJogador, senhaJogador);
             temp = temp.Substring(0, temp.Length - 2);
@@ -145,6 +139,7 @@ namespace king_me
                     txtPersonagensFavoritos.Text += mao.ExibirPersonagem(caractere) + "\r\n";
                 }
             }
+
         }
 
         private void CarregarPersonagens()
