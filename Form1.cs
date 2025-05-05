@@ -332,9 +332,9 @@ namespace king_me
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
 
-            // Cria lista de personagens não posicionados
+            // Cria lista de personagens não posicionados  
             List<char> personagensDisponiveis = new List<char>();
-            for (int i = 0; i < 13; i++) // 13 personagens disponíveis
+            for (int i = 0; i < 13; i++) // 13 personagens disponíveis  
             {
                 char personagem = mao.ObterChavePorPosicao(i);
                 int? setorAtual = _tabuleiroService.ObterSetorAtual(personagem.ToString());
@@ -344,26 +344,52 @@ namespace king_me
                 }
             }
 
-            // Se não houver personagens disponíveis
+            // Se não houver personagens disponíveis  
             if (personagensDisponiveis.Count == 0)
             {
                 MessageBox.Show("Não há personagens disponíveis para posicionar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            Random random = new Random();
-            char inicialPersonagem = personagensDisponiveis[random.Next(personagensDisponiveis.Count)];
+            string cartasFavoritas = _cartaService.ListarCartas(idJogador, senhaJogador);
+            cartasFavoritas = cartasFavoritas.Substring(0, cartasFavoritas.Length - 2);
 
-            List<int> setoresDisponiveis = _tabuleiroService.ObterSetoresNaoCheios(int.Parse(txtIdPartida.Text));
-            if (setoresDisponiveis.Count == 0)
+            // filtra personagens favoritos disponíveis  
+            List<char> personagensFavoritosDisponiveis = personagensDisponiveis.Where(personagem => cartasFavoritas.Contains(personagem)).ToList();
+
+            char personagemSelecionado;
+
+            if (personagensFavoritosDisponiveis.Count > 0)
+            {
+                personagemSelecionado = personagensFavoritosDisponiveis[0]; // seleciona o primeiro favorito disponível
+                personagensFavoritosDisponiveis.Remove(personagemSelecionado); // remove o personagem selecionado da lista de favoritos
+            }
+            else
+            {
+                Random random = new Random();
+                personagemSelecionado = personagensDisponiveis[random.Next(personagensDisponiveis.Count)]; // seleciona aleatoriamente  
+            }
+
+            // tenta posicionar no setor preferencialmente do 4 ao 1  
+            List<int> setoresPreferenciais = new List<int> { 4, 3, 2, 1 };
+            int setorSelecionado = -1;
+
+            foreach (int setor in setoresPreferenciais)
+            {
+                if (!_tabuleiroService.IsSetorCheio(setor, int.Parse(txtIdPartida.Text)))
+                {
+                    setorSelecionado = setor;
+                    break;
+                }
+            }
+
+            if (setorSelecionado == -1)
             {
                 MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int setor = setoresDisponiveis[random.Next(setoresDisponiveis.Count)];
-
-            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setorSelecionado, personagemSelecionado.ToString());
 
             if (retornoDLL.StartsWith("ERRO"))
             {
