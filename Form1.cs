@@ -126,14 +126,8 @@ namespace king_me
             tmrVerificarVez.Start();
 
             _partidaService.Iniciar(idJogador, senhaJogador);
-        }
 
-        private void btnExibirCartas_Click(object sender, EventArgs e)
-        {
             txtPersonagensFavoritos.Clear();
-
-            int idJogador = int.Parse(txtIdJogador.Text);
-            string senhaJogador = txtSenhaJogador.Text;
 
             string temp = _cartaService.ListarCartas(idJogador, senhaJogador);
             temp = temp.Substring(0, temp.Length - 2);
@@ -145,6 +139,7 @@ namespace king_me
                     txtPersonagensFavoritos.Text += mao.ExibirPersonagem(caractere) + "\r\n";
                 }
             }
+
         }
 
         private void CarregarPersonagens()
@@ -337,9 +332,9 @@ namespace king_me
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
 
-            // Cria lista de personagens não posicionados
+            // Cria lista de personagens não posicionados  
             List<char> personagensDisponiveis = new List<char>();
-            for (int i = 0; i < 13; i++) // 13 personagens disponíveis
+            for (int i = 0; i < 13; i++) // 13 personagens disponíveis  
             {
                 char personagem = mao.ObterChavePorPosicao(i);
                 int? setorAtual = _tabuleiroService.ObterSetorAtual(personagem.ToString());
@@ -349,26 +344,52 @@ namespace king_me
                 }
             }
 
-            // Se não houver personagens disponíveis
+            // Se não houver personagens disponíveis  
             if (personagensDisponiveis.Count == 0)
             {
                 MessageBox.Show("Não há personagens disponíveis para posicionar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            Random random = new Random();
-            char inicialPersonagem = personagensDisponiveis[random.Next(personagensDisponiveis.Count)];
+            string cartasFavoritas = _cartaService.ListarCartas(idJogador, senhaJogador);
+            cartasFavoritas = cartasFavoritas.Substring(0, cartasFavoritas.Length - 2);
 
-            List<int> setoresDisponiveis = _tabuleiroService.ObterSetoresNaoCheios(int.Parse(txtIdPartida.Text));
-            if (setoresDisponiveis.Count == 0)
+            // filtra personagens favoritos disponíveis  
+            List<char> personagensFavoritosDisponiveis = personagensDisponiveis.Where(personagem => cartasFavoritas.Contains(personagem)).ToList();
+
+            char personagemSelecionado;
+
+            if (personagensFavoritosDisponiveis.Count > 0)
+            {
+                personagemSelecionado = personagensFavoritosDisponiveis[0]; // seleciona o primeiro favorito disponível
+                personagensFavoritosDisponiveis.Remove(personagemSelecionado); // remove o personagem selecionado da lista de favoritos
+            }
+            else
+            {
+                Random random = new Random();
+                personagemSelecionado = personagensDisponiveis[random.Next(personagensDisponiveis.Count)]; // seleciona aleatoriamente  
+            }
+
+            // tenta posicionar no setor preferencialmente do 4 ao 1  
+            List<int> setoresPreferenciais = new List<int> { 4, 3, 2, 1 };
+            int setorSelecionado = -1;
+
+            foreach (int setor in setoresPreferenciais)
+            {
+                if (!_tabuleiroService.IsSetorCheio(setor, int.Parse(txtIdPartida.Text)))
+                {
+                    setorSelecionado = setor;
+                    break;
+                }
+            }
+
+            if (setorSelecionado == -1)
             {
                 MessageBox.Show("Não há setores disponíveis para posicionar o personagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int setor = setoresDisponiveis[random.Next(setoresDisponiveis.Count)];
-
-            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, inicialPersonagem.ToString());
+            string retornoDLL = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setorSelecionado, personagemSelecionado.ToString());
 
             if (retornoDLL.StartsWith("ERRO"))
             {
@@ -448,6 +469,9 @@ namespace king_me
                 int idJogador = int.Parse(txtIdJogador.Text);
                 string senhaJogador = txtSenhaJogador.Text;
 
+                string cartasFavoritas = _cartaService.ListarCartas(idJogador, senhaJogador);
+                cartasFavoritas = cartasFavoritas.Substring(0, cartasFavoritas.Length - 2);
+
                 string tabuleiro = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
                 string[] linhasTabuleiro = tabuleiro.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 tabuleiro = string.Join("\r\n", linhasTabuleiro.Skip(1));
@@ -456,23 +480,47 @@ namespace king_me
                     return;
 
                 string[] linhas = tabuleiro.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                List<string> personagensPromoviveis = new List<string>();
+                linhas = linhas.Reverse().ToArray(); //deixa em ordem decrescente
 
-                foreach (string linha in linhas)
+                List<string> personagensPromoviveis = new List<string>();
+                List<string> personagensFavoritosPromoviveis = new List<string>();
+                List<string> personagensSetor5 = new List<string>();
+
+                foreach (string linha in linhas) 
                 {
                     string[] partes = linha.Split(',');
                     if (partes.Length >= 2 && int.TryParse(partes[0], out int setor))
                     {
                         if (setor >= 0 && setor <= 5 && !_tabuleiroService.IsSetorCheio(setor + 1, int.Parse(txtIdPartida.Text)))
                         {
-                            personagensPromoviveis.Add(partes[1]);
+                            if (setor == 5)
+                            {
+                                personagensSetor5.Add(partes[1]);
+                            }
+                            else
+                            {
+                                personagensPromoviveis.Add(partes[1]);
+                                if (cartasFavoritas.Contains(partes[1]))
+                                {
+                                    personagensFavoritosPromoviveis.Add(partes[1]);
+                                }
+                            }
                         }
                     }
+                }
+                //int a = 0; //Colocar breakpoint nessa linha e descomentar caso queira visualizar as listas
+                if (personagensPromoviveis.Count == 0 && personagensSetor5.Count > 0)
+                {
+                    personagensPromoviveis.AddRange(personagensSetor5);
                 }
 
                 if (personagensPromoviveis.Count > 0)
                 {
-                    string personagemParaPromover = personagensPromoviveis[0];
+                    string personagemParaPromover;
+                    if (personagensFavoritosPromoviveis.Count > 0)
+                        personagemParaPromover = personagensFavoritosPromoviveis[0];
+                    else
+                        personagemParaPromover = personagensPromoviveis[0];
 
                     string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemParaPromover);
 
