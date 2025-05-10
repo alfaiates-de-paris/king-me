@@ -8,51 +8,56 @@ namespace king_me.Services
 
     public class VotoService : IVotoService
     {
-        private Dictionary<int, int> votosPorJogador = new Dictionary<int, int>();
-
-        public string Votar(int idJogador, string senhaJogador, string voto)
+        private Dictionary<int, List<string>> historicoVotos = new Dictionary<int, List<string>>();
+        public string Votar(int idJogador, string senhaJogador, string _)
         {
-            voto = voto.ToUpper();
+            if (!historicoVotos.ContainsKey(idJogador))
+                historicoVotos[idJogador] = new List<string>();
 
-            if (voto.Length > 1)
-                return "ERRO:Voto com excesso de caracteres";
+            var votos = historicoVotos[idJogador];
+            string voto;
 
-            if (voto != "S" && voto != "N")
-                return "ERRO:Voto com caracter inválido (S/N)";
-
-            // Inicializa contador local se não existir
-            if (!votosPorJogador.ContainsKey(idJogador))
-                votosPorJogador[idJogador] = 3;
-
-            if (votosPorJogador[idJogador] <= 0)
-                voto = "S"; //caso não haja mais votos, o sim é obrigatório
+            if (votos.Count == 0 || votos.Count == 1)
+                voto = "N";
+            else if (votos.Count == 2)
+                voto = "S";
+            else
+                voto = "S"; 
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-            if (!retorno.StartsWith("ERRO"))
+            if (!retorno.StartsWith("ERRO") && voto == "N")
             {
-                votosPorJogador[idJogador]--;
+                votos.Add("N");
+            }
+            else if (!retorno.StartsWith("ERRO") && voto == "S")
+            {
+                votos.Add("S"); 
             }
 
             return retorno;
         }
 
-        public int GetVotosRestantes(int jogador)
-        {
-            if (votosPorJogador.ContainsKey(jogador))
-                return votosPorJogador[jogador];
 
-            return 3;
+        public int GetVotosRestantes(int idJogador)
+        {
+            if (!historicoVotos.ContainsKey(idJogador))
+                return 3;
+
+           
+            return 3 - historicoVotos[idJogador].Count(v => v == "N");
         }
 
         public void ResetarVotosJogadores(int idPartida)
         {
-            var jogadores = votosPorJogador.Keys.ToList(); 
+            var jogadores = historicoVotos.Keys.ToList();
             foreach (var jogador in jogadores)
             {
-                votosPorJogador[jogador] = 3; 
+                historicoVotos[jogador] = new List<string>();
             }
         }
+
+
     }
 }
 
