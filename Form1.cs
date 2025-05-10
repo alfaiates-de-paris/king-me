@@ -586,8 +586,6 @@ namespace king_me
                 MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            MessageBox.Show("Voto registrado com sucesso!");
             if (txtVoto.Text == "N")
             {
                 _tabuleiroService.LimparSetor10(pnlTabuleiro);
