@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace king_me.Services
 {
-
     public class VotoService : IVotoService
     {
         private Dictionary<int, List<string>> historicoVotos = new Dictionary<int, List<string>>();
@@ -22,7 +21,11 @@ namespace king_me.Services
             else if (votos.Count == 2)
                 voto = "S";
             else
+
                 voto = "S"; 
+
+                voto = "S";
+
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
@@ -32,7 +35,11 @@ namespace king_me.Services
             }
             else if (!retorno.StartsWith("ERRO") && voto == "S")
             {
+
                 votos.Add("S"); 
+
+                votos.Add("S");
+
             }
 
             return retorno;
@@ -44,7 +51,7 @@ namespace king_me.Services
             if (!historicoVotos.ContainsKey(idJogador))
                 return 3;
 
-           
+
             return 3 - historicoVotos[idJogador].Count(v => v == "N");
         }
 
