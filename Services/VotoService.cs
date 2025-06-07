@@ -2,6 +2,7 @@
 using king_me.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace king_me.Services
 {
@@ -14,36 +15,33 @@ namespace king_me.Services
                 historicoVotos[idJogador] = new List<string>();
 
             var votos = historicoVotos[idJogador];
+            const int LIMITE_VOTOS = 3;
 
             string voto;
 
-            
-            if (votos.Count == 0 || votos.Count == 1)
-                voto = "N";
-            else
+         
+            if (votos.Count >= LIMITE_VOTOS)
+            {
                 voto = "S";
+            }
+            else if (votos.Count == 0 || votos.Count == 1)
+            {
+                voto = "N";
+            }
+            else
+            {
+                voto = "S";
+            }
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-          
             if (!retorno.StartsWith("ERRO"))
             {
-                if (voto == "N")
-                {
-                    votos.Add("N");
-                    
-                }
-                else if (voto == "S")
-                {
-                    votos.Add("S");
-                                    
-                }
+                votos.Add(voto); 
             }
 
             return retorno;
         }
-
-
 
         public int GetVotosRestantes(int idJogador)
         {
