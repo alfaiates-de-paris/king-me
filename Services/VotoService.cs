@@ -14,36 +14,35 @@ namespace king_me.Services
                 historicoVotos[idJogador] = new List<string>();
 
             var votos = historicoVotos[idJogador];
+
             string voto;
 
+            
             if (votos.Count == 0 || votos.Count == 1)
                 voto = "N";
-            else if (votos.Count == 2)
-                voto = "S";
             else
-
-                voto = "S"; 
-
                 voto = "S";
-
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-            if (!retorno.StartsWith("ERRO") && voto == "N")
+          
+            if (!retorno.StartsWith("ERRO"))
             {
-                votos.Add("N");
-            }
-            else if (!retorno.StartsWith("ERRO") && voto == "S")
-            {
-
-                votos.Add("S"); 
-
-                votos.Add("S");
-
+                if (voto == "N")
+                {
+                    votos.Add("N");
+                    
+                }
+                else if (voto == "S")
+                {
+                    votos.Add("S");
+                                    
+                }
             }
 
             return retorno;
         }
+
 
 
         public int GetVotosRestantes(int idJogador)

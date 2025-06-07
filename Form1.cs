@@ -614,5 +614,10 @@ namespace king_me
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
 
         }
+
+        private void txtPartidas_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
