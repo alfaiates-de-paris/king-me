@@ -634,8 +634,6 @@ namespace king_me
                 MessageBox.Show(retorno, "Erro ao votar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            MessageBox.Show("Voto registrado com sucesso!");
             if (txtVoto.Text == "N")
             {
                 _tabuleiroService.LimparSetor10(pnlTabuleiro);
@@ -662,6 +660,11 @@ namespace king_me
         {
             int votosRestantes = _votoService.GetVotosRestantes(idJogador);
             lblVotosRestantes.Text = $"Votos restantes: {votosRestantes}";
+
+        }
+
+        private void txtPartidas_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

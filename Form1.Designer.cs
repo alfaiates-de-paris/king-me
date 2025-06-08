@@ -212,6 +212,7 @@
             this.txtPartidas.Size = new System.Drawing.Size(301, 117);
             this.txtPartidas.TabIndex = 13;
             this.txtPartidas.Text = "";
+            this.txtPartidas.TextChanged += new System.EventHandler(this.txtPartidas_TextChanged);
             // 
             // lblNomeJogador
             // 
