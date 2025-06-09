@@ -26,7 +26,8 @@ namespace king_me
             var votoService = new VotoService();
 
             // Run the application with the KingMe form, injecting the dependencies
-            Application.Run(new KingMe(partidaService, jogadorService, cartaService, votoService, tabuleiroService));
+            Application.Run(new HomeForm());
+            //Application.Run(new KingMe(partidaService, jogadorService, cartaService, votoService, tabuleiroService));
         }
     }
 }
