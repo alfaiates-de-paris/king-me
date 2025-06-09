@@ -1,5 +1,9 @@
 using king_me.Interfaces;
 using KingMeServer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace king_me.Services
 {
@@ -18,6 +22,44 @@ namespace king_me.Services
         public void Iniciar(int idJogador, string senhaJogador)
         {
             Jogo.Iniciar(idJogador, senhaJogador);
+        }
+
+        public string AtualizarPlacar(IJogadorService _jogadorService, string idPartida)
+        {
+            string retornoDLL = _jogadorService.ListarJogadores(int.Parse(idPartida));
+            string[] jogadores = retornoDLL.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // cria uma lista de tuplas (nome, pontos)
+            var listaPlacar = new List<Tuple<string, int>>();
+            foreach (string jogador in jogadores)
+            {
+                string[] partes = jogador.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (partes.Length >= 3 && int.TryParse(partes[2], out int pontos))
+                {
+                    listaPlacar.Add(Tuple.Create(partes[1], pontos));
+                }
+            }
+
+            // ordena de forma decrescente pelos pontos
+            var placarOrdenado = listaPlacar.OrderByDescending(t => t.Item2).ToList();
+
+            string textoPlacar = "Placar:\r\n";
+            foreach (var item in placarOrdenado)
+            {
+                textoPlacar += $"Jogador: {item.Item1}, Pontos: {item.Item2}\r\n\r\n";
+            }
+
+            return textoPlacar;
+        }
+
+        public string GetGanhador(TextBox placar) {
+            string retorno;
+            string textoPlacar = placar.Text;
+
+            string[] jogadores = textoPlacar.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] partes = jogadores[0].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            retorno = $"Ganhador: {partes[0]} com {partes[1]} pontos!! Parabéns!!";
+            return retorno;
         }
     }
 }

@@ -351,6 +351,7 @@ namespace king_me
 
         }
 
+       
         private void VerificarTabuleiro()
         {
             string retornoDLL = KingMeServer.Jogo.VerificarVez(int.Parse(txtIdPartida.Text));
@@ -371,7 +372,8 @@ namespace king_me
 
             if (statusPartida == "E")
             {
-                MessageBox.Show("Partida Encerrada.");
+                string retorno = _partidaService.GetGanhador(txtPlacar);
+                MessageBox.Show("Partida Encerrada. " + retorno);
                 tmrVerificarVez.Stop();
                 return;
             }
@@ -386,6 +388,8 @@ namespace king_me
                 rodadaAtual = rodada;
 
                 _votoService.ResetarVotosJogadores(int.Parse(txtIdPartida.Text));
+                string retornoPlacar = _partidaService.AtualizarPlacar(_jogadorService, idPartida);
+                txtPlacar.Text = retornoPlacar;
             }
 
             bool minhaVez = VerificarVez();

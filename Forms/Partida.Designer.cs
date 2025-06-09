@@ -52,6 +52,8 @@
             this.lblRodadaAtual = new System.Windows.Forms.Label();
             this.lblStatusPartida = new System.Windows.Forms.Label();
             this.btnPartidaVoltar = new System.Windows.Forms.Button();
+            this.lblPlacar = new System.Windows.Forms.Label();
+            this.txtPlacar = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtSenhaPartida
@@ -129,7 +131,7 @@
             this.lblPersonagensExistentes.BackColor = System.Drawing.Color.Transparent;
             this.lblPersonagensExistentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lblPersonagensExistentes.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblPersonagensExistentes.Location = new System.Drawing.Point(92, 688);
+            this.lblPersonagensExistentes.Location = new System.Drawing.Point(92, 705);
             this.lblPersonagensExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonagensExistentes.Name = "lblPersonagensExistentes";
             this.lblPersonagensExistentes.Size = new System.Drawing.Size(245, 25);
@@ -153,7 +155,7 @@
             this.txtSetoresExistentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtSetoresExistentes.FormattingEnabled = true;
             this.txtSetoresExistentes.ItemHeight = 25;
-            this.txtSetoresExistentes.Location = new System.Drawing.Point(731, 380);
+            this.txtSetoresExistentes.Location = new System.Drawing.Point(708, 372);
             this.txtSetoresExistentes.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetoresExistentes.Name = "txtSetoresExistentes";
             this.txtSetoresExistentes.Size = new System.Drawing.Size(149, 204);
@@ -165,7 +167,7 @@
             this.lblSetoresExistentes.BackColor = System.Drawing.Color.Transparent;
             this.lblSetoresExistentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lblSetoresExistentes.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblSetoresExistentes.Location = new System.Drawing.Point(726, 343);
+            this.lblSetoresExistentes.Location = new System.Drawing.Point(703, 343);
             this.lblSetoresExistentes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSetoresExistentes.Name = "lblSetoresExistentes";
             this.lblSetoresExistentes.Size = new System.Drawing.Size(87, 25);
@@ -300,6 +302,27 @@
             this.btnPartidaVoltar.UseVisualStyleBackColor = false;
             this.btnPartidaVoltar.Click += new System.EventHandler(this.btnPartidaVoltar_Click);
             // 
+            // lblPlacar
+            // 
+            this.lblPlacar.AutoSize = true;
+            this.lblPlacar.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlacar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblPlacar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblPlacar.Location = new System.Drawing.Point(703, 689);
+            this.lblPlacar.Name = "lblPlacar";
+            this.lblPlacar.Size = new System.Drawing.Size(73, 25);
+            this.lblPlacar.TabIndex = 58;
+            this.lblPlacar.Text = "Placar";
+            // 
+            // txtPlacar
+            // 
+            this.txtPlacar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtPlacar.Location = new System.Drawing.Point(708, 718);
+            this.txtPlacar.Multiline = true;
+            this.txtPlacar.Name = "txtPlacar";
+            this.txtPlacar.Size = new System.Drawing.Size(149, 161);
+            this.txtPlacar.TabIndex = 59;
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -310,6 +333,8 @@
             this.BackgroundImage = global::king_me.Properties.Resources.bg_partida;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1292, 978);
+            this.Controls.Add(this.txtPlacar);
+            this.Controls.Add(this.lblPlacar);
             this.Controls.Add(this.btnPartidaVoltar);
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.lblRodadaAtual);
@@ -369,5 +394,7 @@
         private System.Windows.Forms.Label lblRodadaAtual;
         private System.Windows.Forms.Label lblStatusPartida;
         private System.Windows.Forms.Button btnPartidaVoltar;
+        private System.Windows.Forms.Label lblPlacar;
+        private System.Windows.Forms.TextBox txtPlacar;
     }
 }
