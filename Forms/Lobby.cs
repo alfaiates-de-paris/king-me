@@ -115,17 +115,12 @@ namespace king_me.Forms
             if (jogador == string.Empty) { MessageBox.Show("Informe o nome do jogador."); return; }
             if (senha == string.Empty) { MessageBox.Show("Informe a senha da partida."); return; }
 
-            try
-            {
-                _partidaService.Iniciar(int.Parse(id), senhaPartida);
-                SucessoIniciarPartida = true;
-                KingMe partidaForm = new KingMe(_partidaService, _jogadorService, cartaService, votoService, tabuleiroService, id, idJogador, senha, senhaPartida, nomeJogador);
-                partidaForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao iniciar partida: {ex.Message}");
-            }
+
+             _partidaService.Iniciar(int.Parse(id), senhaPartida);
+             SucessoIniciarPartida = true;
+             KingMe partidaForm = new KingMe(_partidaService, _jogadorService, cartaService, votoService, tabuleiroService, id, idJogador, senha, senhaPartida, nomeJogador);
+             partidaForm.ShowDialog();
+            
         }
 
         private void Lobby_Load(object sender, EventArgs e)

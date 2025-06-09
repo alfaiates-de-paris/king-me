@@ -139,53 +139,6 @@ namespace king_me
             }
         }
 
-        private void btnVerificarVez_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(txtIdJogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
-                }
-
-                if (!SucessoIniciarPartida)
-                {
-                    MessageBox.Show("Por favor, inicie a partida antes de verificar a vez.", "Atenção", MessageBoxButtons.OK);
-                    return;
-                }
-
-                int idPartida = int.Parse(txtIdPartida.Text);
-                var jogador = _jogadorService.GetJogadorDaVez(idPartida);
-
-                string jogadores = _jogadorService.ListarJogadores(idPartida);
-
-                if (string.IsNullOrEmpty(jogadores))
-                {
-                    MessageBox.Show("Nenhuma informação encontrada sobre a vez do jogador.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                string[] listaJogadores = jogadores.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (listaJogadores.Length == 0)
-                {
-                    MessageBox.Show("Não foi possível determinar a vez do jogador.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                lblVezIdJogador.Text = $"ID do Jogador: {jogador.IdJogador.Substring(0, Math.Min(4, jogador.IdJogador.Length))}";
-                lblVezNomeJogador.Text = $"Nome: {jogador.NomeJogador}";
-
-
-                AtualizarVotosRestantes(int.Parse(jogador.IdJogador));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao verificar a vez do jogador: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private bool VerificarVez()
         {
             try

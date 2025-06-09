@@ -262,7 +262,7 @@
             // 
             // tmrVerificarVez
             // 
-            this.tmrVerificarVez.Interval = 3500;
+            this.tmrVerificarVez.Interval = 1500;
             this.tmrVerificarVez.Tick += new System.EventHandler(this.tmrVerificarVez_Tick);
             // 
             // lblRodadaAtual

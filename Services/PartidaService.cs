@@ -1,3 +1,4 @@
+using king_me;
 using king_me.Interfaces;
 using KingMeServer;
 using System;
@@ -43,10 +44,10 @@ namespace king_me.Services
             // ordena de forma decrescente pelos pontos
             var placarOrdenado = listaPlacar.OrderByDescending(t => t.Item2).ToList();
 
-            string textoPlacar = "Placar:\r\n";
+            string textoPlacar = "";
             foreach (var item in placarOrdenado)
             {
-                textoPlacar += $"Jogador: {item.Item1}, Pontos: {item.Item2}\r\n\r\n";
+                textoPlacar += $"Jogador: {item.Item1}, pontos: {item.Item2}\r\n\r\n";
             }
 
             return textoPlacar;
@@ -56,10 +57,28 @@ namespace king_me.Services
             string retorno;
             string textoPlacar = placar.Text;
 
-            string[] jogadores = textoPlacar.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            string[] partes = jogadores[0].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            retorno = $"Ganhador: {partes[0]} com {partes[1]} pontos!! Parabéns!!";
+            string[] jogadores = textoPlacar.Split(new[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (jogadores.Length > 0 && jogadores[0].Contains(","))
+            {
+                string[] partes = jogadores[0].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (partes.Length > 1)
+                {
+                    retorno = $"Ganhador: {partes[0]}, {partes[1]}! Parabéns!!";
+                }
+                else
+                {
+                    retorno = "Formato do placar inválido.";
+                }
+            }
+            else
+            {
+                retorno = "Placar vazio ou inválido.";
+            }
+
             return retorno;
         }
     }
 }
+
+
