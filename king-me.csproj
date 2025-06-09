@@ -55,6 +55,12 @@
     <Compile Include="Forms\HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Lobby.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Lobby.Designer.cs">
+      <DependentUpon>Lobby.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\ICartaService.cs" />
     <Compile Include="Interfaces\IJogadorService.cs" />
     <Compile Include="Interfaces\ITabuleiroService.cs" />
@@ -87,6 +93,9 @@
     <EmbeddedResource Include="Forms\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Lobby.resx">
+      <DependentUpon>Lobby.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -112,6 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="KingMeServer\KingMeServer.dll" />
+    <None Include="Resources\lobby_bg.png" />
+    <None Include="Resources\king_me_bg.png" />
     <None Include="Properties\images\tabuleiro_completo.png" />
     <None Include="Properties\images\Tabuleiro2.jpg" />
     <None Include="Properties\images\Tabuleiro1.jpg" />

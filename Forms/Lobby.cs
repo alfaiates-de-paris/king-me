@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace king_me
+namespace king_me.Forms
 {
-    public partial class HomeForm: Form
+    public partial class Lobby: Form
     {
-        public HomeForm()
+        public Lobby()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

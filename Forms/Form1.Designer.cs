@@ -597,6 +597,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(233)))));
             this.ClientSize = new System.Drawing.Size(1640, 896);
             this.Controls.Add(this.lblStatusPartida);
             this.Controls.Add(this.lblRodadaAtual);
