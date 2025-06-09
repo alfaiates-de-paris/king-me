@@ -266,7 +266,6 @@ namespace king_me
             if (!retorno.StartsWith("ERRO"))
             {
                 txtVoto.Text = votoAuto;
-                MessageBox.Show($"Voto automático enviado: {votoAuto}", "Votação automática", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 AtualizarVotosRestantes(idJogador);
                 
             }
