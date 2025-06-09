@@ -11,6 +11,7 @@ using KingMeServer;
 using king_me.Interfaces;
 using king_me.Services;
 using king_me.Models;
+using System.Security;
 
 namespace king_me
 {
@@ -25,7 +26,11 @@ namespace king_me
         private readonly IVotoService _votoService;
         int rodadaAtual = 1;
         string statusPartida;
-        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService)
+        private string idPartida;
+        private string idJogador;
+        private string senhaJogador;
+        public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService, 
+            string idDaPartida, string idDoJogador, string senhaDoJogador)
 
         {
             InitializeComponent();
@@ -34,6 +39,9 @@ namespace king_me
             _cartaService = cartaService ?? throw new ArgumentNullException(nameof(cartaService));
             _tabuleiroService = tabuleiroService ?? throw new ArgumentNullException(nameof(tabuleiroService));
             _votoService = votoService ?? throw new ArgumentNullException(nameof(votoService));
+            idPartida = idDaPartida;
+            idJogador = idDoJogador;
+            senhaJogador = senhaDoJogador;
 
             mao.CriarCartas();
 
@@ -663,9 +671,6 @@ namespace king_me
 
         }
 
-        private void txtPartidas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }

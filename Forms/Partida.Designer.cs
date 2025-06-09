@@ -52,7 +52,6 @@
             this.txtIdJogador = new System.Windows.Forms.TextBox();
             this.lblSenhaJogadorInput = new System.Windows.Forms.Label();
             this.txtSenhaJogador = new System.Windows.Forms.TextBox();
-            this.btnCriarPartida = new System.Windows.Forms.Button();
             this.lblIdPartida = new System.Windows.Forms.Label();
             this.lblPersonagensFav = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -79,6 +78,7 @@
             this.tmrVerificarVez = new System.Windows.Forms.Timer(this.components);
             this.lblRodadaAtual = new System.Windows.Forms.Label();
             this.lblStatusPartida = new System.Windows.Forms.Label();
+            this.btnCriarPartida = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblInfoGame
@@ -212,7 +212,6 @@
             this.txtPartidas.Size = new System.Drawing.Size(301, 117);
             this.txtPartidas.TabIndex = 13;
             this.txtPartidas.Text = "";
-            this.txtPartidas.TextChanged += new System.EventHandler(this.txtPartidas_TextChanged);
             // 
             // lblNomeJogador
             // 
@@ -326,17 +325,6 @@
             this.txtSenhaJogador.Name = "txtSenhaJogador";
             this.txtSenhaJogador.Size = new System.Drawing.Size(133, 22);
             this.txtSenhaJogador.TabIndex = 24;
-            // 
-            // btnCriarPartida
-            // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(185, 31);
-            this.btnCriarPartida.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCriarPartida.Name = "btnCriarPartida";
-            this.btnCriarPartida.Size = new System.Drawing.Size(133, 28);
-            this.btnCriarPartida.TabIndex = 26;
-            this.btnCriarPartida.Text = "Criar Partida";
-            this.btnCriarPartida.UseVisualStyleBackColor = true;
-            this.btnCriarPartida.Click += new System.EventHandler(this.btnCriarPartida_Click);
             // 
             // lblIdPartida
             // 
@@ -591,6 +579,17 @@
             this.lblStatusPartida.TabIndex = 56;
             this.lblStatusPartida.Text = "Status partida: ";
             // 
+            // btnCriarPartida
+            // 
+            this.btnCriarPartida.Location = new System.Drawing.Point(185, 31);
+            this.btnCriarPartida.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCriarPartida.Name = "btnCriarPartida";
+            this.btnCriarPartida.Size = new System.Drawing.Size(133, 28);
+            this.btnCriarPartida.TabIndex = 26;
+            this.btnCriarPartida.Text = "Criar Partida";
+            this.btnCriarPartida.UseVisualStyleBackColor = true;
+            this.btnCriarPartida.Click += new System.EventHandler(this.btnCriarPartida_Click);
+            // 
             // KingMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -653,7 +652,7 @@
             this.Name = "KingMe";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "King Me!";
+            this.Text = "King Me! | Alfaiates de Paris";
             this.Load += new System.EventHandler(this.KingMe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -685,7 +684,6 @@
         private System.Windows.Forms.TextBox txtIdJogador;
         private System.Windows.Forms.Label lblSenhaJogadorInput;
         private System.Windows.Forms.TextBox txtSenhaJogador;
-        private System.Windows.Forms.Button btnCriarPartida;
         private System.Windows.Forms.Label lblIdPartida;
         private System.Windows.Forms.Label lblPersonagensFav;
         private System.Windows.Forms.Label label1;
@@ -712,5 +710,6 @@
         private System.Windows.Forms.Timer tmrVerificarVez;
         private System.Windows.Forms.Label lblRodadaAtual;
         private System.Windows.Forms.Label lblStatusPartida;
+        private System.Windows.Forms.Button btnCriarPartida;
     }
 }

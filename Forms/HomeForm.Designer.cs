@@ -42,7 +42,7 @@
             this.btnHomeJogar.TabIndex = 0;
             this.btnHomeJogar.Text = "Jogar!";
             this.btnHomeJogar.UseVisualStyleBackColor = false;
-            this.btnHomeJogar.Click += new System.EventHandler(this.button1_Click);
+            this.btnHomeJogar.Click += new System.EventHandler(this.btnHomeJogar_Click);
             // 
             // HomeForm
             // 
