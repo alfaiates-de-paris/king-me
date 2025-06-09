@@ -202,25 +202,34 @@ namespace king_me
         }
 
         private void RealizarVotoAutomatico(string tabuleiro, JogadorDTO jogadorDaVez)
-
         {
             if (!tabuleiro.Contains("10")) return;
-
             if (txtIdJogador.Text != jogadorDaVez.IdJogador) return;
 
             int idJogador = int.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
 
-            if (_votoService.GetVotosRestantes(idJogador) <= 0) return;
+            int votosAntes = _votoService.GetVotosRestantes(idJogador);
 
-            string votoAuto = new Random().Next(2) == 0 ? "S" : "N";
-            string retorno = _votoService.Votar(idJogador, senhaJogador, votoAuto);
+            if (votosAntes <= 0) return;
+
+          
+            string retorno = _votoService.Votar(idJogador, senhaJogador, null);
+
+            int votosDepois = _votoService.GetVotosRestantes(idJogador);
 
             if (!retorno.StartsWith("ERRO"))
             {
-                txtVoto.Text = votoAuto;
+               
+                bool votouN = votosDepois < votosAntes;
+
+                txtVoto.Text = votouN ? "N" : "S";
                 AtualizarVotosRestantes(idJogador);
-                
+
+                if (votouN)
+                {
+                    _tabuleiroService.LimparSetor10(pnlTabuleiro);
+                }
             }
             else
             {
@@ -504,6 +513,11 @@ namespace king_me
         private void btnPartidaVoltar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtVoto_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

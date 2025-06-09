@@ -35,9 +35,9 @@ namespace king_me.Services
 
             string retorno = Jogo.Votar(idJogador, senhaJogador, voto);
 
-            if (!retorno.StartsWith("ERRO"))
+            if (!retorno.StartsWith("ERRO") && voto == "N")
             {
-                votos.Add(voto); 
+                votos.Add("N"); 
             }
 
             return retorno;
