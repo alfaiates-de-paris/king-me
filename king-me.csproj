@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="KingMeServer\KingMeServer.dll" />
+    <None Include="Resources\bg_partida.png" />
     <None Include="Resources\lobby_bg.png" />
     <None Include="Resources\king_me_bg.png" />
     <None Include="Properties\images\tabuleiro_completo.png" />

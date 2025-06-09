@@ -29,8 +29,10 @@ namespace king_me
         private string idPartida;
         private string idJogador;
         private string senhaJogador;
+        private string senhaPartida;
+        private string nomeJogador;
         public KingMe(IPartidaService partidaService, IJogadorService jogadorService, ICartaService cartaService, IVotoService votoService, ITabuleiroService tabuleiroService, 
-            string idDaPartida, string idDoJogador, string senhaDoJogador)
+            string idDaPartida, string idDoJogador, string senhaDoJogador, string senhaDaPartida, string nomeDoJogador)
 
         {
             InitializeComponent();
@@ -42,79 +44,23 @@ namespace king_me
             idPartida = idDaPartida;
             idJogador = idDoJogador;
             senhaJogador = senhaDoJogador;
+            senhaPartida = senhaDaPartida;
+            nomeJogador = nomeDoJogador;
+
+            txtIdJogador.Text = idJogador;
+            txtIdPartida.Text = idPartida;
+            txtSenhaJogador.Text = senhaJogador;
+            txtSenhaPartida.Text = senhaPartida;
+            txtSenhaJogador.Hide();
+            txtIdJogador.Hide();
+            txtIdPartida.Hide();
+            txtSenhaPartida.Hide();
 
             mao.CriarCartas();
 
-            cboStatus.SelectedIndex = 0;
-            cboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
-            btnListarPartidas_Click(null, null);
+            
             CarregarPersonagens();
             CarregarSetor();
-
-        }
-
-        private void btnListarPartidas_Click(object sender, EventArgs e)
-        {
-            string status = cboStatus.Text.Substring(0, 1);
-            string partidas = _partidaService.ListarPartidas(status);
-
-            if (partidas == string.Empty)
-            {
-                MessageBox.Show("Nenhuma partida encontrada.");
-                return;
-            }
-
-            txtPartidas.Text = partidas;
-
-
-        }
-
-        private void btnEntrarPartida_Click(object sender, EventArgs e)
-        {
-            string id = txtIdPartida.Text;
-            string jogador = txtNomeJogador.Text;
-            string senha = txtSenhaPartida.Text;
-
-            if (id == string.Empty) { MessageBox.Show("Informe o ID da partida."); return; }
-            if (jogador == string.Empty) { MessageBox.Show("Informe o nome do jogador."); return; }
-            if (senha == string.Empty) { MessageBox.Show("Informe a senha da partida."); return; }
-
-            var infoJogador = _jogadorService.Entrar(int.Parse(id), jogador, senha);
-
-            txtIdJogador.Text = infoJogador.IdJogador;
-            lblIdJogador.Text = $"ID: {infoJogador.IdJogador}";
-            txtSenhaJogador.Text = infoJogador.SenhaJogador;
-            lblSenhaJogador.Text = $"Senha: {infoJogador.SenhaJogador}";
-
-            btnListarJogadores_Click(null, null);
-        }
-
-        private void btnCriarPartida_Click(object sender, EventArgs e)
-        {
-            string nome = txtNomePartida.Text;
-            string senha = txtSenhaPartida.Text;
-            string grupo = txtNomeGrupo.Text;
-
-            if (nome == string.Empty) { MessageBox.Show("Informe o nome da partida."); return; }
-            if (senha == string.Empty) { MessageBox.Show("Informe a senha da partida."); return; }
-            if (grupo == string.Empty) { MessageBox.Show("Informe o grupo da partida."); return; }
-
-            string id = _partidaService.CriarPartida(nome, senha, grupo);
-
-            txtIdPartida.Text = id;
-            lblIdPartida.Text = id;
-        }
-
-        private void btnListarJogadores_Click(object sender, EventArgs e)
-        {
-            string id = txtIdPartida.Text;
-            if (id == string.Empty)
-            {
-                MessageBox.Show("Informe o ID da partida.");
-                return;
-            }
-
-            txtJogadores.Text = _jogadorService.ListarJogadores(int.Parse(id));
         }
 
         public void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -123,12 +69,7 @@ namespace king_me
             int idJogador = Int32.Parse(txtIdJogador.Text);
             string senhaJogador = txtSenhaJogador.Text;
             int id = int.Parse(txtIdPartida.Text);
-            btnVerificarVez.Visible = false;
-            btnMoverPersonagem.Visible = false;
-            txtSetor.Visible = false;
-            txtPersonagem.Visible = false;
-            lblSetor.Visible = false;
-            lblPersonagem.Visible = false;
+
             lblRodadaAtual.Text = "Rodada atual: " + rodadaAtual;
             // Ativa o timer automático
             tmrVerificarVez.Start();
@@ -407,8 +348,7 @@ namespace king_me
 
             _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retornoDLL);
 
-            txtPersonagem.Clear();
-            txtPersonagem.Focus();
+
         }
 
         private void VerificarTabuleiro()
@@ -548,74 +488,13 @@ namespace king_me
             }
         }
 
-        private void btnMoverPersonagem_Click(object sender, EventArgs e)
-        {
-            int idJogador = int.Parse(txtIdJogador.Text);
-            string senhaJogador = txtSenhaJogador.Text;
-            string personagemLetra = txtPersonagem.Text.Substring(0, 1).ToUpper();
-
-            // Verifica se o campo de setor foi preenchido corretamente
-            if (!int.TryParse(txtSetor.Text, out int setor))
-            {
-                MessageBox.Show("Informe um setor válido antes de mover o personagem.", "Setor não informado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            char personagem = personagemLetra[0];
-
-            string retorno = _cartaService.ColocarPersonagem(idJogador, senhaJogador, setor, personagemLetra);
-
-            if (retorno.StartsWith("ERRO"))
-            {
-                MessageBox.Show(retorno, "Erro ao adicionar personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Atualiza o tabuleiro visual
-            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-
-            txtPersonagem.Clear();
-            txtPersonagem.Focus();
-        }
+       
 
         private void txtPersonagens_TextChanged(object sender, EventArgs e) { }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void KingMe_Load(object sender, EventArgs e) { }
-
-        private void btnPromover_Click(object sender, EventArgs e)
-        {
-            if (!int.TryParse(txtIdJogador.Text, out int idJogador))
-            {
-                MessageBox.Show("ID do jogador inválido.");
-                return;
-            }
-
-            string senhaJogador = txtSenhaJogador.Text;
-            string personagemInput = txtPersonagem.Text.Trim();
-
-            if (string.IsNullOrEmpty(personagemInput))
-            {
-                MessageBox.Show("Informe o personagem que deseja promover.");
-                return;
-            }
-
-            string personagemLetra = personagemInput.Substring(0, 1).ToUpper();
-
-            string retorno = _cartaService.Promover(idJogador, senhaJogador, personagemLetra);
-
-            if (retorno.StartsWith("ERRO"))
-            {
-                MessageBox.Show(retorno, "Erro ao promover personagem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            _tabuleiroService.AtualizarTabuleiro(pnlTabuleiro, retorno);
-
-            txtPersonagem.Clear();
-            txtPersonagem.Focus();
-        }
 
         private void btnVotar_Click(object sender, EventArgs e)
         {
@@ -652,11 +531,6 @@ namespace king_me
             AtualizarVotosRestantes(idJogador);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void lblVotosRestantes_Click(object sender, EventArgs e)
         {
             if (int.TryParse(txtIdJogador.Text, out int idJogador))
@@ -671,6 +545,9 @@ namespace king_me
 
         }
 
-    
+        private void btnPartidaVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

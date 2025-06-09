@@ -102,8 +102,10 @@ namespace king_me.Forms
         {
             string id = txtIdPartida.Text;
             string jogador = txtNomeJogador.Text;
-            string senha = txtSenhaPartida.Text;
+            string senhaPartida = txtSenhaPartida.Text;
             string idJogador = txtIdJogador.Text;
+            string senha = txtSenhaJogador.Text;
+            string nomeJogador = txtNomeJogador.Text;
 
             var cartaService = new Services.CartaService();
             var tabuleiroService = new Services.TabuleiroService();
@@ -115,15 +117,20 @@ namespace king_me.Forms
 
             try
             {
-                _partidaService.Iniciar(int.Parse(id), senha);
+                _partidaService.Iniciar(int.Parse(id), senhaPartida);
                 SucessoIniciarPartida = true;
-                KingMe partidaForm = new KingMe(_partidaService, _jogadorService, cartaService, votoService, tabuleiroService, id, idJogador, senha);
+                KingMe partidaForm = new KingMe(_partidaService, _jogadorService, cartaService, votoService, tabuleiroService, id, idJogador, senha, senhaPartida, nomeJogador);
                 partidaForm.ShowDialog();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao iniciar partida: {ex.Message}");
             }
+        }
+
+        private void Lobby_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

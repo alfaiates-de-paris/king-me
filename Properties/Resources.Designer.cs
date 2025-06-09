@@ -63,6 +63,16 @@ namespace king_me.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bg_partida {
+            get {
+                object obj = ResourceManager.GetObject("bg_partida", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap king_me_bg {
             get {
                 object obj = ResourceManager.GetObject("king_me_bg", resourceCulture);

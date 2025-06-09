@@ -112,12 +112,14 @@
             // 
             // btnVoltarLobby
             // 
+            this.btnVoltarLobby.BackColor = System.Drawing.Color.Red;
+            this.btnVoltarLobby.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
             this.btnVoltarLobby.Location = new System.Drawing.Point(939, 600);
             this.btnVoltarLobby.Name = "btnVoltarLobby";
             this.btnVoltarLobby.Size = new System.Drawing.Size(79, 41);
             this.btnVoltarLobby.TabIndex = 32;
             this.btnVoltarLobby.Text = "Voltar";
-            this.btnVoltarLobby.UseVisualStyleBackColor = true;
+            this.btnVoltarLobby.UseVisualStyleBackColor = false;
             this.btnVoltarLobby.Click += new System.EventHandler(this.btnVoltarLobby_Click);
             // 
             // lblInputIdPartida
@@ -353,6 +355,7 @@
             this.MaximizeBox = false;
             this.Name = "Lobby";
             this.Text = "King Me | Lobby | Alfaiates de Paris";
+            this.Load += new System.EventHandler(this.Lobby_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
